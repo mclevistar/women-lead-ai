@@ -29,13 +29,16 @@ export default function AboutPage() {
               </h1>
               <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
                 <p>
-                  I&apos;m Wiktoria Korbecka, and I started Women Lead AI because I believe the conversation around artificial intelligence needs more diverse voices at the table.
+                  I&apos;m Wiktoria Korbecka. I built automations, created tools, and started seeing firsthand how AI could transform the way we work, especially for women, who are 25% less likely to even try it.
                 </p>
                 <p>
-                  After years in leadership roles at Fortune 500 companies, I saw first-hand how AI was transforming industries, but the people shaping the narrative didn&apos;t always reflect the diversity of those being impacted. I wanted to change that.
+                  So I founded Women Lead AI. A community and education platform built to help women learn, implement, and scale AI in their careers and businesses.
                 </p>
                 <p>
-                  Women Lead AI is my way of exploring what it means to lead in the AI era, through honest conversations with builders, operators and visionaries who are doing the work. It is a podcast, a learning platform, a network, and a space to explore what comes next.
+                  Beyond that, I run WK Designs, a 3D printing business where I use AI-driven tools to streamline everything from product development to marketing. It&apos;s proof that you don&apos;t need to be a developer to build something powerful with AI.
+                </p>
+                <p>
+                  Whether you&apos;re a founder, a corporate professional, or somewhere in between, AI isn&apos;t going anywhere. The question is whether you&apos;re going to use it or be left behind. I&apos;m here to make sure it&apos;s the former.
                 </p>
               </div>
               <p className="mt-8 font-display text-xl italic text-foreground">

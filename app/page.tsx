@@ -192,7 +192,7 @@ export default function Home() {
         <div className="absolute inset-0 gradient-mesh opacity-40" />
         <ScrollReveal className="relative max-w-4xl mx-auto text-center">
           <blockquote className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-8">
-            &ldquo;The conversation around AI needs more diverse voices at the table.&rdquo;
+            &ldquo;AI isn&apos;t going anywhere. The question is whether you&apos;re going to use it or be left behind.&rdquo;
           </blockquote>
           <p className="text-lg text-muted-foreground mb-2">Wiktoria Korbecka</p>
           <p className="text-sm text-muted-foreground/60">Founder, Women Lead AI</p>
@@ -296,7 +296,7 @@ export default function Home() {
               Hi, I&apos;m Wiktoria.
             </h2>
             <p className="text-lg leading-relaxed text-muted-foreground mb-6">
-              I started Women Lead AI because I believe the conversation around artificial intelligence needs more diverse voices. After years in leadership at Fortune 500 companies, I saw AI transforming industries, but the narrative didn&apos;t reflect the diversity of those impacted.
+              I built automations, created tools, and started seeing firsthand how AI could transform the way we work, especially for women, who are 25% less likely to even try it. So I founded Women Lead AI, a community and education platform to help women learn, implement, and scale AI in their careers and businesses.
             </p>
             <Link
               href="/about"
