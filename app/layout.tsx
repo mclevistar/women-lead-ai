@@ -9,6 +9,12 @@ export const metadata: Metadata = {
     template: "%s | Women Lead AI",
   },
   description: "A podcast and platform exploring AI, leadership and the future of tech. Hosted from a female founder's perspective.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+  },
   openGraph: {
     title: "Women Lead AI",
     description: "A podcast and platform exploring AI, leadership and the future of tech.",
