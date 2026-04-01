@@ -32,7 +32,7 @@ export default function YouTubePage() {
         {/* Featured video embed */}
         <div className="aspect-video rounded-lg overflow-hidden bg-secondary mb-12">
           <iframe
-            src="https://www.youtube.com/embed?listType=user_uploads&list=WiktoriaKor"
+            src="https://www.youtube.com/embed/6RAJnLDSkXs"
             title="Women Lead AI - Latest Video"
             className="w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

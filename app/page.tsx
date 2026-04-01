@@ -108,7 +108,7 @@ export default function Home() {
             <div className="relative max-w-4xl mx-auto">
               <div className="video-container aspect-video bg-card">
                 <iframe
-                  src="https://www.youtube.com/embed?listType=user_uploads&list=WiktoriaKor"
+                  src="https://www.youtube.com/embed/6RAJnLDSkXs"
                   title="Women Lead AI - Latest Video"
                   className="w-full h-full rounded-2xl"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
