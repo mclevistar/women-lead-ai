@@ -15,6 +15,24 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").trim();
 }
 
+function decodeEntities(text: string): string {
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&nbsp;/g, " ");
+}
+
+function cleanDescription(raw: string): string {
+  let text = decodeEntities(stripHtml(raw));
+  // Remove chapters list and links section that appear at the end of RSS descriptions
+  const cutAt = text.search(/⏳\s*Chapters?:|🔗\s*Links|Links\s*&\s*Resources|Connect with\s+\w/i);
+  if (cutAt > 80) text = text.slice(0, cutAt);
+  return text.trim();
+}
+
 function parseDuration(raw: string | null | undefined): string {
   if (!raw) return "";
   const str = String(raw);
@@ -66,7 +84,7 @@ export function parseEpisodes(xml: string): Episode[] {
     const rawTitle = String(item.title || "Untitled");
     const { title, guest } = extractTitleAndGuest(rawTitle);
     const descriptionRaw = item.description || "";
-    const description = stripHtml(descriptionRaw);
+    const description = cleanDescription(descriptionRaw);
     const pubDate = item.pubDate || "";
     const date = pubDate ? new Date(pubDate).toISOString().split("T")[0] : "";
     const duration = parseDuration(item["itunes:duration"] || null);

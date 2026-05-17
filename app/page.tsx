@@ -1,14 +1,24 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Headphones, Play, BookOpen, Building2, Users, Sparkles } from "lucide-react";
-import { episodes } from "@/lib/episodes";
+import { ArrowRight, Headphones, Play, BookOpen, Building2, Users } from "lucide-react";
+import { episodes as staticEpisodes } from "@/lib/episodes";
+import { RSS_URL, parseEpisodes } from "@/lib/parse-rss";
 import NewsletterSignup from "@/components/newsletter-signup";
 import ScrollReveal from "@/components/scroll-reveal";
 import Marquee from "@/components/marquee";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 
-export default function Home() {
-  const latestEpisodes = episodes.slice(0, 4);
+export default async function Home() {
+  let latestEpisodes = staticEpisodes.slice(0, 4);
+  try {
+    const res = await fetch(RSS_URL, { next: { revalidate: 900 } });
+    if (res.ok) {
+      const rssEpisodes = parseEpisodes(await res.text());
+      if (rssEpisodes.length > 0) latestEpisodes = rssEpisodes.slice(0, 4);
+    }
+  } catch {
+    // keep static fallback
+  }
 
   return (
     <>
