@@ -323,10 +323,10 @@ export default async function Home() {
         <ScrollReveal variant="stagger" className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { num: "50+", label: "Episodes" },
-              { num: "10K+", label: "Listeners" },
-              { num: "100+", label: "Community Members" },
-              { num: "6", label: "Countries" },
+              { num: "15K+", label: "Social Followers" },
+              { num: "1,200+", label: "Podcast Listeners" },
+              { num: "1,000+", label: "Community Members" },
+              { num: "40+", label: "Countries" },
             ].map((stat) => (
               <div key={stat.label}>
                 <p className="font-display text-4xl md:text-5xl font-bold text-primary mb-1">{stat.num}</p>
