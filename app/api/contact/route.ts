@@ -35,7 +35,7 @@ export async function POST(request: Request) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: "Women Lead AI <hello@womenlead.ai>",
+        from: "Women Lead AI <onboarding@resend.dev>",
         to: ["hello@womenlead.ai"],
         reply_to: email,
         subject,
