@@ -9,41 +9,43 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const apiKey = process.env.BUTTONDOWN_API_KEY;
+    const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
-      console.error("BUTTONDOWN_API_KEY not configured");
+      console.error("RESEND_API_KEY not configured");
       return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
     }
 
-    const tag = type === "b2b" ? "b2b-enquiry" : "contact-enquiry";
+    const subject = type === "b2b"
+      ? `B2B Enquiry from ${name}${company ? ` (${company})` : ""}`
+      : `Contact Form: ${name}`;
 
-    const notes = [
-      `Name: ${name}`,
-      company ? `Company: ${company}` : null,
-      service ? `Service: ${service}` : null,
-      reason ? `Reason: ${reason}` : null,
-      `\nMessage:\n${message}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    const lines = [
+      `<strong>Name:</strong> ${name}`,
+      `<strong>Email:</strong> ${email}`,
+      company ? `<strong>Company:</strong> ${company}` : null,
+      service ? `<strong>Service:</strong> ${service}` : null,
+      reason ? `<strong>Reason:</strong> ${reason}` : null,
+      `<br/><strong>Message:</strong><br/>${message.replace(/\n/g, "<br/>")}`,
+    ].filter(Boolean).join("<br/>");
 
-    const res = await fetch("https://api.buttondown.com/v1/subscribers", {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Token ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        email_address: email,
-        tags: [tag],
-        notes,
+        from: "Women Lead AI <hello@womenlead.ai>",
+        to: ["hello@womenlead.ai"],
+        reply_to: email,
+        subject,
+        html: `<p>${lines}</p>`,
       }),
     });
 
-    // 409 = already subscribed, still counts as received
-    if (!res.ok && res.status !== 409) {
+    if (!res.ok) {
       const error = await res.text();
-      console.error("Buttondown error:", error);
+      console.error("Resend error:", error);
       return NextResponse.json({ error: "Failed to send" }, { status: 500 });
     }
 
