@@ -16,7 +16,7 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row items-start gap-10 md:gap-14">
             <div className="shrink-0">
               <Image
-                src="/images/founder-photo.jpg"
+                src="/images/founder-photo-2.jpg"
                 alt="Wiktoria Korbecka, founder of Women Lead AI"
                 width={280}
                 height={280}
@@ -29,16 +29,10 @@ export default function AboutPage() {
               </h1>
               <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
                 <p>
-                  I&apos;m Wiktoria Korbecka. I built automations, created tools, and started seeing firsthand how AI could transform the way we work, especially for women, who are 25% less likely to even try it.
+                  I&apos;m Wiktoria Korbecka, podcast host, AI educator and consultant. I started Women Lead AI because I kept seeing the same pattern: women who were capable, ambitious and smart, but holding back from AI because nobody was talking to them in a way that actually made sense.
                 </p>
                 <p>
-                  So I founded Women Lead AI. A community and education platform built to help women learn, implement, and scale AI in their careers and businesses.
-                </p>
-                <p>
-                  Beyond that, I run WK Designs, a 3D printing business where I use AI-driven tools to streamline everything from product development to marketing. It&apos;s proof that you don&apos;t need to be a developer to build something powerful with AI.
-                </p>
-                <p>
-                  Whether you&apos;re a founder, a corporate professional, or somewhere in between, AI isn&apos;t going anywhere. The question is whether you&apos;re going to use it or be left behind. I&apos;m here to make sure it&apos;s the former.
+                  So I built the podcast, the community, and the education platform to change that. Alongside it, I run AI workshops and consult with organisations on how to make AI practical and make it stick. If you&apos;re ready to stop watching AI from the sidelines, you&apos;re in the right place.
                 </p>
               </div>
               <p className="mt-8 font-display text-xl italic text-foreground">

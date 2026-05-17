@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 
 async function getEpisodes() {
   try {
-    const res = await fetch(RSS_URL, { next: { revalidate: 900 } });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    const res = await fetch(RSS_URL, { next: { revalidate: 900 }, signal: controller.signal });
+    clearTimeout(timeout);
     if (res.ok) {
       const episodes = parseEpisodes(await res.text());
       if (episodes.length > 0) return episodes;

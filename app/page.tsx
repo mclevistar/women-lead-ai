@@ -11,7 +11,10 @@ import { EXTERNAL_LINKS } from "@/lib/constants";
 export default async function Home() {
   let latestEpisodes = staticEpisodes.slice(0, 4);
   try {
-    const res = await fetch(RSS_URL, { next: { revalidate: 900 } });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    const res = await fetch(RSS_URL, { next: { revalidate: 900 }, signal: controller.signal });
+    clearTimeout(timeout);
     if (res.ok) {
       const rssEpisodes = parseEpisodes(await res.text());
       if (rssEpisodes.length > 0) latestEpisodes = rssEpisodes.slice(0, 4);
@@ -22,67 +25,85 @@ export default async function Home() {
 
   return (
     <>
-      {/* ============ HERO - Full viewport, cinematic ============ */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Gradient mesh background */}
-        <div className="absolute inset-0 gradient-mesh" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/0 to-background" />
-        {/* Subtle animated glow */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" style={{ animation: "pulse-glow 6s ease-in-out infinite" }} />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-[100px]" style={{ animation: "pulse-glow 8s ease-in-out infinite 2s" }} />
-
-        <div className="relative max-w-7xl mx-auto px-6 md:px-10 pt-32 pb-20 w-full">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-            {/* Text */}
-            <div className="flex-1 max-w-2xl">
-              <div className="fade-in-up" style={{ animationFillMode: "both" }}>
-                <span className="inline-block text-xs font-medium text-primary uppercase tracking-[0.2em] mb-6 border border-primary/30 rounded-full px-4 py-1.5">
-                  Podcast &middot; Community &middot; Education
-                </span>
-              </div>
-              <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-foreground tracking-tight leading-[1.05] mb-6 fade-in-up delay-100" style={{ animationFillMode: "both" }}>
-                Women
-                <br />
-                <span className="text-primary">Lead</span> AI
-              </h1>
-              <p className="text-lg md:text-xl leading-relaxed text-muted-foreground max-w-lg mb-10 fade-in-up delay-200" style={{ animationFillMode: "both" }}>
-                Exploring AI, leadership and the future of tech from a female founder&apos;s perspective. Conversations with the builders and visionaries shaping the AI era.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 fade-in-up delay-300" style={{ animationFillMode: "both" }}>
-                <Link
-                  href="/podcast"
-                  className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-[1.02]"
-                >
-                  <Headphones className="h-4 w-4" />
-                  Listen to the Podcast
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </Link>
-                <a
-                  href={EXTERNAL_LINKS.skool}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl border border-border text-foreground font-medium text-sm hover:bg-secondary/60 hover:border-primary/30 transition-all duration-300"
-                >
-                  Join the Community
-                </a>
-              </div>
+      {/* ============ HERO — Split screen ============ */}
+      <section className="min-h-screen flex flex-col lg:flex-row overflow-hidden">
+        {/* Left: text */}
+        <div className="flex-1 flex items-center bg-[#EFE2D3] px-8 md:px-14 lg:px-20 pt-28 pb-16 lg:pt-0">
+          <div className="max-w-lg w-full">
+            <p
+              className="text-xs font-bold uppercase tracking-[0.25em] text-[#602D37] mb-6 fade-in-up"
+              style={{ fontFamily: "'Manrope', system-ui, sans-serif", animationFillMode: "both" }}
+            >
+              Podcast &middot; Community &middot; Education
+            </p>
+            <h1
+              className="text-[5.5rem] md:text-[7rem] lg:text-[8rem] leading-none text-[#602D37] mb-6 fade-in-up delay-100"
+              style={{ fontFamily: "'Bebas Neue', Impact, sans-serif", animationFillMode: "both" }}
+            >
+              Women
+              <br />
+              Lead AI
+            </h1>
+            <p
+              className="text-lg leading-relaxed text-[#5A4A44] max-w-md mb-10 fade-in-up delay-200"
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif", animationFillMode: "both" }}
+            >
+              Exploring AI, leadership and the future of tech from a female founder&apos;s perspective. Conversations with the builders and visionaries shaping the AI era.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 fade-in-up delay-300" style={{ animationFillMode: "both" }}>
+              <Link href="/podcast" className="btn-bold">
+                <Headphones className="h-4 w-4" />
+                Listen Now
+              </Link>
+              <a
+                href={EXTERNAL_LINKS.skool}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-bold-outline"
+              >
+                Join the Community
+              </a>
             </div>
+          </div>
+        </div>
 
-            {/* Podcast cover with glow effect */}
-            <div className="shrink-0 slide-in-right delay-300" style={{ animationFillMode: "both" }}>
-              <div className="relative">
-                <div className="absolute -inset-4 bg-primary/15 rounded-3xl blur-2xl" style={{ animation: "pulse-glow 4s ease-in-out infinite" }} />
-                <div className="float relative">
-                  <Image
-                    src="/images/podcast-cover.png"
-                    alt="Women Lead AI podcast cover"
-                    width={420}
-                    height={420}
-                    className="w-72 md:w-80 lg:w-[420px] rounded-2xl shadow-2xl shadow-black/40 transition-transform duration-500 hover:scale-[1.03]"
-                    priority
-                  />
-                </div>
-              </div>
+        {/* Right: photo */}
+        <div className="lg:w-[48%] xl:w-[46%] relative bg-[#AB5961] flex items-end justify-center overflow-hidden min-h-[55vw] lg:min-h-0">
+          <div
+            className="absolute inset-0 slide-in-right delay-300"
+            style={{
+              backgroundImage: "url('/images/hero-davos-3.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center top",
+              animationFillMode: "both",
+            }}
+          />
+          <div className="relative w-full h-full flex items-end justify-center pb-0">
+            {/* Overlay gradient at bottom */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/30 to-transparent" />
+            {/* Left badge: name + title */}
+            <div className="absolute bottom-6 left-6 bg-[#EFE2D3] px-4 py-2">
+              <p
+                className="text-xs font-bold uppercase tracking-wider text-[#602D37]"
+                style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+              >
+                Wiktoria Korbecka
+              </p>
+              <p
+                className="text-xs text-[#5A4A44]"
+                style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
+              >
+                Founder, Women Lead AI
+              </p>
+            </div>
+            {/* Right badge: location */}
+            <div className="absolute bottom-6 right-6 bg-[#602D37] px-4 py-2">
+              <p
+                className="text-xs font-bold uppercase tracking-wider text-[#EFE2D3]"
+                style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+              >
+                at Davos during WEF
+              </p>
             </div>
           </div>
         </div>
@@ -100,128 +121,162 @@ export default async function Home() {
         "Career Growth",
       ]} />
 
-      {/* ============ VIDEO / FEATURED SECTION ============ */}
-      <section className="py-28 md:py-36 px-6 md:px-10">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <h2 className="font-display text-4xl md:text-6xl font-bold text-foreground mb-4">
-                Watch the Latest
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-lg mx-auto">
-                Real conversations about AI with the people building the future.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal variant="scale">
-            <div className="relative max-w-4xl mx-auto">
-              <div className="video-container aspect-video bg-card">
-                <iframe
-                  src="https://www.youtube.com/embed/6RAJnLDSkXs"
-                  title="Women Lead AI - Latest Video"
-                  className="w-full h-full rounded-2xl"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+      {/* ============ STATS STRIP ============ */}
+      <section className="py-16 px-6 md:px-10 border-b border-[#D9CCBE]">
+        <ScrollReveal variant="stagger" className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { num: "15K+", label: "Social Followers" },
+              { num: "1,200+", label: "Podcast Listeners" },
+              { num: "1,000+", label: "Community Members" },
+              { num: "40+", label: "Countries" },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <p
+                  className="text-5xl md:text-6xl text-[#602D37] leading-none mb-2"
+                  style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}
+                >
+                  {stat.num}
+                </p>
+                <p
+                  className="text-xs font-semibold uppercase tracking-widest text-[#5A4A44]"
+                  style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+                >
+                  {stat.label}
+                </p>
               </div>
-              {/* Glow under video */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-16 bg-primary/10 rounded-full blur-3xl" />
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal>
-            <div className="text-center mt-10">
-              <a
-                href={EXTERNAL_LINKS.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium text-primary link-underline"
-              >
-                <Play className="h-4 w-4" />
-                Watch more on YouTube
-              </a>
-            </div>
-          </ScrollReveal>
-        </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* ============ LATEST EPISODES ============ */}
-      <section className="py-28 px-6 md:px-10 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-card/40 to-background" />
-        <div className="relative max-w-7xl mx-auto">
+      <section className="py-24 md:py-32 px-6 md:px-10 bg-[#EFE2D3]">
+        <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="flex items-end justify-between mb-14">
               <div>
-                <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">From the Podcast</span>
-                <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
+                <p
+                  className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-3"
+                  style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+                >
+                  From the Podcast
+                </p>
+                <h2
+                  className="text-5xl md:text-6xl text-[#232323] leading-none"
+                  style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}
+                >
                   Latest Episodes
                 </h2>
               </div>
               <Link
                 href="/podcast"
-                className="hidden md:inline-flex items-center gap-2 text-sm font-medium text-primary link-underline"
+                className="hidden md:inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#602D37] link-underline"
+                style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
               >
-                View all episodes <ArrowRight className="h-4 w-4" />
+                View all <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </ScrollReveal>
 
           <ScrollReveal variant="stagger">
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-px bg-[#D9CCBE]">
               {latestEpisodes.map((episode) => (
                 <Link
                   key={episode.id}
                   href={`/podcast/${episode.id}`}
-                  className="glow-card group block p-6 md:p-8 rounded-2xl bg-card/60 border border-border/30 backdrop-blur-sm"
+                  className="episode-card group block p-7 md:p-8 bg-[#FAF5EF]"
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xs font-medium text-primary bg-primary/10 rounded-full px-3 py-1">EP {episode.episodeNumber}</span>
-                    <span className="text-xs text-muted-foreground">{episode.duration}</span>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span
+                      className="text-xs font-bold uppercase tracking-wider bg-[#602D37] text-[#EFE2D3] px-3 py-1"
+                      style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+                    >
+                      EP {episode.episodeNumber}
+                    </span>
+                    <span className="text-xs text-[#5A4A44]">{episode.duration}</span>
                   </div>
-                  <h3 className="font-display text-lg md:text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+                  <h3
+                    className="text-lg font-bold text-[#232323] group-hover:text-[#602D37] transition-colors mb-1"
+                    style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+                  >
                     {episode.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-3">with {episode.guest}</p>
-                  <p className="text-sm text-muted-foreground/70 line-clamp-2">{episode.description}</p>
+                  <p className="text-sm text-[#5A4A44] mb-3">with {episode.guest}</p>
+                  <p className="text-sm text-[#5A4A44]/70 line-clamp-2">{episode.description}</p>
                 </Link>
               ))}
             </div>
           </ScrollReveal>
 
           <div className="mt-8 text-center md:hidden">
-            <Link href="/podcast" className="text-sm font-medium text-primary link-underline">
+            <Link
+              href="/podcast"
+              className="text-sm font-semibold uppercase tracking-wider text-[#602D37] link-underline"
+              style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+            >
               View all episodes &rarr;
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ============ BIG QUOTE / MISSION ============ */}
-      <section className="py-32 md:py-40 px-6 md:px-10 relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh opacity-40" />
+      {/* ============ BIG QUOTE ============ */}
+      <section className="py-28 md:py-36 px-6 md:px-10 bg-[#602D37] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 opacity-10"
+          style={{
+            background: "radial-gradient(circle, #ECB398 0%, transparent 70%)"
+          }}
+        />
         <ScrollReveal className="relative max-w-4xl mx-auto text-center">
-          <blockquote className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-8">
-            &ldquo;AI isn&apos;t going anywhere. The question is whether you&apos;re going to use it or be left behind.&rdquo;
+          <span
+            className="text-[#ECB398] text-8xl md:text-9xl leading-none block mb-2 opacity-40"
+            style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}
+          >
+            &ldquo;
+          </span>
+          <blockquote
+            className="text-4xl md:text-5xl lg:text-6xl text-[#EFE2D3] leading-tight mb-8"
+            style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}
+          >
+            AI isn&apos;t going anywhere. The question is whether you&apos;re going to use it or be left behind.
           </blockquote>
-          <p className="text-lg text-muted-foreground mb-2">Wiktoria Korbecka</p>
-          <p className="text-sm text-muted-foreground/60">Founder, Women Lead AI</p>
+          <p
+            className="text-[#ECB398] font-bold text-sm uppercase tracking-widest mb-1"
+            style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+          >
+            Wiktoria Korbecka
+          </p>
+          <p
+            className="text-[#EFE2D3]/70 text-xl"
+            style={{ fontFamily: "'Caveat', cursive" }}
+          >
+            Founder, Women Lead AI
+          </p>
         </ScrollReveal>
       </section>
 
-      {/* ============ WHAT I DO - Interactive cards ============ */}
-      <section className="py-28 px-6 md:px-10">
+      {/* ============ WHAT I DO ============ */}
+      <section className="py-24 md:py-32 px-6 md:px-10 bg-[#FAF5EF]">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-16">
-              <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">What I Do</span>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground">
+            <div className="mb-14">
+              <p
+                className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-3"
+                style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+              >
+                What I Do
+              </p>
+              <h2
+                className="text-5xl md:text-6xl text-[#232323] leading-none"
+                style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}
+              >
                 Build. Teach. Lead.
               </h2>
             </div>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               {
                 icon: Headphones,
@@ -253,28 +308,48 @@ export default async function Home() {
                 external: true,
               },
             ].map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 100}>
+              <ScrollReveal key={item.title} delay={i * 80}>
                 {item.external ? (
                   <a
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="glow-card group block p-8 rounded-2xl bg-card/60 border border-border/30 h-full"
+                    className="editorial-card group block p-8 h-full"
                   >
-                    <item.icon className="h-6 w-6 text-primary mb-5 transition-transform duration-300 group-hover:scale-110" />
-                    <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{item.desc}</p>
-                    <span className="text-sm font-medium text-primary link-underline">{item.label} &rarr;</span>
+                    <item.icon className="h-5 w-5 text-[#602D37] mb-5" />
+                    <h3
+                      className="text-xl font-bold text-[#232323] group-hover:text-[#602D37] transition-colors mb-2"
+                      style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-[#5A4A44] leading-relaxed mb-5">{item.desc}</p>
+                    <span
+                      className="text-xs font-bold uppercase tracking-wider text-[#602D37] link-underline"
+                      style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+                    >
+                      {item.label} &rarr;
+                    </span>
                   </a>
                 ) : (
                   <Link
                     href={item.href}
-                    className="glow-card group block p-8 rounded-2xl bg-card/60 border border-border/30 h-full"
+                    className="editorial-card group block p-8 h-full"
                   >
-                    <item.icon className="h-6 w-6 text-primary mb-5 transition-transform duration-300 group-hover:scale-110" />
-                    <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{item.desc}</p>
-                    <span className="text-sm font-medium text-primary link-underline">{item.label} &rarr;</span>
+                    <item.icon className="h-5 w-5 text-[#602D37] mb-5" />
+                    <h3
+                      className="text-xl font-bold text-[#232323] group-hover:text-[#602D37] transition-colors mb-2"
+                      style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-[#5A4A44] leading-relaxed mb-5">{item.desc}</p>
+                    <span
+                      className="text-xs font-bold uppercase tracking-wider text-[#602D37] link-underline"
+                      style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+                    >
+                      {item.label} &rarr;
+                    </span>
                   </Link>
                 )}
               </ScrollReveal>
@@ -284,33 +359,43 @@ export default async function Home() {
       </section>
 
       {/* ============ ABOUT STRIP ============ */}
-      <section className="py-28 px-6 md:px-10 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-card/60 via-background to-card/60" />
-        <div className="relative max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
+      <section className="py-24 md:py-32 px-6 md:px-10 bg-[#EFE2D3]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
           <ScrollReveal variant="left" className="shrink-0">
             <div className="relative">
-              <div className="absolute -inset-3 bg-primary/10 rounded-2xl blur-xl" />
               <Image
                 src="/images/founder-photo.jpg"
                 alt="Wiktoria Korbecka"
                 width={320}
-                height={320}
-                className="relative w-56 md:w-72 rounded-2xl shadow-xl"
+                height={400}
+                className="polaroid w-56 md:w-72 object-cover"
               />
             </div>
           </ScrollReveal>
 
           <ScrollReveal variant="right" className="flex-1">
-            <span className="text-xs font-medium text-primary uppercase tracking-[0.2em] mb-3 block">About</span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <p
+              className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-4"
+              style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+            >
+              About
+            </p>
+            <h2
+              className="text-5xl md:text-6xl text-[#232323] leading-none mb-6"
+              style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}
+            >
               Hi, I&apos;m Wiktoria.
             </h2>
-            <p className="text-lg leading-relaxed text-muted-foreground mb-6">
+            <p
+              className="text-lg leading-relaxed text-[#5A4A44] mb-6"
+              style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
+            >
               I built automations, created tools, and started seeing firsthand how AI could transform the way we work, especially for women, who are 25% less likely to even try it. So I founded Women Lead AI, a community and education platform to help women learn, implement, and scale AI in their careers and businesses.
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary link-underline"
+              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#602D37] link-underline"
+              style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
             >
               Read my story <ArrowRight className="h-4 w-4" />
             </Link>
@@ -318,23 +403,55 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ============ STATS / PROOF ============ */}
-      <section className="py-20 px-6 md:px-10 border-y border-border/20">
-        <ScrollReveal variant="stagger" className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { num: "15K+", label: "Social Followers" },
-              { num: "1,200+", label: "Podcast Listeners" },
-              { num: "1,000+", label: "Community Members" },
-              { num: "40+", label: "Countries" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="font-display text-4xl md:text-5xl font-bold text-primary mb-1">{stat.num}</p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
+      {/* ============ FEATURED VIDEO ============ */}
+      <section className="py-24 md:py-32 px-6 md:px-10 bg-[#FAF5EF]">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="mb-14">
+              <p
+                className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-3"
+                style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+              >
+                Watch
+              </p>
+              <h2
+                className="text-5xl md:text-6xl text-[#232323] leading-none"
+                style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}
+              >
+                Latest Video
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal variant="scale">
+            <div className="relative max-w-4xl">
+              <div className="video-container aspect-video bg-[#D9CCBE]">
+                <iframe
+                  src="https://www.youtube.com/embed/6RAJnLDSkXs"
+                  title="Women Lead AI - Latest Video"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
               </div>
-            ))}
-          </div>
-        </ScrollReveal>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <div className="mt-8">
+              <a
+                href={EXTERNAL_LINKS.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#602D37] link-underline"
+                style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+              >
+                <Play className="h-4 w-4" />
+                Watch more on YouTube
+              </a>
+            </div>
+          </ScrollReveal>
+        </div>
       </section>
 
       {/* ============ NEWSLETTER ============ */}

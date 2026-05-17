@@ -1,14 +1,18 @@
 "use client";
 
 export default function Marquee({ items }: { items: string[] }) {
-  const repeated = [...items, ...items];
+  const repeated = [...items, ...items, ...items];
 
   return (
-    <div className="overflow-hidden border-y border-border/20 py-5 bg-card/50">
+    <div className="overflow-hidden bg-[#602D37] py-4">
       <div className="marquee-track flex whitespace-nowrap">
         {repeated.map((item, i) => (
-          <span key={i} className="inline-flex items-center mx-8 text-sm md:text-base font-medium text-muted-foreground">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary mr-4 shrink-0" />
+          <span
+            key={i}
+            className="inline-flex items-center mx-6 text-xs md:text-sm font-bold tracking-[0.15em] uppercase text-[#EFE2D3]"
+            style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
+          >
+            <span className="mr-5 text-[#ECB398]">✦</span>
             {item}
           </span>
         ))}

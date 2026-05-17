@@ -15,6 +15,7 @@ export const NAV_LINKS = [
   { href: "/youtube", label: "YouTube" },
   { href: "/courses", label: "Courses" },
   { href: "/b2b", label: "B2B" },
+  { href: "/speaking", label: "Speaking" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
