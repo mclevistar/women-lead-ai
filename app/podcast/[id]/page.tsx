@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { RSS_URL, parseEpisodes } from "@/lib/parse-rss";
 import { episodes as staticEpisodes } from "@/lib/episodes";
 import { transcripts } from "@/lib/transcripts";
+import { youtubeVideos } from "@/lib/youtube-videos";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import type { Metadata } from "next";
 import type { Episode } from "@/lib/episodes";
@@ -59,6 +60,7 @@ export default async function EpisodePage({ params }: Props) {
   if (!episode) notFound();
 
   const transcript = transcripts[id] ?? episode.transcript ?? "";
+  const youtubeId = youtubeVideos[id] ?? null;
 
   return (
     <section className="py-24 md:py-32 px-6">
@@ -117,8 +119,21 @@ export default async function EpisodePage({ params }: Props) {
           </div>
         )}
 
-        {/* Audio player */}
-        {episode.audioUrl && <EpisodeAudio audioUrl={episode.audioUrl} />}
+        {/* YouTube embed */}
+        {youtubeId && (
+          <div className="mb-8 rounded-xl overflow-hidden aspect-video">
+            <iframe
+              src={`https://www.youtube.com/embed/${youtubeId}`}
+              title={episode.title}
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        )}
+
+        {/* Audio player — shown only when no YouTube video */}
+        {episode.audioUrl && !youtubeId && <EpisodeAudio audioUrl={episode.audioUrl} />}
 
         {/* Show notes */}
         {episode.showNotes && (
