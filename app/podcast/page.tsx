@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { RSS_URL, parseEpisodes } from "@/lib/parse-rss";
 import { episodes as staticEpisodes } from "@/lib/episodes";
 import PodcastList from "./podcast-list";
 
@@ -9,18 +10,13 @@ export const metadata: Metadata = {
 
 async function getEpisodes() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/podcast-feed`, {
-      next: { revalidate: 900 },
-    });
+    const res = await fetch(RSS_URL, { next: { revalidate: 900 } });
     if (res.ok) {
-      const data = await res.json();
-      if (data.length > 0) return data;
+      const episodes = parseEpisodes(await res.text());
+      if (episodes.length > 0) return episodes;
     }
   } catch {
-    // Fall through to static data
+    // fall through to static fallback
   }
   return staticEpisodes;
 }

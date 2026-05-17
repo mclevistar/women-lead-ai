@@ -1,6 +1,8 @@
 import { XMLParser } from "fast-xml-parser";
 import type { Episode } from "./episodes";
 
+export const RSS_URL = "https://anchor.fm/s/10ef58958/podcast/rss";
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -32,6 +34,22 @@ function parseDuration(raw: string | null | undefined): string {
   return str;
 }
 
+// Splits "Clean Title | ft. Guest Name" or "Clean Title | Show Ep N Guest Name"
+function extractTitleAndGuest(raw: string): { title: string; guest: string } {
+  const pipeIdx = raw.indexOf("|");
+  if (pipeIdx === -1) return { title: raw.trim(), guest: "" };
+
+  const title = raw.slice(0, pipeIdx).trim();
+  const suffix = raw.slice(pipeIdx + 1).trim();
+
+  const ftMatch = suffix.match(/\bft\.?\s+(.+)/i) || suffix.match(/\bwith\s+(.+)/i);
+  if (ftMatch) return { title, guest: ftMatch[1].trim() };
+
+  // Remove "Women Lead AI Ep N" prefix and use remainder as guest name
+  const cleaned = suffix.replace(/women lead ai ep\s*\d+/i, "").trim();
+  return { title, guest: cleaned };
+}
+
 export function parseEpisodes(xml: string): Episode[] {
   const parser = new XMLParser({
     ignoreAttributes: false,
@@ -43,20 +61,18 @@ export function parseEpisodes(xml: string): Episode[] {
 
   const items = Array.isArray(channel.item) ? channel.item : channel.item ? [channel.item] : [];
   const episodes: Episode[] = [];
-  let episodeNumber = items.length;
 
   for (const item of items) {
-    const title = item.title || "Untitled";
+    const rawTitle = String(item.title || "Untitled");
+    const { title, guest } = extractTitleAndGuest(rawTitle);
     const descriptionRaw = item.description || "";
     const description = stripHtml(descriptionRaw);
     const pubDate = item.pubDate || "";
     const date = pubDate ? new Date(pubDate).toISOString().split("T")[0] : "";
-    const duration = parseDuration(
-      item["itunes:duration"] || null
-    );
-    const author = item["itunes:author"] || "";
+    const duration = parseDuration(item["itunes:duration"] || null);
     const enclosureUrl = item.enclosure?.["@_url"] || "";
     const link = item.link || "";
+    const epNum = item["itunes:episode"];
 
     const keywords = item["itunes:keywords"] || "";
     const topics = keywords
@@ -69,7 +85,7 @@ export function parseEpisodes(xml: string): Episode[] {
       id,
       title,
       description: description.slice(0, 300),
-      guest: author || "Women Lead AI",
+      guest: guest || "Wiktoria Korbecka",
       guestBio: "",
       date,
       duration,
@@ -78,7 +94,7 @@ export function parseEpisodes(xml: string): Episode[] {
       keyTakeaways: [],
       linksMentioned: link ? [{ title: "Listen on Spotify", url: link }] : [],
       transcript: "",
-      episodeNumber: episodeNumber--,
+      episodeNumber: epNum ? parseInt(String(epNum)) : 0,
       audioUrl: enclosureUrl,
     });
   }
