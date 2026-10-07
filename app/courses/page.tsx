@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import WaitlistForm from "./waitlist-form";
+import { BOOTCAMP_PRICE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Courses",
@@ -16,7 +19,31 @@ const expectations = [
 
 export default function CoursesPage() {
   return (
-    <section className="py-24 md:py-32 px-6">
+    <>
+    <section className="pt-32 md:pt-40 pb-8 px-6">
+      <div className="max-w-4xl mx-auto">
+        <Link
+          href="/courses/ai-sales-marketing-bootcamp"
+          className="group grid md:grid-cols-[1fr_auto] gap-8 items-center bg-[#602D37] text-[#EFE2D3] p-8 md:p-12 border-2 border-[#602D37] hover:-translate-y-1 transition-transform"
+        >
+          <div>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#ECB398] mb-3 block" style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}>
+              Starts 1 November &middot; 2 weeks &middot; ${BOOTCAMP_PRICE}
+            </span>
+            <h2 className="text-4xl md:text-5xl leading-[1.05] mb-4" style={{ fontFamily: "var(--loaded-dmserif), Georgia, serif" }}>
+              Your AI marketing team <em className="text-[#ECB398]">in 14 days</em>
+            </h2>
+            <p className="text-[#EFE2D3]/80 leading-relaxed max-w-xl">
+              14 days, 14 tasks, a video for every one. Make cinematic AI videos, animated carousels with Claude, short and long form edited by Claude, plus AI outreach that wins clients.
+            </p>
+          </div>
+          <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#EFE2D3]" style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}>
+            See the course <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </Link>
+      </div>
+    </section>
+    <section className="py-16 md:py-24 px-6">
       <div className="max-w-2xl mx-auto text-center">
         <span className="text-xs font-medium text-primary uppercase tracking-widest mb-4 block">Coming Soon</span>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
@@ -49,5 +76,6 @@ export default function CoursesPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

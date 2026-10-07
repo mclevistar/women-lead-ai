@@ -10,6 +10,12 @@ export const EXTERNAL_LINKS = {
   email: "hello@womenlead.ai",
 } as const;
 
+// "Your AI Marketing Team in 14 Days" bootcamp ($95, starts 1 November 2026, UK time).
+// Stripe Payment Link (served on the oxfordtalks.io custom checkout domain). Set to "" to show a waitlist form instead.
+export const BOOTCAMP_CHECKOUT_URL = "https://checkout.oxfordtalks.io/b/bJeeVe9PG9EAgFX7Yyawo0v";
+export const BOOTCAMP_PRICE = 95;
+export const BOOTCAMP_START = "2026-11-01T00:00:00Z";
+
 export const NAV_LINKS = [
   { href: "/podcast", label: "Podcast" },
   { href: "/youtube", label: "YouTube" },

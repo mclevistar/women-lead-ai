@@ -288,9 +288,9 @@ export default async function Home() {
               {
                 icon: BookOpen,
                 title: "Courses",
-                desc: "Practical AI education for founders and professionals who want to lead confidently.",
-                href: "/courses",
-                label: "Join waitlist",
+                desc: "New bootcamp: Your AI Marketing Team in 14 Days, starting 1 November. One task and one video a day for 14 days.",
+                href: "/courses/ai-sales-marketing-bootcamp",
+                label: "See the course",
               },
               {
                 icon: Building2,

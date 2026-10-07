@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Manrope, Caveat, DM_Sans } from "next/font/google";
+import { Bebas_Neue, Manrope, Caveat, DM_Sans, DM_Serif_Display } from "next/font/google";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import "./globals.css";
@@ -22,6 +22,14 @@ const caveat = Caveat({
   weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--loaded-caveat",
+  display: "swap",
+});
+
+const dmSerif = DM_Serif_Display({
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--loaded-dmserif",
   display: "swap",
 });
 
@@ -59,7 +67,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased ${bebasNeue.variable} ${manrope.variable} ${caveat.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`h-full antialiased ${bebasNeue.variable} ${manrope.variable} ${caveat.variable} ${dmSans.variable} ${dmSerif.variable}`}>
       <body className="min-h-full flex flex-col">
         <Nav />
         <main className="flex-1">{children}</main>
