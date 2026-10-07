@@ -30,8 +30,8 @@ export default function CoursesPage() {
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#ECB398] mb-3 block" style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}>
               Starts 1 November &middot; 2 weeks &middot; ${BOOTCAMP_PRICE}
             </span>
-            <h2 className="text-5xl md:text-6xl leading-none mb-4" style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}>
-              AI for Sales &amp; Marketing Bootcamp
+            <h2 className="text-4xl md:text-5xl leading-[1.05] mb-4" style={{ fontFamily: "var(--loaded-dmserif), Georgia, serif" }}>
+              Your AI marketing team <em className="text-[#ECB398]">in 14 days</em>
             </h2>
             <p className="text-[#EFE2D3]/80 leading-relaxed max-w-xl">
               14 days, 14 tasks, a video for every one. Make cinematic AI videos, animated carousels with Claude, short and long form edited by Claude, plus AI outreach that wins clients.

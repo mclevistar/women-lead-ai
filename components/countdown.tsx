@@ -46,8 +46,8 @@ export default function Countdown({ target, tone = "light" }: { target: string; 
       {(time?.parts ?? remaining(0).parts).map((p) => (
         <div key={p.label} className="text-center">
           <div
-            className={`w-16 md:w-20 py-2 md:py-3 text-4xl md:text-5xl leading-none tabular-nums ${box}`}
-            style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}
+            className={`w-16 md:w-20 py-3 md:py-4 text-3xl md:text-4xl leading-none tabular-nums ${box}`}
+            style={{ fontFamily: "var(--loaded-dmserif), Georgia, serif" }}
           >
             {time ? String(p.value).padStart(2, "0") : "--"}
           </div>

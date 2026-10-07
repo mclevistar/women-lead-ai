@@ -20,11 +20,11 @@ import Countdown from "@/components/countdown";
 import { BOOTCAMP_CHECKOUT_URL, BOOTCAMP_PRICE, BOOTCAMP_START } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "AI for Sales and Marketing Bootcamp",
+  title: "Your AI Marketing Team in 14 Days",
   description:
     "A 2-week bootcamp on using AI for sales and marketing, starting 1 November. Every day you get one task and a video showing exactly how to do it: cinematic AI videos, animated carousels built with Claude, long and short form videos edited by Claude, and AI-powered outreach.",
   openGraph: {
-    title: "AI for Sales and Marketing Bootcamp | Women Lead AI",
+    title: "Your AI Marketing Team in 14 Days | Women Lead AI",
     description:
       "Starts 1 November. 14 days, 14 tasks. Make cinematic AI videos, animated carousels and Claude-edited content, then turn it into sales with AI outreach.",
     url: "https://womenlead.ai/courses/ai-sales-marketing-bootcamp",
@@ -32,9 +32,9 @@ export const metadata: Metadata = {
   },
 };
 
-const display = { fontFamily: "'Bebas Neue', Impact, sans-serif" };
+const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
-const script = { fontFamily: "'Caveat', cursive" };
+const script = { fontFamily: "var(--loaded-dmserif), Georgia, serif", fontStyle: "italic" as const };
 
 const hasCheckout = BOOTCAMP_CHECKOUT_URL.length > 0;
 const enrolHref = hasCheckout ? BOOTCAMP_CHECKOUT_URL : "#enrol";
@@ -156,7 +156,7 @@ function DayList({ days }: { days: typeof week1 }) {
     <ol className="divide-y divide-[#D9CCBE] border-y border-[#D9CCBE]">
       {days.map((d) => (
         <li key={d.day} className="flex gap-5 py-5">
-          <span className="shrink-0 w-14 text-4xl leading-none text-[#AB5961]" style={display}>
+          <span className="shrink-0 w-14 text-4xl leading-[1.05] text-[#AB5961]" style={display}>
             {String(d.day).padStart(2, "0")}
           </span>
           <div>
@@ -185,17 +185,13 @@ export default function AiSalesMarketingBootcampPage() {
               2-week bootcamp &middot; starts 1 November
             </p>
             <h1
-              className="text-[3.75rem] md:text-[5.5rem] leading-[0.9] text-[#602D37] mb-4 fade-in-up delay-100"
+              className="text-[3rem] md:text-[4.5rem] leading-[1.02] text-[#602D37] mb-5 fade-in-up delay-100"
               style={{ ...display, animationFillMode: "both" }}
             >
-              AI for Sales
-              <br />
-              &amp; Marketing
-              <br />
-              Bootcamp
+              Your AI marketing team <em className="text-[#AB5961]">in 14 days</em>
             </h1>
-            <p className="text-3xl md:text-4xl text-[#AB5961] mb-6 fade-in-up delay-200" style={{ ...script, animationFillMode: "both" }}>
-              14 days. 14 tasks. Real content.
+            <p className="text-2xl md:text-3xl text-[#5A4A44] mb-6 fade-in-up delay-200" style={{ ...script, animationFillMode: "both" }}>
+              The 14-day AI bootcamp for sales and marketing
             </p>
             <p
               className="text-lg leading-relaxed text-[#5A4A44] max-w-xl mb-10 fade-in-up delay-300"
@@ -258,7 +254,7 @@ export default function AiSalesMarketingBootcampPage() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-3" style={heading}>
                 What you&apos;ll be able to do
               </p>
-              <h2 className="text-5xl md:text-6xl text-[#232323] leading-none mb-5" style={display}>
+              <h2 className="text-4xl md:text-5xl text-[#232323] leading-[1.05] mb-5" style={display}>
                 Content that used to need a whole team
               </h2>
               <p className="text-lg text-[#5A4A44] leading-relaxed">
@@ -284,7 +280,7 @@ export default function AiSalesMarketingBootcampPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#AB5961] mb-2" style={heading}>
                     Skill {String(i + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="text-4xl md:text-5xl text-[#232323] leading-none mb-5" style={display}>
+                  <h3 className="text-4xl md:text-5xl text-[#232323] leading-[1.05] mb-5" style={display}>
                     {o.title}
                   </h3>
                   <p className="text-lg text-[#5A4A44] leading-relaxed max-w-md">{o.desc}</p>
@@ -300,7 +296,7 @@ export default function AiSalesMarketingBootcampPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ECB398] mb-2" style={heading}>
                     Skill 05
                   </p>
-                  <h3 className="text-4xl md:text-5xl leading-none mb-5" style={display}>
+                  <h3 className="text-4xl md:text-5xl leading-[1.05] mb-5" style={display}>
                     Outreach that turns content into clients
                   </h3>
                   <p className="text-lg text-[#EFE2D3]/80 leading-relaxed max-w-2xl">
@@ -319,7 +315,7 @@ export default function AiSalesMarketingBootcampPage() {
       <section className="py-24 md:py-28 px-6 md:px-10 bg-[#EFE2D3] border-y border-[#D9CCBE]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <h2 className="text-5xl md:text-6xl text-[#232323] leading-none mb-14 text-center" style={display}>
+            <h2 className="text-4xl md:text-5xl text-[#232323] leading-[1.05] mb-14 text-center" style={display}>
               How it works
             </h2>
           </ScrollReveal>
@@ -331,7 +327,7 @@ export default function AiSalesMarketingBootcampPage() {
                 { n: "3", t: "Ship it", d: "Do the task, post the result. After 14 days you have a portfolio of content and a sales system that runs." },
               ].map((s) => (
                 <div key={s.n} className="editorial-card p-8 h-full">
-                  <span className="text-6xl leading-none text-[#ECB398] block mb-4" style={display}>
+                  <span className="text-6xl leading-[1.05] text-[#ECB398] block mb-4" style={display}>
                     {s.n}
                   </span>
                   <h3 className="text-xl font-bold text-[#232323] mb-2" style={heading}>
@@ -353,7 +349,7 @@ export default function AiSalesMarketingBootcampPage() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-3" style={heading}>
                 The curriculum
               </p>
-              <h2 className="text-5xl md:text-6xl text-[#232323] leading-none" style={display}>
+              <h2 className="text-4xl md:text-5xl text-[#232323] leading-[1.05]" style={display}>
                 14 days, one task a day
               </h2>
             </div>
@@ -390,7 +386,7 @@ export default function AiSalesMarketingBootcampPage() {
       <section className="py-24 md:py-28 px-6 md:px-10 bg-[#232323]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <h2 className="text-5xl md:text-6xl text-[#EFE2D3] leading-none mb-3 text-center" style={display}>
+            <h2 className="text-4xl md:text-5xl text-[#EFE2D3] leading-[1.05] mb-3 text-center" style={display}>
               Made with these workflows
             </h2>
             <p className="text-2xl text-[#ECB398] text-center mb-14" style={script}>
@@ -423,7 +419,7 @@ export default function AiSalesMarketingBootcampPage() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-4" style={heading}>
               Your teacher
             </p>
-            <h2 className="text-5xl md:text-6xl text-[#232323] leading-none mb-6" style={display}>
+            <h2 className="text-4xl md:text-5xl text-[#232323] leading-[1.05] mb-6" style={display}>
               Hi, I&apos;m Wiktoria.
             </h2>
             <p className="text-lg leading-relaxed text-[#5A4A44] mb-4">
@@ -446,7 +442,7 @@ export default function AiSalesMarketingBootcampPage() {
         />
         <div className="relative max-w-3xl mx-auto">
           <ScrollReveal className="text-center mb-12">
-            <h2 className="text-5xl md:text-7xl text-[#EFE2D3] leading-none mb-3" style={display}>
+            <h2 className="text-4xl md:text-5xl text-[#EFE2D3] leading-[1.05] mb-3" style={display}>
               Join the bootcamp
             </h2>
             <p className="text-2xl text-[#ECB398]" style={script}>
@@ -462,11 +458,11 @@ export default function AiSalesMarketingBootcampPage() {
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 pb-8 border-b border-[#D9CCBE]">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-2" style={heading}>
-                    AI for Sales &amp; Marketing Bootcamp
+                    Your AI Marketing Team in 14 Days
                   </p>
                   <p className="text-[#5A4A44]">Starts 1 November &middot; 14 days &middot; 14 tasks</p>
                 </div>
-                <p className="text-7xl md:text-8xl leading-none text-[#602D37]" style={display}>
+                <p className="text-6xl md:text-7xl leading-none text-[#602D37]" style={display}>
                   ${BOOTCAMP_PRICE}
                 </p>
               </div>
@@ -509,7 +505,7 @@ export default function AiSalesMarketingBootcampPage() {
       <section className="py-24 md:py-32 px-6 md:px-10 bg-[#FAF5EF]">
         <div className="max-w-3xl mx-auto">
           <ScrollReveal>
-            <h2 className="text-5xl md:text-6xl text-[#232323] leading-none mb-12 text-center" style={display}>
+            <h2 className="text-4xl md:text-5xl text-[#232323] leading-[1.05] mb-12 text-center" style={display}>
               Questions
             </h2>
           </ScrollReveal>

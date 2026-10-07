@@ -10,7 +10,7 @@ export const EXTERNAL_LINKS = {
   email: "hello@womenlead.ai",
 } as const;
 
-// AI for Sales and Marketing Bootcamp ($95, starts 1 November 2026, UK time).
+// "Your AI Marketing Team in 14 Days" bootcamp ($95, starts 1 November 2026, UK time).
 // Paste the Stripe Payment Link (https://buy.stripe.com/...) here. While empty, the page shows a waitlist form instead.
 export const BOOTCAMP_CHECKOUT_URL = "";
 export const BOOTCAMP_PRICE = 95;
