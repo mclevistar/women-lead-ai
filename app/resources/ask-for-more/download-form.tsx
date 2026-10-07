@@ -8,11 +8,12 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 export default function DownloadForm() {
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email) return;
+    if (!email || !consent) return;
 
     setStatus("loading");
     try {
@@ -54,7 +55,7 @@ export default function DownloadForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <form id="ask-for-more-form" onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
         <input
           type="email"
           value={email}
@@ -73,9 +74,20 @@ export default function DownloadForm() {
           {status === "loading" ? "Sending..." : "Get the skill"}
         </button>
       </form>
-      <p className="text-[#EFE2D3]/50 text-xs mt-3 text-center">
-        You&apos;ll also get my weekly AI insights. Unsubscribe anytime.
-      </p>
+      <label className="flex items-start gap-3 max-w-md mx-auto mt-4 text-left text-[#EFE2D3]/70 text-xs leading-relaxed cursor-pointer">
+        <input
+          type="checkbox"
+          form="ask-for-more-form"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          required
+          className="mt-0.5 h-4 w-4 shrink-0 accent-[#ECB398] cursor-pointer"
+        />
+        <span>
+          I agree to receive emails from Wiktoria Korbecka at Women Lead AI, including weekly AI insights, resources
+          and occasional offers. I can unsubscribe at any time using the link in every email.
+        </span>
+      </label>
       {status === "error" && (
         <p className="text-[#EFE2D3]/70 text-sm mt-3 text-center">Something went wrong. Please try again.</p>
       )}
