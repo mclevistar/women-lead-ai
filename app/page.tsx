@@ -288,9 +288,9 @@ export default async function Home() {
               {
                 icon: BookOpen,
                 title: "Courses",
-                desc: "Practical AI education for founders and professionals who want to lead confidently.",
-                href: "/courses",
-                label: "Join waitlist",
+                desc: "New: the 14-day AI Marketing Sprint. One task and one video a day to master AI for sales and marketing.",
+                href: "/courses/ai-marketing-sprint",
+                label: "See the course",
               },
               {
                 icon: Building2,

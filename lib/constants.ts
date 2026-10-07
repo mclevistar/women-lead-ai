@@ -10,6 +10,11 @@ export const EXTERNAL_LINKS = {
   email: "hello@womenlead.ai",
 } as const;
 
+// Stripe Payment Link for the 14-day AI Marketing Sprint ($95).
+// Paste the https://buy.stripe.com/... link here. While empty, the page shows a waitlist form instead.
+export const SPRINT_CHECKOUT_URL = "";
+export const SPRINT_PRICE = 95;
+
 export const NAV_LINKS = [
   { href: "/podcast", label: "Podcast" },
   { href: "/youtube", label: "YouTube" },
