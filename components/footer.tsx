@@ -12,7 +12,7 @@ export default function Footer() {
               <li><Link href="/podcast" className="text-sm text-muted-foreground hover:text-primary transition-colors">Podcast</Link></li>
               <li><Link href="/youtube" className="text-sm text-muted-foreground hover:text-primary transition-colors">YouTube</Link></li>
               <li><Link href="/courses" className="text-sm text-muted-foreground hover:text-primary transition-colors">Courses</Link></li>
-              <li><a href={EXTERNAL_LINKS.gumroad} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">Resources</a></li>
+              <li><Link href="/resources" className="text-sm text-muted-foreground hover:text-primary transition-colors">Resources</Link></li>
               <li><Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About</Link></li>
             </ul>
           </div>

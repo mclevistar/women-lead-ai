@@ -15,13 +15,13 @@ export default function Nav() {
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-16 md:h-20">
         <Link
           href="/"
-          className="text-2xl tracking-wider text-[#EFE2D3]"
+          className="text-2xl tracking-wider text-[#EFE2D3] whitespace-nowrap"
           style={{ fontFamily: "'Bebas Neue', Impact, sans-serif" }}
         >
           Women Lead AI
         </Link>
 
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -48,7 +48,7 @@ export default function Nav() {
         </nav>
 
         <button
-          className="md:hidden p-2 text-[#EFE2D3]"
+          className="lg:hidden p-2 text-[#EFE2D3]"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -57,7 +57,7 @@ export default function Nav() {
       </div>
 
       {mobileOpen && (
-        <nav className="md:hidden bg-[#602D37] border-t border-[#4a2129]">
+        <nav className="lg:hidden bg-[#602D37] border-t border-[#4a2129]">
           <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-4">
             {NAV_LINKS.map((link) => (
               <Link
