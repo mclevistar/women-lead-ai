@@ -491,7 +491,7 @@ export default function AiSalesMarketingBootcampPage() {
                     Enrol now for ${BOOTCAMP_PRICE}
                     <ArrowRight className="h-4 w-4" />
                   </a>
-                  <p className="text-xs text-[#5A4A44] mt-4">Secure checkout with Stripe. Instant access after payment.</p>
+                  <p className="text-xs text-[#5A4A44] mt-4">Secure checkout with Stripe. Your place is confirmed by email straight away.</p>
                 </div>
               ) : (
                 <div className="text-center">

@@ -11,8 +11,8 @@ export const EXTERNAL_LINKS = {
 } as const;
 
 // "Your AI Marketing Team in 14 Days" bootcamp ($95, starts 1 November 2026, UK time).
-// Paste the Stripe Payment Link (https://buy.stripe.com/...) here. While empty, the page shows a waitlist form instead.
-export const BOOTCAMP_CHECKOUT_URL = "";
+// Stripe Payment Link (served on the oxfordtalks.io custom checkout domain). Set to "" to show a waitlist form instead.
+export const BOOTCAMP_CHECKOUT_URL = "https://checkout.oxfordtalks.io/b/bJeeVe9PG9EAgFX7Yyawo0v";
 export const BOOTCAMP_PRICE = 95;
 export const BOOTCAMP_START = "2026-11-01T00:00:00Z";
 
