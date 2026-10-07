@@ -46,7 +46,7 @@ function EnrolButton() {
   );
 }
 
-function LoopVideo({ src, ratio, label }: { src: string; ratio: "9/16" | "4/5"; label?: string }) {
+function LoopVideo({ src, ratio, label }: { src: string; ratio: "9/16" | "4/5" | "16/9"; label?: string }) {
   return (
     <div className="relative overflow-hidden bg-[#232323] border-2 border-[#602D37]" style={{ aspectRatio: ratio }}>
       <LoopVideoPlayer src={`/course/${src}.mp4`} poster={`/course/${src}.jpg`} />
@@ -102,8 +102,8 @@ const outcomes = [
   },
   {
     icon: Film,
-    video: "podcast-shorts",
-    ratio: "9/16" as const,
+    video: "podcast-intro",
+    ratio: "16/9" as const,
     title: "Long form, edited by Claude",
     desc: "YouTube videos and podcast episodes edited with Claude, then sliced into a week of shorts. One recording, dozens of pieces of content.",
   },
@@ -261,47 +261,6 @@ export default function AiSalesMarketingBootcampPage() {
         ]}
       />
 
-      {/* ============ FEATURED EDIT ============ */}
-      <section className="py-24 md:py-28 px-6 md:px-10 bg-[#232323]">
-        <div className="max-w-5xl mx-auto">
-          <ScrollReveal className="text-center mb-10">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ECB398] mb-3" style={heading}>
-              Press play
-            </p>
-            <h2 className="text-4xl md:text-5xl text-[#EFE2D3] leading-[1.05] mb-4" style={display}>
-              This intro was edited with AI
-            </h2>
-            <p className="text-lg text-[#EFE2D3]/75 max-w-2xl mx-auto leading-relaxed">
-              The opening of my podcast episode with Lindsey Chrismon: b-roll, titles, logo and music, all put together
-              with AI. You&apos;ll learn to edit your own long form videos like this in week two.
-            </p>
-          </ScrollReveal>
-          <ScrollReveal variant="scale">
-            <div className="video-container bg-black" style={{ aspectRatio: "16/9" }}>
-              <video
-                className="w-full h-full"
-                src="/course/podcast-intro.mp4"
-                poster="/course/podcast-intro.jpg"
-                controls
-                playsInline
-                preload="none"
-              />
-            </div>
-            <p className="text-center mt-5">
-              <a
-                href="https://youtu.be/5-Y8CkQAxWQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#ECB398] hover:text-[#EFE2D3] transition-colors"
-                style={heading}
-              >
-                Watch the full episode on YouTube <ArrowRight className="h-4 w-4" />
-              </a>
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
-
       {/* ============ OUTCOMES ============ */}
       <section className="py-24 md:py-32 px-6 md:px-10 bg-[#FAF5EF]">
         <div className="max-w-7xl mx-auto">
@@ -327,7 +286,7 @@ export default function AiSalesMarketingBootcampPage() {
                 className={`grid md:grid-cols-2 gap-10 md:gap-16 items-center ${i % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""}`}
               >
                 <ScrollReveal variant={i % 2 === 1 ? "right" : "left"}>
-                  <div className={`mx-auto ${o.ratio === "9/16" ? "max-w-[280px]" : "max-w-[360px]"}`}>
+                  <div className={`mx-auto ${o.ratio === "9/16" ? "max-w-[280px]" : o.ratio === "16/9" ? "max-w-[560px]" : "max-w-[360px]"}`}>
                     {o.ratio === "4/5" ? (
                       <CarouselPlayer slides={carousels.claude} label={o.title} />
                     ) : (
