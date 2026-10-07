@@ -16,17 +16,18 @@ import ScrollReveal from "@/components/scroll-reveal";
 import Marquee from "@/components/marquee";
 import LoopVideoPlayer from "@/components/loop-video";
 import WaitlistForm from "../waitlist-form";
-import { SPRINT_CHECKOUT_URL, SPRINT_PRICE } from "@/lib/constants";
+import Countdown from "@/components/countdown";
+import { BOOTCAMP_CHECKOUT_URL, BOOTCAMP_PRICE, BOOTCAMP_START } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "AI Marketing Sprint: 14 Days, 14 Tasks",
+  title: "AI for Sales and Marketing Bootcamp",
   description:
-    "A 2-week course on using AI for sales and marketing. Every day you get one task and a video showing exactly how to do it: cinematic AI videos, animated carousels built with Claude, long and short form videos edited by Claude, and AI-powered outreach.",
+    "A 2-week bootcamp on using AI for sales and marketing, starting 1 November. Every day you get one task and a video showing exactly how to do it: cinematic AI videos, animated carousels built with Claude, long and short form videos edited by Claude, and AI-powered outreach.",
   openGraph: {
-    title: "AI Marketing Sprint | Women Lead AI",
+    title: "AI for Sales and Marketing Bootcamp | Women Lead AI",
     description:
-      "14 days. 14 tasks. Make cinematic AI videos, animated carousels and Claude-edited content, then turn it into sales with AI outreach.",
-    url: "https://womenlead.ai/courses/ai-marketing-sprint",
+      "Starts 1 November. 14 days, 14 tasks. Make cinematic AI videos, animated carousels and Claude-edited content, then turn it into sales with AI outreach.",
+    url: "https://womenlead.ai/courses/ai-sales-marketing-bootcamp",
     images: ["/course/pink-nyc.jpg"],
   },
 };
@@ -35,13 +36,13 @@ const display = { fontFamily: "'Bebas Neue', Impact, sans-serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 const script = { fontFamily: "'Caveat', cursive" };
 
-const hasCheckout = SPRINT_CHECKOUT_URL.length > 0;
-const enrolHref = hasCheckout ? SPRINT_CHECKOUT_URL : "#enrol";
+const hasCheckout = BOOTCAMP_CHECKOUT_URL.length > 0;
+const enrolHref = hasCheckout ? BOOTCAMP_CHECKOUT_URL : "#enrol";
 
 function EnrolButton() {
   return (
     <a href={enrolHref} className="btn-bold" style={heading}>
-      {hasCheckout ? `Enrol for $${SPRINT_PRICE}` : "Get early access"}
+      {hasCheckout ? `Enrol for $${BOOTCAMP_PRICE}` : "Get early access"}
       <ArrowRight className="h-4 w-4" />
     </a>
   );
@@ -138,7 +139,7 @@ const faqs = [
   },
   {
     q: "What if I fall behind?",
-    a: "It is self-paced. Every lesson stays available, so you can do two days in one or take a weekend off and pick up where you left off.",
+    a: "Every lesson stays available after it unlocks, so you can do two days in one or take a weekend off and pick up where you left off.",
   },
   {
     q: "Is this for sales or for marketing?",
@@ -146,7 +147,7 @@ const faqs = [
   },
   {
     q: "When do I get access?",
-    a: "Straight after checkout you get an email with your access link, and day one is ready to go.",
+    a: "The bootcamp starts on 1 November. You get your access email straight after checkout, day one unlocks on the 1st and a new day unlocks every morning after that.",
   },
 ];
 
@@ -170,7 +171,7 @@ function DayList({ days }: { days: typeof week1 }) {
   );
 }
 
-export default function AiMarketingSprintPage() {
+export default function AiSalesMarketingBootcampPage() {
   return (
     <>
       {/* ============ HERO ============ */}
@@ -181,15 +182,17 @@ export default function AiMarketingSprintPage() {
               className="text-xs font-bold uppercase tracking-[0.25em] text-[#602D37] mb-6 fade-in-up"
               style={{ ...heading, animationFillMode: "both" }}
             >
-              2-week course &middot; AI for sales &amp; marketing
+              2-week bootcamp &middot; starts 1 November
             </p>
             <h1
-              className="text-[4.5rem] md:text-[6.5rem] leading-[0.9] text-[#602D37] mb-4 fade-in-up delay-100"
+              className="text-[3.75rem] md:text-[5.5rem] leading-[0.9] text-[#602D37] mb-4 fade-in-up delay-100"
               style={{ ...display, animationFillMode: "both" }}
             >
-              AI Marketing
+              AI for Sales
               <br />
-              Sprint
+              &amp; Marketing
+              <br />
+              Bootcamp
             </h1>
             <p className="text-3xl md:text-4xl text-[#AB5961] mb-6 fade-in-up delay-200" style={{ ...script, animationFillMode: "both" }}>
               14 days. 14 tasks. Real content.
@@ -202,6 +205,9 @@ export default function AiMarketingSprintPage() {
               videos, animated carousels built by Claude, short and long form videos edited by Claude, and outreach that
               turns all that attention into clients.
             </p>
+            <div className="mb-10 fade-in-up delay-300" style={{ animationFillMode: "both" }}>
+              <Countdown target={BOOTCAMP_START} />
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 fade-in-up delay-400" style={{ animationFillMode: "both" }}>
               <EnrolButton />
               <a href="#curriculum" className="btn-bold-outline" style={heading}>
@@ -211,7 +217,7 @@ export default function AiMarketingSprintPage() {
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#5A4A44] fade-in-up delay-500" style={{ animationFillMode: "both" }}>
               <span className="inline-flex items-center gap-2"><PlayCircle className="h-4 w-4 text-[#602D37]" /> Video every day</span>
               <span className="inline-flex items-center gap-2"><ListChecks className="h-4 w-4 text-[#602D37]" /> One task a day</span>
-              <span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4 text-[#602D37]" /> Self-paced, lifetime access</span>
+              <span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4 text-[#602D37]" /> Starts 1 November</span>
             </div>
           </div>
 
@@ -320,7 +326,7 @@ export default function AiMarketingSprintPage() {
           <ScrollReveal variant="stagger">
             <div className="grid md:grid-cols-3 gap-5">
               {[
-                { n: "1", t: "Get your task", d: "Each morning a new day unlocks with one clear task and the result you should have by the end of it." },
+                { n: "1", t: "Get your task", d: "From 1 November, each morning a new day unlocks with one clear task and the result you should have by the end of it." },
                 { n: "2", t: "Watch me do it", d: "A screen-recorded video shows exactly how I do it, every prompt and every click, so you never get stuck." },
                 { n: "3", t: "Ship it", d: "Do the task, post the result. After 14 days you have a portfolio of content and a sales system that runs." },
               ].map((s) => (
@@ -425,7 +431,7 @@ export default function AiMarketingSprintPage() {
               carousels, podcast edits and outreach are made with the exact workflows in this course.
             </p>
             <p className="text-lg leading-relaxed text-[#5A4A44]">
-              I built this sprint because I kept getting the same DM: &ldquo;How did you make that?&rdquo; This is the
+              I built this bootcamp because I kept getting the same DM: &ldquo;How did you make that?&rdquo; This is the
               answer, one day at a time.
             </p>
           </ScrollReveal>
@@ -441,11 +447,14 @@ export default function AiMarketingSprintPage() {
         <div className="relative max-w-3xl mx-auto">
           <ScrollReveal className="text-center mb-12">
             <h2 className="text-5xl md:text-7xl text-[#EFE2D3] leading-none mb-3" style={display}>
-              Join the sprint
+              Join the bootcamp
             </h2>
             <p className="text-2xl text-[#ECB398]" style={script}>
-              two weeks from now you could be posting these
+              doors close when we start on 1 November
             </p>
+            <div className="mt-8 flex justify-center">
+              <Countdown target={BOOTCAMP_START} tone="dark" />
+            </div>
           </ScrollReveal>
 
           <ScrollReveal variant="scale">
@@ -453,12 +462,12 @@ export default function AiMarketingSprintPage() {
               <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 pb-8 border-b border-[#D9CCBE]">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-2" style={heading}>
-                    AI Marketing Sprint
+                    AI for Sales &amp; Marketing Bootcamp
                   </p>
-                  <p className="text-[#5A4A44]">14 days &middot; 14 tasks &middot; lifetime access</p>
+                  <p className="text-[#5A4A44]">Starts 1 November &middot; 14 days &middot; 14 tasks</p>
                 </div>
                 <p className="text-7xl md:text-8xl leading-none text-[#602D37]" style={display}>
-                  ${SPRINT_PRICE}
+                  ${BOOTCAMP_PRICE}
                 </p>
               </div>
 
@@ -474,11 +483,11 @@ export default function AiMarketingSprintPage() {
               {hasCheckout ? (
                 <div className="text-center">
                   <a
-                    href={SPRINT_CHECKOUT_URL}
+                    href={BOOTCAMP_CHECKOUT_URL}
                     className="btn-bold w-full sm:w-auto text-base px-12 py-5"
                     style={heading}
                   >
-                    Enrol now for ${SPRINT_PRICE}
+                    Enrol now for ${BOOTCAMP_PRICE}
                     <ArrowRight className="h-4 w-4" />
                   </a>
                   <p className="text-xs text-[#5A4A44] mt-4">Secure checkout with Stripe. Instant access after payment.</p>

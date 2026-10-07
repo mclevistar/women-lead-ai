@@ -10,10 +10,11 @@ export const EXTERNAL_LINKS = {
   email: "hello@womenlead.ai",
 } as const;
 
-// Stripe Payment Link for the 14-day AI Marketing Sprint ($95).
-// Paste the https://buy.stripe.com/... link here. While empty, the page shows a waitlist form instead.
-export const SPRINT_CHECKOUT_URL = "";
-export const SPRINT_PRICE = 95;
+// AI for Sales and Marketing Bootcamp ($95, starts 1 November 2026, UK time).
+// Paste the Stripe Payment Link (https://buy.stripe.com/...) here. While empty, the page shows a waitlist form instead.
+export const BOOTCAMP_CHECKOUT_URL = "";
+export const BOOTCAMP_PRICE = 95;
+export const BOOTCAMP_START = "2026-11-01T00:00:00Z";
 
 export const NAV_LINKS = [
   { href: "/podcast", label: "Podcast" },

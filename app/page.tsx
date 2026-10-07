@@ -288,8 +288,8 @@ export default async function Home() {
               {
                 icon: BookOpen,
                 title: "Courses",
-                desc: "New: the 14-day AI Marketing Sprint. One task and one video a day to master AI for sales and marketing.",
-                href: "/courses/ai-marketing-sprint",
+                desc: "New: the AI for Sales and Marketing Bootcamp, starting 1 November. One task and one video a day for 14 days.",
+                href: "/courses/ai-sales-marketing-bootcamp",
                 label: "See the course",
               },
               {
