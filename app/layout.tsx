@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bebas_Neue, Manrope, Caveat, DM_Sans, DM_Serif_Display } from "next/font/google";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import BootcampPopup from "@/components/bootcamp-popup";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -72,6 +73,7 @@ export default function RootLayout({
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <BootcampPopup />
       </body>
     </html>
   );

@@ -44,6 +44,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Stop off-screen animations (e.g. the homepage hero) widening the page on phones. */
+  overflow-x: clip;
 }
 
 body {
