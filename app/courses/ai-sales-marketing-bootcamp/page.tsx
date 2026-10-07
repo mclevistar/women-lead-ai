@@ -8,9 +8,6 @@ import {
   Scissors,
   Film,
   Send,
-  PlayCircle,
-  ListChecks,
-  CalendarDays,
 } from "lucide-react";
 import ScrollReveal from "@/components/scroll-reveal";
 import Marquee from "@/components/marquee";
@@ -63,6 +60,13 @@ function LoopVideo({ src, ratio, label }: { src: string; ratio: "9/16" | "4/5"; 
     </div>
   );
 }
+
+const heroOutcomes = [
+  "Make cinematic AI videos, like my pink New York reel",
+  "Create animated carousels that Claude designs for you",
+  "Have Claude edit your Reels, TikToks and YouTube videos",
+  "Turn your new content into messages that win clients",
+];
 
 const outcomes = [
   {
@@ -193,14 +197,20 @@ export default function AiSalesMarketingBootcampPage() {
             <p className="text-2xl md:text-3xl text-[#5A4A44] mb-6 fade-in-up delay-200" style={{ ...script, animationFillMode: "both" }}>
               The 14-day AI bootcamp for sales and marketing
             </p>
-            <p
-              className="text-lg leading-relaxed text-[#5A4A44] max-w-xl mb-10 fade-in-up delay-300"
-              style={{ animationFillMode: "both" }}
-            >
-              Every day you get one task and a video showing exactly how to do it. In two weeks you will make cinematic AI
-              videos, animated carousels built by Claude, short and long form videos edited by Claude, and outreach that
-              turns all that attention into clients.
-            </p>
+            <div className="max-w-xl mb-10 fade-in-up delay-300" style={{ animationFillMode: "both" }}>
+              <p className="text-lg leading-relaxed text-[#5A4A44] mb-5">
+                One task a day for 14 days. Each day comes with a short video showing you exactly what to do, step by
+                step. By the end, you&apos;ll be able to:
+              </p>
+              <ul className="space-y-2.5">
+                {heroOutcomes.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-[#232323] leading-snug">
+                    <Check className="h-5 w-5 text-[#AB5961] mt-0.5 shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
             <div className="mb-10 fade-in-up delay-300" style={{ animationFillMode: "both" }}>
               <Countdown target={BOOTCAMP_START} />
             </div>
@@ -209,11 +219,6 @@ export default function AiSalesMarketingBootcampPage() {
               <a href="#curriculum" className="btn-bold-outline" style={heading}>
                 See the 14 days
               </a>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-[#5A4A44] fade-in-up delay-500" style={{ animationFillMode: "both" }}>
-              <span className="inline-flex items-center gap-2"><PlayCircle className="h-4 w-4 text-[#602D37]" /> Video every day</span>
-              <span className="inline-flex items-center gap-2"><ListChecks className="h-4 w-4 text-[#602D37]" /> One task a day</span>
-              <span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4 text-[#602D37]" /> Starts 1 November</span>
             </div>
           </div>
 
