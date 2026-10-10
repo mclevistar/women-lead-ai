@@ -3,10 +3,16 @@
 import { useState } from "react";
 import { Download } from "lucide-react";
 
-const DOWNLOAD_URL = "/downloads/ask-for-more-skill.zip";
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
-export default function DownloadForm() {
+type Props = {
+  downloadUrl: string;
+  tag: string;
+  buttonLabel: string;
+};
+
+export default function DownloadForm({ downloadUrl, tag, buttonLabel }: Props) {
+  const formId = `${tag}-form`;
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -20,12 +26,12 @@ export default function DownloadForm() {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, tag: "ask-for-more" }),
+        body: JSON.stringify({ email, tag }),
       });
       if (res.ok) {
         setStatus("success");
         setEmail("");
-        window.location.href = DOWNLOAD_URL;
+        window.location.href = downloadUrl;
       } else {
         setStatus("error");
       }
@@ -41,7 +47,7 @@ export default function DownloadForm() {
           You&apos;re in. Your download should start now.
         </p>
         <a
-          href={DOWNLOAD_URL}
+          href={downloadUrl}
           download
           className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#EFE2D3] text-[#602D37] font-bold text-sm uppercase tracking-wider border-2 border-[#EFE2D3] hover:bg-transparent hover:text-[#EFE2D3] transition-all duration-300"
           style={heading}
@@ -55,7 +61,7 @@ export default function DownloadForm() {
 
   return (
     <>
-      <form id="ask-for-more-form" onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <form id={formId} onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
         <input
           type="email"
           value={email}
@@ -71,13 +77,13 @@ export default function DownloadForm() {
           className="px-7 py-3.5 bg-[#EFE2D3] text-[#602D37] font-bold text-sm uppercase tracking-wider border-2 border-[#EFE2D3] hover:bg-transparent hover:text-[#EFE2D3] transition-all duration-300 disabled:opacity-50"
           style={heading}
         >
-          {status === "loading" ? "Sending..." : "Get the skill"}
+          {status === "loading" ? "Sending..." : buttonLabel}
         </button>
       </form>
       <label className="flex items-start gap-3 max-w-md mx-auto mt-4 text-left text-[#EFE2D3]/70 text-xs leading-relaxed cursor-pointer">
         <input
           type="checkbox"
-          form="ask-for-more-form"
+          form={formId}
           checked={consent}
           onChange={(e) => setConsent(e.target.checked)}
           required

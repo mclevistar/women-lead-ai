@@ -3,68 +3,80 @@ import { EXTERNAL_LINKS } from "@/lib/constants";
 import DownloadForm from "@/components/download-form";
 
 export const metadata: Metadata = {
-  title: "Ask For More: the Claude skill that negotiates for you",
+  title: "3 AI hook effects that stop the scroll: every prompt",
   description:
-    "A free Claude skill for people who hate negotiating. Get the number, the exact words and a rehearsal for pricing projects, brand deals, raising rates and answering \"that's over our budget\".",
+    "Free prompt guide: every prompt I used in Higgsfield to make an Instagram post pour out cotton candy, my inbox fold into paper planes and strawberries melt out of my phone.",
   openGraph: {
-    title: "Ask For More | Women Lead AI",
-    description: "A free Claude skill that helps you price, counter and rehearse money conversations.",
-    url: "https://womenlead.ai/resources/ask-for-more",
+    title: "3 AI Hook Effects | Women Lead AI",
+    description: "Every prompt behind the pop out, paper plane and melt effects. Copy, paste, swap in your details.",
+    url: "https://womenlead.ai/resources/ai-hook-effects",
+    images: ["/resources/hook-end_candy.jpg"],
   },
 };
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
-const uses = [
-  "Price a new client project",
-  "Reply to a brand offer, including usage rights and exclusivity",
-  "Raise your rates with existing clients",
-  "Answer \"that's over our budget\" without discounting",
-  "Counter a low, gifted or \"exposure\" offer",
-  "Rehearse a money conversation before it happens",
+const effects = [
+  { src: "/resources/hook-end_candy.jpg", name: "The pop out" },
+  { src: "/resources/hook-end_planes.jpg", name: "The paper plane" },
+  { src: "/resources/hook-end_jam.jpg", name: "The melt" },
+];
+
+const inside = [
+  "The character sheet prompt that keeps your face and outfit the same in every clip",
+  "How to get readable words on screen (image models can spell, video models can move)",
+  "The start frame prompt for each effect",
+  "The Seedance 2.5 animation prompt for each effect",
+  "The exact Higgsfield settings and what each clip cost me",
 ];
 
 const steps = [
-  "Download the ZIP. Don't unzip it.",
-  "In Claude, open Settings, then Capabilities, and turn on Code execution.",
-  "Go to Customize, then Skills. Click +, choose Create skill, then Upload a skill, and pick the ZIP.",
-  "Start a new chat and say \"help me negotiate\", or paste a client or brand email that mentions money.",
+  "Lock your look with a character sheet.",
+  "Put the words in a still: the start frame.",
+  "Animate from it with Seedance 2.5.",
 ];
 
-const prompts = [
-  "A brand offered me £300 for a Reel. Help me reply.",
-  "What should I charge for a 3 month social media project?",
-  "They said it's over budget. What do I say?",
-  "Practise this call with me. Play a tough haggler.",
-];
-
-export default function AskForMorePage() {
+export default function AiHookEffectsPage() {
   return (
     <>
       <section className="pt-32 md:pt-40 pb-16 px-6">
         <div className="max-w-3xl mx-auto">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-4 block" style={heading}>
-            Free resource &middot; Claude skill
+            Free resource &middot; Prompt guide
           </span>
           <h1 className="text-5xl md:text-6xl leading-[1.05] text-foreground mb-6" style={display}>
-            Ask for more, <em className="text-[#602D37]">without the awkwardness</em>
+            3 AI hook effects <em className="text-[#602D37]">that stop the scroll</em>
           </h1>
           <p className="text-lg leading-relaxed text-muted-foreground max-w-2xl">
-            A negotiation coach for Claude, built for women running businesses and creators working with brands.
-            It gives you the number, the exact words and a rehearsal, so the real conversation feels like reading a
-            script you already know.
+            Every prompt I used to make an Instagram post pour out cotton candy, my inbox fold into paper planes and
+            strawberries melt out of my phone. Copy, paste, swap in your details.
           </p>
+        </div>
+        <div className="max-w-3xl mx-auto grid grid-cols-3 gap-3 md:gap-5 mt-12">
+          {effects.map((e) => (
+            <figure key={e.name}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={e.src} alt={e.name} className="w-full aspect-[9/16] object-cover border-2 border-[#602D37]" />
+              <figcaption className="text-xs md:text-sm font-bold uppercase tracking-wider text-[#602D37] mt-3" style={heading}>
+                {e.name}
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
       <section id="download" className="py-16 md:py-20 px-6 bg-[#602D37]">
         <div className="max-w-xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl text-[#EFE2D3] mb-4 leading-tight" style={display}>
-            Get the skill free
+            Get the prompts free
           </h2>
-          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the download starts straight away.</p>
-          <DownloadForm downloadUrl="/downloads/ask-for-more-skill.zip" tag="ask-for-more" buttonLabel="Get the skill" />
+          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the PDF downloads straight away.</p>
+          <DownloadForm
+            downloadUrl="/downloads/3-ai-hook-effects-prompts.pdf"
+            tag="ai-hook-effects"
+            buttonLabel="Get the PDF"
+          />
         </div>
       </section>
 
@@ -72,10 +84,10 @@ export default function AskForMorePage() {
         <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-2xl font-bold text-foreground mb-5" style={heading}>
-              What it helps you do
+              What&apos;s inside
             </h2>
             <ul className="space-y-3">
-              {uses.map((item) => (
+              {inside.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-muted-foreground">
                   <span className="text-[#602D37] mt-1 shrink-0">&bull;</span>
                   <span>{item}</span>
@@ -85,7 +97,7 @@ export default function AskForMorePage() {
           </div>
           <div>
             <h2 className="text-2xl font-bold text-foreground mb-5" style={heading}>
-              Set it up in 2 minutes
+              The workflow in 3 steps
             </h2>
             <ol className="space-y-3">
               {steps.map((item, i) => (
@@ -97,30 +109,17 @@ export default function AskForMorePage() {
                 </li>
               ))}
             </ol>
+            <p className="text-sm text-muted-foreground mt-6">
+              You&apos;ll need a Higgsfield account, 6 to 10 photos of yourself and an editor like CapCut.
+            </p>
           </div>
-        </div>
-
-        <div className="max-w-3xl mx-auto mt-16">
-          <h2 className="text-2xl font-bold text-foreground mb-5" style={heading}>
-            Try saying
-          </h2>
-          <div className="grid sm:grid-cols-2 gap-3">
-            {prompts.map((p) => (
-              <p key={p} className="border-2 border-[#602D37]/20 px-5 py-4 text-foreground">
-                &ldquo;{p}&rdquo;
-              </p>
-            ))}
-          </div>
-          <p className="text-sm text-muted-foreground mt-8">
-            It never sends anything for you. You always read the message and send it yourself.
-          </p>
         </div>
       </section>
 
       <section className="pb-24 px-6">
         <div className="max-w-3xl mx-auto text-center border-t-2 border-[#602D37]/10 pt-16">
           <h2 className="text-3xl md:text-4xl text-foreground mb-4" style={display}>
-            Want more skills like this?
+            Want more guides like this?
           </h2>
           <p className="text-muted-foreground mb-8">
             Join Women Lead AI, the community for women putting AI to work in their business.

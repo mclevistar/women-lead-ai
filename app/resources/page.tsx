@@ -19,6 +19,20 @@ const resources = [
     description:
       "A negotiation coach for Claude. Price a project, reply to a brand offer, raise your rates or rehearse a money conversation before it happens.",
   },
+  {
+    href: "/resources/ai-hook-effects",
+    label: "Free · Prompt guide",
+    title: "3 AI Hook Effects",
+    description:
+      "Every prompt behind the pop out, paper plane and melt effects. Make your phone behave like a real object and stop the scroll.",
+  },
+  {
+    href: "/resources/nyc-through-time",
+    label: "Free · Prompt pack",
+    title: "NYC Through Time",
+    description:
+      "Every prompt I used to walk through 143 years of New York history in one AI video, from 1883 to today.",
+  },
 ];
 
 export default function ResourcesPage() {
