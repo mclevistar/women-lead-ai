@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import DownloadForm from "@/components/download-form";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "3 AI hook effects that stop the scroll: every prompt",
   description:
     "Free prompt guide: every prompt I used in Higgsfield to make an Instagram post pour out cotton candy, my inbox fold into paper planes and strawberries melt out of my phone.",
-  openGraph: {
-    title: "3 AI Hook Effects | Women Lead AI",
-    description: "Every prompt behind the pop out, paper plane and melt effects. Copy, paste, swap in your details.",
-    url: "https://womenlead.ai/resources/ai-hook-effects",
-    images: ["/resources/hook-end_candy.jpg"],
-  },
-};
+  path: "/resources/ai-hook-effects",
+  ogTitle: "3 AI Hook Effects | Women Lead AI",
+  ogDescription:
+    "Every prompt behind the pop out, paper plane and melt effects. Copy, paste, swap in your details.",
+  images: ["/resources/hook-end_candy.jpg"],
+});
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };

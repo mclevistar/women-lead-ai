@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import WaitlistForm from "./waitlist-form";
 import { BOOTCAMP_PRICE } from "@/lib/constants";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Courses",
-  description: "AI education for leaders. Practical courses on AI strategy, tools and implementation.",
-};
+  description:
+    "AI education for leaders. Practical courses on AI strategy, tools and implementation.",
+  path: "/courses",
+});
 
 const expectations = [
   "Practical, hands-on curriculum designed for real-world application",

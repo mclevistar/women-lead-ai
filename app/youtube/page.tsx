@@ -1,10 +1,13 @@
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "YouTube",
-  description: "Watch Women Lead AI on YouTube. AI education, interviews and insights.",
-};
+  description:
+    "Watch Women Lead AI on YouTube. AI education, interviews and insights.",
+  path: "/youtube",
+});
 
 export default function YouTubePage() {
   return (

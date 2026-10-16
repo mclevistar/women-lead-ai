@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import SpeakingForm from "./speaking-form";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Speaking",
-  description: "Invite Wiktoria Korbecka to speak at your event. Keynotes, panels and workshops on AI, leadership and the future of work.",
-};
+  description:
+    "Invite Wiktoria Korbecka to speak at your event. Keynotes, panels and workshops on AI, leadership and the future of work.",
+  path: "/speaking",
+});
 
 const topics = [
   {

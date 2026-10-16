@@ -1,11 +1,14 @@
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import GeneralContactForm from "./contact-form";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description: "Get in touch with Women Lead AI. We'd love to hear from you.",
-};
+  description:
+    "Get in touch with Women Lead AI. We'd love to hear from you.",
+  path: "/contact",
+});
 
 const socialLinks = [
   { label: "LinkedIn", href: EXTERNAL_LINKS.linkedin },

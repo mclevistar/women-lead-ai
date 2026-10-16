@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { pageMetadata, SITE_URL, PERSON_ID, ORGANIZATION_ID } from "@/lib/seo";
+import JsonLd from "@/components/json-ld";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -17,18 +19,16 @@ import WaitlistForm from "../waitlist-form";
 import Countdown from "@/components/countdown";
 import { BOOTCAMP_CHECKOUT_URL, BOOTCAMP_PRICE, BOOTCAMP_START } from "@/lib/constants";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Your AI Marketing Team in 14 Days",
   description:
     "A 2-week bootcamp on using AI for sales and marketing, starting 1 November. Every day you get one task and a video showing exactly how to do it: cinematic AI videos, animated carousels built with Claude, long and short form videos edited by Claude, and AI-powered outreach.",
-  openGraph: {
-    title: "Your AI Marketing Team in 14 Days | Women Lead AI",
-    description:
-      "Starts 1 November. 14 days, 14 tasks. Make cinematic AI videos, animated carousels and Claude-edited content, then turn it into sales with AI outreach.",
-    url: "https://womenlead.ai/courses/ai-sales-marketing-bootcamp",
-    images: ["/course/pink-nyc.jpg"],
-  },
-};
+  path: "/courses/ai-sales-marketing-bootcamp",
+  ogTitle: "Your AI Marketing Team in 14 Days | Women Lead AI",
+  ogDescription:
+    "Starts 1 November. 14 days, 14 tasks. Make cinematic AI videos, animated carousels and Claude-edited content, then turn it into sales with AI outreach.",
+  images: ["/course/pink-nyc.jpg"],
+});
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
@@ -185,9 +185,37 @@ function DayList({ days }: { days: typeof week1 }) {
   );
 }
 
+const courseSchema = {
+  "@type": "Course",
+  name: "Your AI Marketing Team in 14 Days",
+  description:
+    "A 2-week online bootcamp on using AI for sales and marketing. Every day you get one task and a video showing how to do it: cinematic AI videos, animated carousels built with Claude, long and short form videos edited by Claude, and AI-powered outreach.",
+  url: `${SITE_URL}/courses/ai-sales-marketing-bootcamp`,
+  image: `${SITE_URL}/course/pink-nyc.jpg`,
+  provider: { "@id": ORGANIZATION_ID },
+  instructor: { "@id": PERSON_ID },
+  inLanguage: "en",
+  offers: {
+    "@type": "Offer",
+    price: BOOTCAMP_PRICE,
+    priceCurrency: "USD",
+    category: "Paid",
+    url: `${SITE_URL}/courses/ai-sales-marketing-bootcamp`,
+    availability: "https://schema.org/InStock",
+  },
+  hasCourseInstance: {
+    "@type": "CourseInstance",
+    courseMode: "Online",
+    startDate: BOOTCAMP_START.slice(0, 10),
+    duration: "P14D",
+    instructor: { "@id": PERSON_ID },
+  },
+};
+
 export default function AiSalesMarketingBootcampPage() {
   return (
     <>
+      <JsonLd data={courseSchema} />
       {/* ============ HERO ============ */}
       <section className="pt-28 md:pt-36 pb-20 md:pb-28 px-6 md:px-10 bg-[#EFE2D3] overflow-hidden">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_1fr] gap-14 lg:gap-10 items-center">

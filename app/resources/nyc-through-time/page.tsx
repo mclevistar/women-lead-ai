@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import DownloadForm from "@/components/download-form";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "NYC Through Time: the prompts",
   description:
     "Free prompt pack: every prompt I used in Higgsfield to put myself into 143 years of New York history, from the Brooklyn Bridge opening in 1883 to SoHo today.",
-  openGraph: {
-    title: "NYC Through Time: the prompts | Women Lead AI",
-    description: "Walk through history in your own AI video. Every prompt, copy and paste ready.",
-    url: "https://womenlead.ai/resources/nyc-through-time",
-    images: ["/resources/nyc-cover.jpg"],
-  },
-};
+  path: "/resources/nyc-through-time",
+  ogTitle: "NYC Through Time: the prompts | Women Lead AI",
+  ogDescription:
+    "Walk through history in your own AI video. Every prompt, copy and paste ready.",
+  images: ["/resources/nyc-cover.jpg"],
+});
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };

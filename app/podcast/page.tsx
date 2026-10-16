@@ -1,34 +1,43 @@
 import type { Metadata } from "next";
-import { RSS_URL, parseEpisodes } from "@/lib/parse-rss";
-import { episodes as staticEpisodes } from "@/lib/episodes";
+import { pageMetadata, SITE_URL, PODCAST_ID, PERSON_ID, ORGANIZATION_ID } from "@/lib/seo";
+import { EXTERNAL_LINKS } from "@/lib/constants";
+import JsonLd from "@/components/json-ld";
+import { getAllEpisodes } from "@/lib/get-episodes";
 import PodcastList from "./podcast-list";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Podcast",
-  description: "Conversations with builders, operators and visionaries shaping the AI era.",
-};
-
-async function getEpisodes() {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 5000);
-    const res = await fetch(RSS_URL, { next: { revalidate: 900 }, signal: controller.signal });
-    clearTimeout(timeout);
-    if (res.ok) {
-      const episodes = parseEpisodes(await res.text());
-      if (episodes.length > 0) return episodes;
-    }
-  } catch {
-    // fall through to static fallback
-  }
-  return staticEpisodes;
-}
+  description:
+    "Conversations with builders, operators and visionaries shaping the AI era.",
+  path: "/podcast",
+});
 
 export default async function PodcastPage() {
-  const episodes = await getEpisodes();
+  const episodes = await getAllEpisodes();
+
+  const seriesSchema = {
+    "@type": "PodcastSeries",
+    "@id": PODCAST_ID,
+    name: "Women Lead AI",
+    url: `${SITE_URL}/podcast`,
+    description:
+      "The Women Lead AI podcast, hosted by Wiktoria Korbecka: conversations with women founders, operators and experts about using AI in careers and businesses.",
+    image: `${SITE_URL}/images/podcast-cover.png`,
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    webFeed: "https://anchor.fm/s/10ef58958/podcast/rss",
+    sameAs: [EXTERNAL_LINKS.spotify, EXTERNAL_LINKS.applePodcasts, EXTERNAL_LINKS.youtube],
+    episode: episodes.map((ep) => ({
+      "@type": "PodcastEpisode",
+      name: ep.title,
+      url: `${SITE_URL}/podcast/${ep.id}`,
+      datePublished: ep.date || undefined,
+    })),
+  };
 
   return (
     <section className="py-24 md:py-32 px-6">
+      <JsonLd data={seriesSchema} />
       <div className="max-w-3xl mx-auto">
         <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
           Podcast

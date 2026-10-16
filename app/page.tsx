@@ -1,27 +1,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Headphones, Play, BookOpen, Building2, Users } from "lucide-react";
-import { episodes as staticEpisodes } from "@/lib/episodes";
-import { RSS_URL, parseEpisodes } from "@/lib/parse-rss";
+import { getAllEpisodes } from "@/lib/get-episodes";
 import NewsletterSignup from "@/components/newsletter-signup";
 import ScrollReveal from "@/components/scroll-reveal";
 import Marquee from "@/components/marquee";
 import { EXTERNAL_LINKS } from "@/lib/constants";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { url: "/", siteName: "Women Lead AI", type: "website", images: ["/og-default.jpg"] },
+};
 
 export default async function Home() {
-  let latestEpisodes = staticEpisodes.slice(0, 4);
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 5000);
-    const res = await fetch(RSS_URL, { next: { revalidate: 900 }, signal: controller.signal });
-    clearTimeout(timeout);
-    if (res.ok) {
-      const rssEpisodes = parseEpisodes(await res.text());
-      if (rssEpisodes.length > 0) latestEpisodes = rssEpisodes.slice(0, 4);
-    }
-  } catch {
-    // keep static fallback
-  }
+  const latestEpisodes = (await getAllEpisodes()).slice(0, 4);
 
   return (
     <>

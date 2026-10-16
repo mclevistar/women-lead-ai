@@ -3,6 +3,8 @@ import { Bebas_Neue, Manrope, Caveat, DM_Sans, DM_Serif_Display } from "next/fon
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import BootcampPopup from "@/components/bootcamp-popup";
+import JsonLd from "@/components/json-ld";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE, organizationSchema, personSchema } from "@/lib/seo";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -42,11 +44,12 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Women Lead AI",
+    default: SITE_NAME,
     template: "%s | Women Lead AI",
   },
-  description: "A podcast and platform exploring AI, leadership and the future of tech. Hosted from a female founder's perspective.",
+  description: SITE_DESCRIPTION,
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -54,12 +57,28 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   openGraph: {
-    title: "Women Lead AI",
-    description: "A podcast and platform exploring AI, leadership and the future of tech.",
-    url: "https://womenlead.ai",
-    siteName: "Women Lead AI",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    siteName: SITE_NAME,
     type: "website",
+    images: [DEFAULT_OG_IMAGE],
   },
+  twitter: { card: "summary_large_image" },
+};
+
+const siteSchema = {
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: SITE_DESCRIPTION,
+      publisher: { "@id": organizationSchema["@id"] },
+    },
+    organizationSchema,
+    personSchema,
+  ],
 };
 
 export default function RootLayout({
@@ -70,6 +89,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`h-full antialiased ${bebasNeue.variable} ${manrope.variable} ${caveat.variable} ${dmSans.variable} ${dmSerif.variable}`}>
       <body className="min-h-full flex flex-col">
+        <JsonLd data={siteSchema} />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />

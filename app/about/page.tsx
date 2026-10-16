@@ -1,11 +1,14 @@
 import Image from "next/image";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
-  description: "Meet the founder behind Women Lead AI and learn about our mission to explore AI, leadership and the future of tech.",
-};
+  description:
+    "Meet the founder behind Women Lead AI and learn about our mission to explore AI, leadership and the future of tech.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

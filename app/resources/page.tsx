@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Resources",
-  description: "Free Claude skills, guides and tools from Women Lead AI to help you put AI to work in your business.",
-};
+  description:
+    "Free Claude skills, guides and tools from Women Lead AI to help you put AI to work in your business.",
+  path: "/resources",
+});
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };

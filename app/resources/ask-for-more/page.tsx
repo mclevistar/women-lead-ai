@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import DownloadForm from "@/components/download-form";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Ask For More: the Claude skill that negotiates for you",
   description:
     "A free Claude skill for people who hate negotiating. Get the number, the exact words and a rehearsal for pricing projects, brand deals, raising rates and answering \"that's over our budget\".",
-  openGraph: {
-    title: "Ask For More | Women Lead AI",
-    description: "A free Claude skill that helps you price, counter and rehearse money conversations.",
-    url: "https://womenlead.ai/resources/ask-for-more",
-  },
-};
+  path: "/resources/ask-for-more",
+  ogTitle: "Ask For More | Women Lead AI",
+  ogDescription:
+    "A free Claude skill that helps you price, counter and rehearse money conversations.",
+});
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import ContactForm from "./contact-form";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "B2B Services",
-  description: "AI strategy, advisory, workshops and consulting for forward-thinking organisations.",
-};
+  description:
+    "AI strategy, advisory, workshops and consulting for forward-thinking organisations.",
+  path: "/b2b",
+});
 
 const services = [
   { title: "AI Advisory", description: "Strategic guidance on AI adoption, implementation and governance for leadership teams." },

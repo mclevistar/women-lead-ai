@@ -1,35 +1,18 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { RSS_URL, parseEpisodes } from "@/lib/parse-rss";
-import { episodes as staticEpisodes } from "@/lib/episodes";
+import { notFound, permanentRedirect } from "next/navigation";
+import { getAllEpisodes } from "@/lib/get-episodes";
 import { transcripts } from "@/lib/transcripts";
 import { youtubeVideos } from "@/lib/youtube-videos";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import type { Metadata } from "next";
 import type { Episode } from "@/lib/episodes";
+import JsonLd from "@/components/json-ld";
+import { pageMetadata, SITE_URL, PODCAST_ID, PERSON_ID } from "@/lib/seo";
 import EpisodeAudio from "./episode-audio";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
-
-async function getAllEpisodes(): Promise<Episode[]> {
-  try {
-    const res = await fetch(RSS_URL, { next: { revalidate: 900 } });
-    if (res.ok) {
-      const rssEpisodes = parseEpisodes(await res.text());
-      if (rssEpisodes.length > 0) {
-        // Merge RSS episodes with static ones, RSS takes priority
-        const rssIds = new Set(rssEpisodes.map((e) => e.id));
-        const staticOnly = staticEpisodes.filter((e) => !rssIds.has(e.id));
-        return [...rssEpisodes, ...staticOnly];
-      }
-    }
-  } catch {
-    // fall through to static
-  }
-  return staticEpisodes;
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
@@ -37,14 +20,47 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const episode = episodes.find((ep) => ep.id === id);
   if (!episode) return { title: "Episode Not Found" };
 
-  return {
-    title: episode.title,
+  return pageMetadata({
+    title: pageTitle(episode),
     description: episode.description,
-    openGraph: {
-      title: episode.title,
-      description: episode.description,
-      type: "article",
-    },
+    path: `/podcast/${episode.id}`,
+    type: "article",
+  });
+}
+
+const HOST = "Wiktoria Korbecka";
+
+// "Episode title, with Guest Name" so guest names are searchable too
+function pageTitle(episode: Episode): string {
+  return episode.guest && episode.guest !== HOST ? `${episode.title}, with ${episode.guest}` : episode.title;
+}
+
+function episodeSchema(episode: Episode, youtubeId: string | null) {
+  const url = `${SITE_URL}/podcast/${episode.id}`;
+  return {
+    "@type": "PodcastEpisode",
+    "@id": `${url}#episode`,
+    url,
+    name: episode.title,
+    description: episode.showNotes || episode.description,
+    datePublished: episode.date || undefined,
+    episodeNumber: episode.episodeNumber || undefined,
+    partOfSeries: { "@id": PODCAST_ID, "@type": "PodcastSeries", name: "Women Lead AI", url: `${SITE_URL}/podcast` },
+    author: { "@id": PERSON_ID },
+    actor: episode.guest && episode.guest !== HOST ? [{ "@type": "Person", name: episode.guest }] : undefined,
+    keywords: episode.topics.join(", ") || undefined,
+    associatedMedia: episode.audioUrl ? { "@type": "MediaObject", contentUrl: episode.audioUrl } : undefined,
+    video: youtubeId
+      ? {
+          "@type": "VideoObject",
+          name: episode.title,
+          description: episode.description,
+          thumbnailUrl: `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`,
+          uploadDate: episode.date || undefined,
+          embedUrl: `https://www.youtube.com/embed/${youtubeId}`,
+          contentUrl: `https://www.youtube.com/watch?v=${youtubeId}`,
+        }
+      : undefined,
   };
 }
 
@@ -57,13 +73,18 @@ export default async function EpisodePage({ params }: Props) {
   const { id } = await params;
   const episodes = await getAllEpisodes();
   const episode = episodes.find((ep) => ep.id === id);
-  if (!episode) notFound();
+  if (!episode) {
+    const renamed = episodes.find((ep) => ep.legacyId === id);
+    if (renamed) permanentRedirect(`/podcast/${renamed.id}`);
+    notFound();
+  }
 
   const transcript = transcripts[id] ?? episode.transcript ?? "";
   const youtubeId = youtubeVideos[id] ?? null;
 
   return (
     <section className="py-24 md:py-32 px-6">
+      <JsonLd data={episodeSchema(episode, youtubeId)} />
       <div className="max-w-3xl mx-auto">
         {/* Breadcrumb */}
         <Link
