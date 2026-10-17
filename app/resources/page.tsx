@@ -23,6 +23,13 @@ const resources = [
       "A negotiation coach for Claude. Price a project, reply to a brand offer, raise your rates or rehearse a money conversation before it happens.",
   },
   {
+    href: "/resources/motion-graphics-effects",
+    label: "Free · Prompt guide",
+    title: "10 Motion Graphics Effects",
+    description:
+      "Every prompt behind the newspaper highlight, globe and map zoom, text behind you, chat and 3D phone effects. Made with only Claude Code.",
+  },
+  {
     href: "/resources/ai-hook-effects",
     label: "Free · Prompt guide",
     title: "3 AI Hook Effects",
