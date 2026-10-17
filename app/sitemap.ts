@@ -11,6 +11,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
   { path: "/courses/ai-sales-marketing-bootcamp", priority: 0.9, changeFrequency: "weekly" },
   { path: "/courses", priority: 0.7, changeFrequency: "monthly" },
   { path: "/resources", priority: 0.7, changeFrequency: "weekly" },
+  { path: "/resources/motion-graphics-effects", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/ai-hook-effects", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/nyc-through-time", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/ask-for-more", priority: 0.6, changeFrequency: "monthly" },
