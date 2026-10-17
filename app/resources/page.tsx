@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/startup-perks",
+    label: "Free · Tracker",
+    title: "Startup Perks Tracker",
+    description:
+      "Every startup perk from my video in one place: what you get, who can apply and the link to apply, with a box to tick when you have.",
+  },
+  {
     href: "/resources/ask-for-more",
     label: "Free · Claude skill",
     title: "Ask For More",
