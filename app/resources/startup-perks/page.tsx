@@ -71,8 +71,8 @@ export default function StartupPerksPage() {
           <h2 className="text-4xl md:text-5xl text-[#EFE2D3] mb-4 leading-tight" style={display}>
             Get the tracker free
           </h2>
-          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the PDF downloads straight away.</p>
-          <DownloadForm downloadUrl="/downloads/startup-perks-tracker.pdf" tag="startup-perks" buttonLabel="Get the tracker" />
+          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the PDF downloads straight away, plus a spreadsheet version for Excel, Numbers or Google Sheets.</p>
+          <DownloadForm downloadUrl="/downloads/startup-perks-tracker.pdf" tag="startup-perks" buttonLabel="Get the tracker" extra={{ url: "/downloads/startup-perks-tracker.xlsx", label: "Download the spreadsheet" }} />
         </div>
       </section>
 
