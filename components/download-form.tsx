@@ -9,9 +9,11 @@ type Props = {
   downloadUrl: string;
   tag: string;
   buttonLabel: string;
+  /** optional second file offered after sign up (for example a spreadsheet version) */
+  extra?: { url: string; label: string };
 };
 
-export default function DownloadForm({ downloadUrl, tag, buttonLabel }: Props) {
+export default function DownloadForm({ downloadUrl, tag, buttonLabel, extra }: Props) {
   const formId = `${tag}-form`;
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
@@ -55,6 +57,17 @@ export default function DownloadForm({ downloadUrl, tag, buttonLabel }: Props) {
           <Download className="h-4 w-4" />
           Download again
         </a>
+        {extra && (
+          <a
+            href={extra.url}
+            download
+            className="inline-flex items-center gap-2 px-7 py-3.5 ml-0 sm:ml-3 mt-3 sm:mt-0 text-[#EFE2D3] font-bold text-sm uppercase tracking-wider border-2 border-[#EFE2D3] hover:bg-[#EFE2D3] hover:text-[#602D37] transition-all duration-300"
+            style={heading}
+          >
+            <Download className="h-4 w-4" />
+            {extra.label}
+          </a>
+        )}
       </div>
     );
   }
