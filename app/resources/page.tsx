@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/aeo-audit-kit",
+    label: "Free · Audit kit",
+    title: "The AEO Audit Kit",
+    description:
+      "Find out if ChatGPT, Claude, Perplexity and Gemini recommend your website, then fix it with every Claude Code prompt from my video.",
+  },
+  {
     href: "/resources/startup-perks",
     label: "Free · Tracker",
     title: "Startup Perks Tracker",
