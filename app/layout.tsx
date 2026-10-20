@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { Bebas_Neue, Manrope, Caveat, DM_Sans, DM_Serif_Display } from "next/font/google";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
@@ -95,6 +96,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <BootcampPopup />
+        <Analytics />
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
