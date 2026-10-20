@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Headphones, Play, BookOpen, Users } from "lucide-react";
 import { getAllEpisodes } from "@/lib/get-episodes";
+import { getLatestVideos } from "@/lib/get-videos";
 import NewsletterSignup from "@/components/newsletter-signup";
 import ScrollReveal from "@/components/scroll-reveal";
 import Marquee from "@/components/marquee";
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const latestEpisodes = (await getAllEpisodes()).slice(0, 4);
+  const [latestVideo] = await getLatestVideos();
 
   return (
     <>
@@ -413,8 +415,8 @@ export default async function Home() {
             <div className="relative max-w-4xl">
               <div className="video-container aspect-video bg-[#D9CCBE]">
                 <iframe
-                  src="https://www.youtube.com/embed/6RAJnLDSkXs"
-                  title="Women Lead AI - Latest Video"
+                  src={`https://www.youtube.com/embed/${latestVideo?.id ?? "6RAJnLDSkXs"}`}
+                  title={latestVideo?.title ?? "Women Lead AI - Latest Video"}
                   className="w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
