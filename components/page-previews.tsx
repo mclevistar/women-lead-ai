@@ -6,7 +6,17 @@ type Preview = { src: string; name: string };
 
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
-export default function PagePreviews({ previews }: { previews: Preview[] }) {
+export default function PagePreviews({
+  previews,
+  aspect = "aspect-[1/1.414]",
+  compactMobile = false,
+}: {
+  previews: Preview[];
+  // Tailwind aspect class for the thumbnails; defaults to an A4 page.
+  aspect?: string;
+  // Keep three across on phones (for tall 9:16 stills).
+  compactMobile?: boolean;
+}) {
   const [open, setOpen] = useState<number | null>(null);
 
   const close = useCallback(() => setOpen(null), []);
@@ -32,7 +42,7 @@ export default function PagePreviews({ previews }: { previews: Preview[] }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
+      <div className={`grid ${compactMobile ? "grid-cols-3 gap-3" : "grid-cols-1 gap-6"} sm:grid-cols-3 sm:gap-6 md:gap-8`}>
         {previews.map((e, i) => (
           <figure key={e.name}>
             <button
@@ -42,9 +52,9 @@ export default function PagePreviews({ previews }: { previews: Preview[] }) {
               className="group relative block w-full border-2 border-[#602D37] bg-white shadow-[0_12px_40px_-12px_rgba(96,45,55,0.45)] transition-transform duration-300 hover:-translate-y-1 cursor-zoom-in"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={e.src} alt={e.name} className="w-full aspect-[1/1.414] object-cover object-top" />
+              <img src={e.src} alt={e.name} className={`w-full ${aspect} object-cover object-top`} />
               <span
-                className="absolute bottom-3 right-3 bg-[#602D37] text-[#EFE2D3] text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 opacity-90 group-hover:opacity-100"
+                className={`absolute bottom-3 right-3 ${compactMobile ? "hidden sm:block" : ""} bg-[#602D37] text-[#EFE2D3] text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 opacity-90 group-hover:opacity-100`}
                 style={heading}
               >
                 Click to enlarge

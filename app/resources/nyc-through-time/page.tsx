@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import DownloadForm from "@/components/download-form";
+import PagePreviews from "@/components/page-previews";
 
 export const metadata: Metadata = pageMetadata({
   title: "NYC Through Time: the prompts",
@@ -54,16 +55,8 @@ export default function NycThroughTimePage() {
             1883 to the streets of SoHo today. Copy, paste, swap in your own city and your own moments.
           </p>
         </div>
-        <div className="max-w-3xl mx-auto grid grid-cols-3 gap-3 md:gap-5 mt-12">
-          {moments.map((m) => (
-            <figure key={m.year}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={m.src} alt={`New York, ${m.year}`} className="w-full aspect-[9/16] object-cover border-2 border-[#602D37]" />
-              <figcaption className="text-xs md:text-sm font-bold uppercase tracking-wider text-[#602D37] mt-3" style={heading}>
-                {m.year}
-              </figcaption>
-            </figure>
-          ))}
+        <div className="max-w-5xl mx-auto mt-14">
+          <PagePreviews previews={moments.map((m) => ({ src: m.src, name: m.year }))} aspect="aspect-[9/16]" compactMobile />
         </div>
       </section>
 

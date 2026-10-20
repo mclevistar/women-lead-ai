@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import DownloadForm from "@/components/download-form";
+import PagePreviews from "@/components/page-previews";
 
 export const metadata: Metadata = pageMetadata({
   title: "3 AI hook effects that stop the scroll: every prompt",
@@ -53,16 +54,8 @@ export default function AiHookEffectsPage() {
             strawberries melt out of my phone. Copy, paste, swap in your details.
           </p>
         </div>
-        <div className="max-w-3xl mx-auto grid grid-cols-3 gap-3 md:gap-5 mt-12">
-          {effects.map((e) => (
-            <figure key={e.name}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={e.src} alt={e.name} className="w-full aspect-[9/16] object-cover border-2 border-[#602D37]" />
-              <figcaption className="text-xs md:text-sm font-bold uppercase tracking-wider text-[#602D37] mt-3" style={heading}>
-                {e.name}
-              </figcaption>
-            </figure>
-          ))}
+        <div className="max-w-5xl mx-auto mt-14">
+          <PagePreviews previews={effects} aspect="aspect-[9/16]" compactMobile />
         </div>
       </section>
 
