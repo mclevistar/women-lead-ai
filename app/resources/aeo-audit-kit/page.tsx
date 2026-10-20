@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import DownloadForm from "@/components/download-form";
+import PagePreviews from "@/components/page-previews";
 
 export const metadata: Metadata = pageMetadata({
   title: "The AEO audit kit: get AI to recommend your website",
@@ -18,9 +19,9 @@ const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const previews = [
-  { src: "/resources/aeo-cover.jpg", name: "The audit kit" },
-  { src: "/resources/aeo-sheet.jpg", name: "The 20 question audit sheet" },
-  { src: "/resources/aeo-prompts.jpg", name: "Every Claude Code prompt" },
+  { src: "/resources/aeo-page-cover.jpg", name: "The audit kit" },
+  { src: "/resources/aeo-page-sheet.jpg", name: "The 20 question audit sheet" },
+  { src: "/resources/aeo-page-prompts.jpg", name: "Every Claude Code prompt" },
 ];
 
 const inside = [
@@ -55,16 +56,8 @@ export default function AeoAuditKitPage() {
             own site this week.
           </p>
         </div>
-        <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-5 mt-12">
-          {previews.map((e) => (
-            <figure key={e.name}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={e.src} alt={e.name} className="w-full aspect-video object-cover object-top border-2 border-[#602D37]" />
-              <figcaption className="text-xs md:text-sm font-bold uppercase tracking-wider text-[#602D37] mt-3" style={heading}>
-                {e.name}
-              </figcaption>
-            </figure>
-          ))}
+        <div className="max-w-5xl mx-auto mt-14">
+          <PagePreviews previews={previews} />
         </div>
       </section>
 
