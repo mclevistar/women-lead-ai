@@ -19,9 +19,7 @@ export default function Footer() {
           <div>
             <h4 className="font-display text-sm font-semibold text-foreground mb-5">Business</h4>
             <ul className="space-y-3">
-              <li><Link href="/b2b" className="text-sm text-muted-foreground hover:text-primary transition-colors">B2B Services</Link></li>
-              <li><Link href="/b2b" className="text-sm text-muted-foreground hover:text-primary transition-colors">Advisory</Link></li>
-              <li><Link href="/b2b" className="text-sm text-muted-foreground hover:text-primary transition-colors">Speaking</Link></li>
+              <li><Link href="/speaking" className="text-sm text-muted-foreground hover:text-primary transition-colors">Speaking</Link></li>
             </ul>
           </div>
           <div>

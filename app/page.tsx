@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Headphones, Play, BookOpen, Building2, Users } from "lucide-react";
+import { ArrowRight, Headphones, Play, BookOpen, Users } from "lucide-react";
 import { getAllEpisodes } from "@/lib/get-episodes";
 import NewsletterSignup from "@/components/newsletter-signup";
 import ScrollReveal from "@/components/scroll-reveal";
@@ -269,7 +269,7 @@ export default async function Home() {
             </div>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
               {
                 icon: Headphones,
@@ -284,13 +284,6 @@ export default async function Home() {
                 desc: "New bootcamp: Your AI Marketing Team in 14 Days, starting 1 November. One task and one video a day for 14 days.",
                 href: "/courses/ai-sales-marketing-bootcamp",
                 label: "See the course",
-              },
-              {
-                icon: Building2,
-                title: "B2B Advisory",
-                desc: "Helping organisations navigate AI through workshops, strategy and consulting.",
-                href: "/b2b",
-                label: "Learn more",
               },
               {
                 icon: Users,

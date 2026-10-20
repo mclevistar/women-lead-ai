@@ -21,7 +21,6 @@ export const NAV_LINKS = [
   { href: "/youtube", label: "YouTube" },
   { href: "/courses", label: "Courses" },
   { href: "/resources", label: "Resources" },
-  { href: "/b2b", label: "B2B" },
   { href: "/speaking", label: "Speaking" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
