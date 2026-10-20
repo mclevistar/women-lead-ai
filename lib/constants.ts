@@ -1,5 +1,5 @@
 export const EXTERNAL_LINKS = {
-  skool: "https://www.skool.com/women-lead-ai-1882/about",
+  skool: "https://www.skool.com/she-leads-ai-1882",
   youtube: "https://www.youtube.com/@WiktoriaKor",
   spotify: "https://open.spotify.com/show/6TasSwMc9QkwNmLti7Y5L6",
   applePodcasts: "https://podcasts.apple.com/us/podcast/women-lead-ai/id1876556097",
