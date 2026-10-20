@@ -4,6 +4,7 @@ import { Bebas_Neue, Manrope, Caveat, DM_Sans, DM_Serif_Display } from "next/fon
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import BootcampPopup from "@/components/bootcamp-popup";
+import CookieBanner from "@/components/cookie-banner";
 import JsonLd from "@/components/json-ld";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE, organizationSchema, personSchema } from "@/lib/seo";
 import "./globals.css";
@@ -95,6 +96,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <BootcampPopup />
+        <CookieBanner />
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

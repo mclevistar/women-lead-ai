@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { EXTERNAL_LINKS } from "@/lib/constants";
+import CookieSettingsLink from "@/components/cookie-settings-link";
 
 export default function Footer() {
   return (
@@ -37,6 +38,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li><a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms of Use</a></li>
+              <li><CookieSettingsLink /></li>
             </ul>
           </div>
         </div>
