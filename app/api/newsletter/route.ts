@@ -20,6 +20,8 @@ export async function POST(request: Request) {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${apiKey}`,
+        // existing subscribers get the new tag merged in instead of a 400
+        "X-Buttondown-Collision-Behavior": "add",
       },
       body: JSON.stringify({
         email_address: email,
@@ -29,8 +31,10 @@ export async function POST(request: Request) {
 
     if (!res.ok) {
       const error = await res.text();
-      // 409 means already subscribed, which is fine
-      if (res.status === 409) {
+      // 400 covers people Buttondown won't update (unsubscribed, blocked, bounced);
+      // still let them through so a resource download is never blocked
+      if (res.status === 400) {
+        console.warn("Buttondown rejected subscriber:", error);
         return NextResponse.json({ success: true });
       }
       console.error("Buttondown error:", error);

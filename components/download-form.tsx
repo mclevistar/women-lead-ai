@@ -25,7 +25,7 @@ export default function DownloadForm({ downloadUrl, tag, buttonLabel, extra }: P
 
     setStatus("loading");
     try {
-      const res = await fetch("/api/newsletter", {
+      const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, tag }),
