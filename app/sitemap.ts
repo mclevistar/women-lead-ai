@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllEpisodes } from "@/lib/get-episodes";
+import { getLatestVideos } from "@/lib/get-videos";
 import { SITE_URL } from "@/lib/seo";
 
 // Rebuilt every 15 minutes, so new podcast episodes get added on their own
@@ -24,7 +25,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const episodes = await getAllEpisodes();
+  const [episodes, videos] = await Promise.all([getAllEpisodes(), getLatestVideos()]);
   const latest = episodes.map((ep) => ep.date).filter(Boolean).sort().pop();
 
   return [
@@ -39,6 +40,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: ep.date || undefined,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    ...videos.map((video) => ({
+      url: `${SITE_URL}/youtube/${video.id}`,
+      lastModified: video.date || undefined,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }

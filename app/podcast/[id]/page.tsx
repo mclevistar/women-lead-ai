@@ -3,12 +3,14 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { getAllEpisodes } from "@/lib/get-episodes";
 import { transcripts } from "@/lib/transcripts";
 import { youtubeVideos } from "@/lib/youtube-videos";
+import videoTranscripts from "@/lib/video-transcripts.json";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import type { Metadata } from "next";
 import type { Episode } from "@/lib/episodes";
 import JsonLd from "@/components/json-ld";
 import { pageMetadata, SITE_URL, PODCAST_ID, PERSON_ID } from "@/lib/seo";
 import EpisodeAudio from "./episode-audio";
+import Transcript from "@/components/transcript";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -79,8 +81,12 @@ export default async function EpisodePage({ params }: Props) {
     notFound();
   }
 
-  const transcript = transcripts[id] ?? episode.transcript ?? "";
   const youtubeId = youtubeVideos[id] ?? null;
+  // Fall back to the YouTube transcript when the episode has none of its own
+  const videoTranscript = youtubeId
+    ? (videoTranscripts as Record<string, { transcript?: string }>)[youtubeId]?.transcript
+    : undefined;
+  const transcript = transcripts[id] || episode.transcript || videoTranscript || "";
 
   return (
     <section className="py-24 md:py-32 px-6">
@@ -232,40 +238,7 @@ export default async function EpisodePage({ params }: Props) {
         )}
 
         {/* Transcript */}
-        {transcript && (
-          <details className="group border-t border-border/60 pt-8">
-            <summary className="font-display text-xl font-semibold text-foreground cursor-pointer select-none list-none flex items-center justify-between">
-              <span>Transcript</span>
-              <span className="text-sm font-normal text-muted-foreground group-open:hidden">Show</span>
-              <span className="text-sm font-normal text-muted-foreground hidden group-open:inline">Hide</span>
-            </summary>
-            <div className="mt-6 space-y-4">
-              {transcript
-                .split(/\n{2,}/)
-                .flatMap((block) => {
-                  const joined = block.replace(/\n/g, " ").trim();
-                  if (!joined) return [];
-                  // Group into ~5-sentence paragraphs for readability
-                  const sentences = joined.match(/[^.!?]+[.!?]+\s*/g) ?? [joined];
-                  const paras: string[] = [];
-                  let current = "";
-                  sentences.forEach((s, i) => {
-                    current += s;
-                    if ((i + 1) % 5 === 0 || i === sentences.length - 1) {
-                      paras.push(current.trim());
-                      current = "";
-                    }
-                  });
-                  return paras;
-                })
-                .map((para, i) => (
-                  <p key={i} className="text-sm text-foreground leading-7">
-                    {para}
-                  </p>
-                ))}
-            </div>
-          </details>
-        )}
+        {transcript && <Transcript text={transcript} />}
       </div>
     </section>
   );
