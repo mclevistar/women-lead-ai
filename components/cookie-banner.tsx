@@ -10,6 +10,7 @@ type Choice = "granted" | "denied";
 declare global {
   interface Window {
     clarity?: (...args: unknown[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -24,9 +25,10 @@ function storedChoice(): Choice | null {
   }
 }
 
-// Tell Clarity what the visitor chose. Without a "granted" signal it runs without cookies.
-function signalClarity(choice: Choice) {
+// Tell Clarity and Google Analytics what the visitor chose. Without "granted" they run without cookies.
+function signalConsent(choice: Choice) {
   window.clarity?.("consentv2", { ad_Storage: "denied", analytics_Storage: choice });
+  window.gtag?.("consent", "update", { analytics_storage: choice });
 }
 
 export function openCookieSettings() {
@@ -38,7 +40,7 @@ export default function CookieBanner() {
 
   useEffect(() => {
     const choice = storedChoice();
-    if (choice) signalClarity(choice);
+    if (choice) signalConsent(choice);
     const id = setTimeout(() => setOpen(!choice), 0);
     const reopen = () => setOpen(true);
     window.addEventListener(OPEN_EVENT, reopen);
@@ -52,7 +54,7 @@ export default function CookieBanner() {
     try {
       localStorage.setItem(CONSENT_KEY, choice);
     } catch {}
-    signalClarity(choice);
+    signalConsent(choice);
     setOpen(false);
   };
 

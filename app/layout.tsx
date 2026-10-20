@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 import BootcampPopup from "@/components/bootcamp-popup";
 import CookieBanner from "@/components/cookie-banner";
 import JsonLd from "@/components/json-ld";
+import { GA_MEASUREMENT_ID } from "@/lib/constants";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE, organizationSchema, personSchema } from "@/lib/seo";
 import "./globals.css";
 
@@ -97,6 +98,17 @@ export default function RootLayout({
         <Footer />
         <BootcampPopup />
         <CookieBanner />
+        {GA_MEASUREMENT_ID && (
+          <>
+            {/* Consent defaults to denied; the cookie banner updates it. */}
+            <Script id="google-consent-default" strategy="beforeInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+              gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});
+              gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
+            </Script>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="afterInteractive" />
+          </>
+        )}
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

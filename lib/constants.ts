@@ -25,3 +25,6 @@ export const NAV_LINKS = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
+
+// Google Analytics 4 Measurement ID ("G-..."). Leave "" to keep GA off.
+export const GA_MEASUREMENT_ID = "G-X8YB21SDHY";
