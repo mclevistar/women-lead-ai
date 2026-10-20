@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { Bebas_Neue, Manrope, Caveat, DM_Sans, DM_Serif_Display } from "next/font/google";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
@@ -98,6 +99,7 @@ export default function RootLayout({
         <Footer />
         <BootcampPopup />
         <CookieBanner />
+        <Analytics />
         {GA_MEASUREMENT_ID && (
           <>
             {/* Consent defaults to denied; the cookie banner updates it. */}
