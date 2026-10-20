@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, message, type, reason, company, service } = body;
+    const { name, email, message, type, reason, company, service, organisation, eventType, eventDate } = body;
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -17,6 +17,8 @@ export async function POST(request: Request) {
 
     const subject = type === "b2b"
       ? `B2B Enquiry from ${name}${company ? ` (${company})` : ""}`
+      : type === "speaking"
+      ? `Speaking Request from ${name}${organisation ? ` (${organisation})` : ""}`
       : `Contact Form: ${name}`;
 
     const lines = [
@@ -24,6 +26,9 @@ export async function POST(request: Request) {
       `<strong>Email:</strong> ${email}`,
       company ? `<strong>Company:</strong> ${company}` : null,
       service ? `<strong>Service:</strong> ${service}` : null,
+      organisation ? `<strong>Organisation:</strong> ${organisation}` : null,
+      eventType ? `<strong>Event type:</strong> ${eventType}` : null,
+      eventDate ? `<strong>Event date:</strong> ${eventDate}` : null,
       reason ? `<strong>Reason:</strong> ${reason}` : null,
       `<br/><strong>Message:</strong><br/>${message.replace(/\n/g, "<br/>")}`,
     ].filter(Boolean).join("<br/>");
