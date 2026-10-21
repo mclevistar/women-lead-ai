@@ -1,14 +1,23 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 
 export type Work = {
   slug: string;
   brand: string;
   platform: string;
   url: string;
-  landscape?: boolean;
+  // tall 9:16 reel (default), wide 16:9 video, feed 4:5 post
+  shape?: "tall" | "wide" | "feed";
+  // a still thumbnail (eg YouTube) in place of a looping preview
+  image?: string;
+  title?: string;
+};
+
+const shapeClass = {
+  tall: "aspect-[9/16] h-[420px] md:h-[560px]",
+  wide: "aspect-video h-[300px] md:h-[440px]",
+  feed: "aspect-[4/5] h-[420px] md:h-[560px]",
 };
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
@@ -141,76 +150,109 @@ export function Bar({ label, pct }: { label: string; pct: number }) {
   );
 }
 
-// Grid of sponsored videos: silent loops, click to watch the full video with sound
-export function WorkGrid({ work }: { work: Work[] }) {
-  const [open, setOpen] = useState<Work | null>(null);
+// One row of sponsored videos that scrolls sideways. Each card opens the original post.
+export function WorkRow({ work }: { work: Work[] }) {
+  const rowRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null);
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [open]);
+  function nudge(dir: number) {
+    const row = rowRef.current;
+    if (row) row.scrollBy({ left: dir * row.clientWidth * 0.8, behavior: "smooth" });
+  }
 
   return (
-    <>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+    <div className="relative">
+      <div
+        ref={rowRef}
+        className="flex items-end gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-6 pl-6 md:pl-10 pr-6 md:pr-10 [scrollbar-width:thin] [scrollbar-color:#602D37_transparent]"
+      >
         {work.map((w) => (
-          <button
+          <a
             key={w.slug}
-            onClick={() => setOpen(w)}
-            className="group relative aspect-[9/16] rounded-2xl md:rounded-3xl overflow-hidden bg-[#1c1416] text-left"
-            aria-label={`Watch the ${w.brand} video`}
+            href={w.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`group relative shrink-0 snap-start overflow-hidden rounded-2xl md:rounded-3xl bg-[#1c1416] max-w-[85vw] ${shapeClass[w.shape ?? "tall"]}`}
+            aria-label={`Watch ${w.title ?? `the ${w.brand} video`} on ${w.platform}`}
           >
-            <Loop slug={w.slug} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+            {w.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={w.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+            ) : (
+              <Loop slug={w.slug} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-            <div className="absolute top-3 left-3 md:top-4 md:left-4 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/90" style={heading}>
+            <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/90" style={heading}>
               {w.platform}
             </div>
-            <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 flex items-end justify-between gap-2">
-              <p className="text-2xl md:text-4xl text-white leading-none" style={display}>{w.brand}</p>
-              <span className="shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#EFE2D3] text-[#602D37] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor" aria-hidden="true"><path d="M0 0l14 8-14 8z" /></svg>
+            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 flex items-end justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-3xl md:text-4xl text-white leading-none" style={display}>{w.brand}</p>
+                {w.title && <p className="mt-2 text-sm text-white/80 leading-snug line-clamp-2">{w.title}</p>}
+              </div>
+              <span className="shrink-0 px-4 h-10 md:h-11 rounded-full bg-[#EFE2D3] text-[#602D37] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-transform duration-300 group-hover:scale-105" style={heading}>
+                Watch <span aria-hidden="true">↗</span>
               </span>
             </div>
+          </a>
+        ))}
+      </div>
+      <div className="hidden md:flex justify-end gap-3 pr-10 mt-4">
+        {[-1, 1].map((dir) => (
+          <button
+            key={dir}
+            onClick={() => nudge(dir)}
+            className="w-12 h-12 rounded-full border border-[#EFE2D3]/30 text-[#EFE2D3] hover:bg-[#EFE2D3] hover:text-[#602D37] transition-colors"
+            aria-label={dir < 0 ? "Previous videos" : "Next videos"}
+          >
+            {dir < 0 ? "←" : "→"}
           </button>
         ))}
       </div>
+    </div>
+  );
+}
 
-      {/* Portalled to body: the grid sits inside a transformed reveal wrapper, which would otherwise trap position: fixed */}
-      {open && createPortal(
-        <div
-          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setOpen(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${open.brand} sponsored video`}
-        >
-          <div className="relative flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
-            <video
-              src={`/partnerships/${open.slug}.mp4`}
-              poster={`/partnerships/${open.slug}.jpg`}
-              className={`rounded-2xl bg-black ${open.landscape ? "w-[min(92vw,960px)]" : "h-[min(80vh,860px)] max-w-[92vw]"}`}
-              controls
-              autoPlay
-              playsInline
-            />
-            <div className="mt-4 flex items-center gap-6">
-              <a href={open.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#EFE2D3] underline underline-offset-4">
-                View the original on {open.platform}
-              </a>
-              <button onClick={() => setOpen(null)} className="text-sm font-semibold text-[#EFE2D3]/70 hover:text-[#EFE2D3]">
-                Close
-              </button>
-            </div>
+export type Panel = {
+  id: string;
+  label: string;
+  source: string;
+  groups: { title: string; rows: [string, number][] }[];
+};
+
+// Audience analytics with a tab per platform; bars regrow each time a tab opens
+export function Analytics({ panels }: { panels: Panel[] }) {
+  const [active, setActive] = useState(panels[0].id);
+  const panel = panels.find((p) => p.id === active) ?? panels[0];
+
+  return (
+    <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 md:p-10">
+      <div className="flex flex-wrap gap-2 mb-8 md:mb-10" role="tablist" aria-label="Audience data">
+        {panels.map((p) => (
+          <button
+            key={p.id}
+            role="tab"
+            aria-selected={p.id === active}
+            onClick={() => setActive(p.id)}
+            className={`px-5 py-2.5 rounded-full text-sm font-bold transition-colors ${
+              p.id === active ? "bg-[#EFE2D3] text-[#602D37]" : "border border-white/15 text-[#EFE2D3]/80 hover:text-[#EFE2D3] hover:border-white/40"
+            }`}
+            style={heading}
+          >
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div key={panel.id} className="grid md:grid-cols-3 gap-10 md:gap-12" role="tabpanel">
+        {panel.groups.map((g) => (
+          <div key={g.title} className="space-y-5 min-w-0">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ECB398]" style={heading}>{g.title}</p>
+            {g.rows.map(([label, pct]) => (
+              <Bar key={label} label={label} pct={pct} />
+            ))}
           </div>
-        </div>,
-        document.body
-      )}
-    </>
+        ))}
+      </div>
+      <p className="text-xs text-[#EFE2D3]/45 mt-10">{panel.source}</p>
+    </div>
   );
 }

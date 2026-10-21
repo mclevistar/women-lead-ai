@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import ScrollReveal from "@/components/scroll-reveal";
 import PartnershipForm from "./partnership-form";
-import { HeroReel, CountUp, Bar, WorkGrid, type Work } from "./partnerships-client";
+import { HeroReel, CountUp, WorkRow, Analytics, type Work, type Panel } from "./partnerships-client";
 
 export const metadata: Metadata = pageMetadata({
   title: "Brand Partnerships",
@@ -18,14 +18,23 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const PARTNERSHIPS_EMAIL = "partnerships@womenlead.ai";
 
-// Videos live in public/partnerships as <slug>-loop.mp4 (silent preview), <slug>.mp4 (full, with sound) and <slug>.jpg
+// Silent previews live in public/partnerships as <slug>-loop.mp4 and <slug>.jpg; each card links to the original post
 const work: Work[] = [
   { slug: "runway", brand: "Runway", platform: "Instagram", url: "https://www.instagram.com/p/Dd3i47Mgi5G/" },
   { slug: "pink-nyc", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/Ddy9LkugPE9/" },
-  { slug: "veed", brand: "VEED", platform: "LinkedIn", url: "https://www.linkedin.com/posts/veedhq_spending-your-evenings-working-not-the-one-activity-7513529130571730944-m7I6", landscape: true },
+  { slug: "veed", brand: "VEED", platform: "LinkedIn", url: "https://www.linkedin.com/posts/veedhq_spending-your-evenings-working-not-the-one-activity-7513529130571730944-m7I6", shape: "wide" },
   { slug: "imagine", brand: "Imagine", platform: "Instagram", url: "https://www.instagram.com/p/DcLYUXUohxq/" },
   { slug: "higgsfield", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/DXumWciDtc8/" },
   { slug: "sintra", brand: "Sintra AI", platform: "Instagram", url: "https://www.instagram.com/p/DZXrVroH4U1/" },
+];
+
+// Recent organic videos: YouTube shows its thumbnail, Instagram plays a silent preview
+const organic: Work[] = [
+  { slug: "yt-11NTCS9P7BQ", brand: "Claude Code", platform: "YouTube", shape: "wide", image: "/partnerships/yt-11NTCS9P7BQ.jpg", title: "10 Video Effects You Can Make With Claude Code, Step by Step", url: "https://www.youtube.com/watch?v=11NTCS9P7BQ" },
+  { slug: "organic-higgs", brand: "AI video", platform: "Instagram", url: "https://www.instagram.com/p/DeUdMozAUC4/" },
+  { slug: "yt-EEEo1Obql1A", brand: "AEO Playbook", platform: "YouTube", shape: "wide", image: "/partnerships/yt-EEEo1Obql1A.jpg", title: "How to Get AI to Recommend Your Website: AEO 2026 Playbook", url: "https://www.youtube.com/watch?v=EEEo1Obql1A" },
+  { slug: "organic-history", brand: "Time travel", platform: "Instagram", shape: "feed", url: "https://www.instagram.com/p/Deew5AhgA1M/" },
+  { slug: "yt-DJ2J8OxWafQ", brand: "Podcast", platform: "YouTube", shape: "wide", image: "/partnerships/yt-DJ2J8OxWafQ.jpg", title: "The $1 Trillion Gap In Women's Health, Ep 9", url: "https://www.youtube.com/watch?v=DJ2J8OxWafQ" },
 ];
 
 const brands = ["Runway", "Higgsfield", "VEED", "Imagine", "Sintra AI"];
@@ -36,7 +45,53 @@ const stats = [
   { to: 97.4, decimals: 1, suffix: "%", label: "Views from non followers" },
   { to: 33.7, decimals: 1, suffix: "K", label: "LinkedIn impressions in 28 days" },
   { to: 13, suffix: "K", label: "Instagram followers" },
-  { to: 1, suffix: "K+", label: "Community members" },
+  { to: 1.1, decimals: 1, suffix: "K+", label: "Community members" },
+];
+
+// Instagram and LinkedIn from the media kit (Apr to May 2026); community from the Skool member export (Oct 2026, 1,163 members)
+const panels: Panel[] = [
+  {
+    id: "instagram",
+    label: "Instagram",
+    source: "Instagram insights, 4 April to 3 May 2026. 1.54M views, 97.4% from non followers.",
+    groups: [
+      { title: "Gender", rows: [["Women", 71.7], ["Men", 28.3]] },
+      { title: "Age", rows: [["25 to 34", 40.6], ["18 to 24", 32.6], ["35 to 44", 16.5]] },
+      { title: "Top markets", rows: [["India", 23.2], ["United States", 16.1], ["United Kingdom", 4.7], ["Pakistan", 4.0]] },
+    ],
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    source: "LinkedIn analytics, 7 April to 4 May 2026. 33.7K impressions, 16.7K members reached.",
+    groups: [
+      { title: "Seniority", rows: [["Senior", 38.9], ["Entry level", 18.8], ["Owner or founder", 10.8], ["Director", 10.4]] },
+      { title: "Company size", rows: [["10,001+ employees", 29.9], ["1 to 10 employees", 15.0]] },
+      { title: "Industry", rows: [["Medical and MedTech", 14.9], ["Tech and internet", 9.3], ["IT consulting", 9.3]] },
+    ],
+  },
+  {
+    id: "community",
+    label: "Community",
+    source: "Women Lead AI on Skool: answers from 1,163 members when they joined. 39% engagement rate.",
+    groups: [
+      { title: "AI experience", rows: [["Tried a few tools, want confidence", 39.1], ["Use AI regularly, want to go deeper", 28.3], ["Brand new to AI", 17.4]] },
+      { title: "What they want from AI", rows: [["Build agents and apps", 28.4], ["Grow business and income", 28.3], ["Marketing and content", 25.1], ["Automate and save time", 22.6]] },
+      { title: "Who they are", rows: [["Skool engagement rate", 39], ["Want to grow their career", 14.8], ["Run their own business", 12]] },
+    ],
+  },
+];
+
+// Member answers to "What would you love AI to help you with?", lightly tidied for spelling, names left out
+const quotes = [
+  { text: "I want AI to build a strong system for my business that runs on automation without stressing me out.", who: "Business owner" },
+  { text: "I have a kidswear business online and I need AI to generate product videos, schedule posts and write scripts.", who: "Ecommerce founder" },
+  { text: "I would love for it to help me serve more clients. I lead our AI team for a consultancy.", who: "AI lead, consultancy" },
+  { text: "I'd like to delegate more of my work to AI and automate as much as possible, so I can focus on getting more clients.", who: "Freelancer" },
+  { text: "I am building my own AI operating system to manage my work and personal life.", who: "Community member" },
+  { text: "I'd like to be managing agent teams, with automated workflows and business development through agents.", who: "Founder" },
+  { text: "Help me be more efficient in business and deliver faster for my clients.", who: "Consultant" },
+  { text: "I want to use AI to boost my career, scale my social media and build content.", who: "Community member" },
 ];
 
 const channels = [
@@ -71,10 +126,10 @@ export default function PartnershipsPage() {
             Brand Partnerships
           </p>
           <h1 className="text-[3.4rem] sm:text-7xl md:text-8xl lg:text-[7.5rem] leading-[0.95] tracking-tight max-w-4xl mb-8" style={display}>
-            {["Videos", "people", "actually"].map((w, i) => (
+            {["Videos", "that", "actually"].map((w, i) => (
               <span key={w}><span className="pt-word" style={{ animationDelay: `${150 + i * 120}ms` }}>{w}</span>{" "}</span>
             ))}
-            <span className="pt-word italic text-[#ECB398]" style={{ animationDelay: "510ms" }}>watch.</span>
+            <span className="pt-word italic text-[#ECB398]" style={{ animationDelay: "510ms" }}>convert.</span>
           </h1>
           <p className="fade-in-up delay-600 text-lg md:text-xl text-[#EFE2D3]/75 max-w-md mb-10">
             AI tutorials that put your product to work, for founders and women in tech.
@@ -90,20 +145,53 @@ export default function PartnershipsPage() {
         </div>
       </section>
 
-      {/* Brands marquee */}
-      <section className="border-y border-white/10 py-8 overflow-hidden">
-        <p className="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-[#EFE2D3]/50 mb-6" style={heading}>
-          Worked with
+      {/* Brands belt */}
+      <section className="border-y border-white/10 py-7 md:py-9 overflow-hidden bg-[#140E10]">
+        <p className="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-[#EFE2D3]/50 mb-5" style={heading}>
+          Brands I&apos;ve worked with
         </p>
-        <div className="marquee-track flex whitespace-nowrap w-max" style={{ animationDuration: "28s" }}>
+        <div className="marquee-track flex items-center whitespace-nowrap w-max" style={{ animationDuration: "30s" }}>
           {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
-            <span key={i} className="mx-8 md:mx-14 text-3xl md:text-5xl text-[#EFE2D3]/85" style={display}>{b}</span>
+            <span key={i} className="inline-flex items-center text-3xl md:text-5xl text-[#EFE2D3]/90" style={display}>
+              <span className="mx-8 md:mx-12">{b}</span>
+              <span className="text-lg md:text-2xl text-[#ECB398]" aria-hidden="true">✦</span>
+            </span>
           ))}
         </div>
       </section>
 
+      {/* Work: one sideways scrolling row */}
+      <section id="work" className="py-24 md:py-32 scroll-mt-16">
+        <ScrollReveal className="max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
+          <div>
+            <Eyebrow>Past work</Eyebrow>
+            <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
+              Made with <span className="italic text-[#ECB398]">these brands</span>
+            </h2>
+          </div>
+          <p className="text-[#EFE2D3]/60 md:text-right">Scroll sideways, tap a video to watch it.</p>
+        </ScrollReveal>
+        <WorkRow work={work} />
+      </section>
+
+      {/* Organic content */}
+      <section className="py-24 md:py-32 border-t border-white/10">
+        <ScrollReveal className="max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
+          <div>
+            <Eyebrow>Organic content</Eyebrow>
+            <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
+              Recent <span className="italic text-[#ECB398]">videos</span>
+            </h2>
+          </div>
+          <a href={EXTERNAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-[#EFE2D3]/70 hover:text-[#EFE2D3] underline underline-offset-4 md:text-right">
+            See the full YouTube channel
+          </a>
+        </ScrollReveal>
+        <WorkRow work={organic} />
+      </section>
+
       {/* Stats */}
-      <section className="pt-glow py-24 md:py-32 px-6 md:px-10">
+      <section className="pt-glow py-24 md:py-32 px-6 md:px-10 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <Eyebrow>By the numbers</Eyebrow>
@@ -121,40 +209,38 @@ export default function PartnershipsPage() {
         </div>
       </section>
 
-      {/* Work */}
-      <section id="work" className="py-24 md:py-32 px-4 md:px-10 scroll-mt-16">
+      {/* Audience analytics */}
+      <section className="py-24 md:py-32 px-4 md:px-10 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
-          <ScrollReveal className="px-2 md:px-0 flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
-            <div>
-              <Eyebrow>Past work</Eyebrow>
-              <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
-                Made with <span className="italic text-[#ECB398]">these brands</span>
-              </h2>
-            </div>
-            <p className="text-[#EFE2D3]/60 md:text-right">Tap any video to watch with sound.</p>
-          </ScrollReveal>
-          <ScrollReveal>
-            <WorkGrid work={work} />
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Audience */}
-      <section className="pt-glow py-24 md:py-32 px-6 md:px-10 border-t border-white/10">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 md:gap-20 items-center">
-          <ScrollReveal>
-            <Eyebrow>The audience</Eyebrow>
+          <ScrollReveal className="px-2 md:px-0 mb-10 md:mb-14">
+            <Eyebrow>Audience analytics</Eyebrow>
             <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
               Professionals <span className="italic text-[#ECB398]">who buy</span>
             </h2>
           </ScrollReveal>
-          <ScrollReveal className="space-y-7">
-            <Bar label="Women" pct={71.7} />
-            <Bar label="Aged 25 to 34" pct={40.6} />
-            <Bar label="Senior level on LinkedIn" pct={38.9} />
-            <Bar label="Skool engagement rate" pct={39} />
-            <Bar label="Work at companies with 10K+ staff" pct={29.9} />
+          <ScrollReveal>
+            <Analytics panels={panels} />
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Member quotes */}
+      <section className="pt-glow py-24 md:py-32 border-t border-white/10 overflow-hidden">
+        <ScrollReveal className="max-w-6xl mx-auto px-6 md:px-10 mb-10 md:mb-14">
+          <Eyebrow>In their words</Eyebrow>
+          <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
+            What my community <span className="italic text-[#ECB398]">wants from AI</span>
+          </h2>
+        </ScrollReveal>
+        <div className="marquee-track flex gap-5 w-max" style={{ animationDuration: "70s" }}>
+          {[...quotes, ...quotes].map((q, i) => (
+            <figure key={i} className="w-[300px] md:w-[380px] shrink-0 rounded-3xl border border-white/10 bg-white/[0.04] p-7 md:p-8 flex flex-col justify-between gap-6">
+              <blockquote className="text-xl md:text-2xl leading-snug text-[#EFE2D3] whitespace-normal" style={display}>
+                &ldquo;{q.text}&rdquo;
+              </blockquote>
+              <figcaption className="text-xs font-bold uppercase tracking-[0.2em] text-[#ECB398]" style={heading}>{q.who}</figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
