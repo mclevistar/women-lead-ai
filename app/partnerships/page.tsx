@@ -37,7 +37,14 @@ const organic: Work[] = [
   { slug: "yt-DJ2J8OxWafQ", brand: "Podcast", platform: "YouTube", shape: "wide", image: "/partnerships/yt-DJ2J8OxWafQ.jpg", title: "The $1 Trillion Gap In Women's Health, Ep 9", url: "https://www.youtube.com/watch?v=DJ2J8OxWafQ" },
 ];
 
-const brands = ["Runway", "Higgsfield", "VEED", "Imagine", "Sintra AI"];
+// White logos taken from each brand's own site, in public/partnerships/logos. Higgsfield's wordmark is live text on their site, so it is set in type next to the glyph.
+const brands = [
+  { name: "Runway", logo: "/partnerships/logos/runway.svg", height: "h-7 md:h-10" },
+  { name: "Higgsfield", logo: "/partnerships/logos/higgsfield-glyph.svg", height: "h-8 md:h-11", wordmark: true },
+  { name: "VEED", logo: "/partnerships/logos/veed.svg", height: "h-6 md:h-9" },
+  { name: "ImagineArt", logo: "/partnerships/logos/imagine.svg", height: "h-6 md:h-8" },
+  { name: "Sintra AI", logo: "/partnerships/logos/sintra.svg", height: "h-7 md:h-10" },
+];
 
 const stats = [
   { to: 1.54, decimals: 2, suffix: "M", label: "Instagram views in 30 days" },
@@ -152,9 +159,13 @@ export default function PartnershipsPage() {
         </p>
         <div className="marquee-track flex items-center whitespace-nowrap w-max" style={{ animationDuration: "30s" }}>
           {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
-            <span key={i} className="inline-flex items-center text-3xl md:text-5xl text-[#EFE2D3]/90" style={display}>
-              <span className="mx-8 md:mx-12">{b}</span>
-              <span className="text-lg md:text-2xl text-[#ECB398]" aria-hidden="true">✦</span>
+            <span key={i} className="inline-flex items-center">
+              <span className="mx-10 md:mx-16 inline-flex items-center gap-2.5 md:gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={b.logo} alt={b.wordmark ? "" : b.name} className={`${b.height} w-auto`} />
+                {b.wordmark && <span className="text-3xl md:text-[2.6rem] font-semibold tracking-tight text-white" style={heading}>{b.name}</span>}
+              </span>
+              <span className="text-base md:text-xl text-[#ECB398]/70" aria-hidden="true">✦</span>
             </span>
           ))}
         </div>
