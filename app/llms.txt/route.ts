@@ -27,6 +27,7 @@ Women Lead AI is run by Wiktoria Korbecka, a podcast host, AI educator and consu
 - [Your AI Marketing Team in 14 Days](${SITE_URL}/courses/ai-sales-marketing-bootcamp): a 2-week online bootcamp ($${BOOTCAMP_PRICE}) on using AI for sales and marketing
 - [Free resources](${SITE_URL}/resources): free Claude skills and AI prompt guides
 - [Speaking](${SITE_URL}/speaking): keynotes, panels and workshops on AI and leadership
+- [Brand Partnerships](${SITE_URL}/partnerships): sponsored videos, audience stats and past brand work
 - [Contact](${SITE_URL}/contact)
 
 ## Podcast episodes

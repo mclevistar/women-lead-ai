@@ -7,6 +7,8 @@ import { ArrowRight, X } from "lucide-react";
 import { BOOTCAMP_PRICE, BOOTCAMP_START } from "@/lib/constants";
 
 const BOOTCAMP_PATH = "/courses/ai-sales-marketing-bootcamp";
+// Pages for brands and event organisers, where a course offer would be off topic
+const NO_POPUP_PATHS = ["/partnerships", "/speaking"];
 const DISMISS_KEY = "wla-bootcamp-popup-dismissed";
 // Once closed, stay hidden for a week so it doesn't nag on every page.
 const DISMISS_MS = 7 * 86_400_000;
@@ -50,9 +52,9 @@ export default function BootcampPopup() {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
 
-  // Show after 10 seconds on the site, except on the bootcamp page itself, after it has started, or if recently closed.
+  // Show after 10 seconds on the site, except on the bootcamp page itself and business pages, after it has started, or if recently closed.
   useEffect(() => {
-    if (pathname === BOOTCAMP_PATH) return;
+    if (pathname === BOOTCAMP_PATH || NO_POPUP_PATHS.includes(pathname)) return;
     if (Date.now() >= new Date(BOOTCAMP_START).getTime()) return;
     if (recentlyDismissed()) return;
     const id = setTimeout(() => setOpen(true), msUntilDue());

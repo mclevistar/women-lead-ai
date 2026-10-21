@@ -52,7 +52,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
-  overflow-x: hidden;
+  /* clip, not hidden: hidden makes body a scroll container and breaks position: sticky */
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -343,4 +344,39 @@ h1, h2, h3, h4, h5, h6 {
 .glow-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 60px -15px rgba(96, 45, 55, 0.2);
+}
+
+/* ---- Partnerships page ---- */
+@keyframes pt-reel-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+@keyframes pt-reel-down {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+
+.pt-reel-up { animation: pt-reel-up linear infinite; }
+.pt-reel-down { animation: pt-reel-down linear infinite; }
+
+@keyframes pt-word {
+  from { opacity: 0; transform: translateY(0.4em); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.pt-word {
+  display: inline-block;
+  opacity: 0;
+  animation: pt-word 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.pt-glow {
+  background: radial-gradient(60% 50% at 20% 40%, rgba(168, 71, 90, 0.35), transparent 70%),
+    radial-gradient(40% 40% at 85% 80%, rgba(236, 179, 152, 0.12), transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pt-reel-up, .pt-reel-down { animation: none; }
+  .pt-word { animation: none; opacity: 1; }
 }
