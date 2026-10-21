@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/website-starter-pack",
+    label: "Free · Starter pack",
+    title: "The Website Starter Pack",
+    description:
+      "Every prompt and the launch checklist from my video, for building a business website with Claude Code without writing code yourself.",
+  },
+  {
     href: "/resources/aeo-audit-kit",
     label: "Free · Audit kit",
     title: "The AEO Audit Kit",
