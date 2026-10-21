@@ -17,6 +17,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
   { path: "/resources/startup-perks", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/motion-graphics-effects", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/ai-hook-effects", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/resources/london-through-time", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/nyc-through-time", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/ask-for-more", priority: 0.6, changeFrequency: "monthly" },
   { path: "/about", priority: 0.8, changeFrequency: "monthly" },

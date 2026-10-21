@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/london-through-time",
+    label: "Free · Prompt pack",
+    title: "London Through Time",
+    description:
+      "Every prompt I used to step into eight moments of London history in one AI video, from Boudica in AD 60 to New Year 2026.",
+  },
+  {
     href: "/resources/website-starter-pack",
     label: "Free · Starter pack",
     title: "The Website Starter Pack",
