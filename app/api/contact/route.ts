@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { SITE_URL } from "@/lib/seo";
 
 // Contact and speaking enquiries are stored in our own Supabase table so none are
 // ever lost. The publishable key is safe to ship: the table only allows inserts
@@ -7,7 +8,8 @@ const SUPABASE_URL = process.env.SUPABASE_URL ?? "https://klyubshxbbzzyppmrqnn.s
 const SUPABASE_KEY = process.env.SUPABASE_PUBLISHABLE_KEY ?? "sb_publishable_y3Apv7gdUlk85wS2DhpL_g_7gvtZgSG";
 
 // Email notification via FormSubmit (no account or API key needed).
-const NOTIFY_EMAIL = "hello@womenlead.ai";
+// FormSubmit holds every email until the "Activate Form" link it sends to this address is clicked once.
+const NOTIFY_EMAIL = "wiktoria@oxfordtalks.io";
 
 export async function POST(request: Request) {
   try {
@@ -54,7 +56,8 @@ export async function POST(request: Request) {
     try {
       const notified = await fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        // FormSubmit rejects requests that do not name the website they come from
+        headers: { "Content-Type": "application/json", Accept: "application/json", Origin: SITE_URL, Referer: `${SITE_URL}/` },
         body: JSON.stringify({
           _subject: subject,
           _replyto: enquiry.email,
@@ -69,8 +72,10 @@ export async function POST(request: Request) {
           Message: enquiry.message,
         }),
       });
-      if (!notified.ok) {
-        console.error("Enquiry email failed:", notified.status, await notified.text());
+      // FormSubmit answers 200 with success "false" when the address is not activated, so read the body too
+      const reply = await notified.text();
+      if (!notified.ok || reply.includes('"success":"false"')) {
+        console.error("Enquiry email failed:", notified.status, reply);
       }
     } catch (err) {
       // the enquiry is already saved, so never fail the form over the email
