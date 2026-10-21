@@ -6,6 +6,7 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import BootcampPopup from "@/components/bootcamp-popup";
 import CookieBanner from "@/components/cookie-banner";
+import UtmCapture from "@/components/utm-capture";
 import JsonLd from "@/components/json-ld";
 import { GA_MEASUREMENT_ID } from "@/lib/constants";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, DEFAULT_OG_IMAGE, organizationSchema, personSchema } from "@/lib/seo";
@@ -99,6 +100,7 @@ export default function RootLayout({
         <Footer />
         <BootcampPopup />
         <CookieBanner />
+        <UtmCapture />
         <Analytics />
         {GA_MEASUREMENT_ID && (
           <>

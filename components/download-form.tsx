@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Download } from "lucide-react";
+import { storedUtm } from "@/lib/utm";
 
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
@@ -28,7 +29,7 @@ export default function DownloadForm({ downloadUrl, tag, buttonLabel, extra }: P
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, tag }),
+        body: JSON.stringify({ email, tag, utm: storedUtm() }),
       });
       if (res.ok) {
         setStatus("success");

@@ -9,14 +9,14 @@ const BUTTONDOWN_TAGS = ["waitlist"];
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email, tag } = body;
+    const { email, tag, utm } = body;
 
     if (!email) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
     if (tag && !BUTTONDOWN_TAGS.includes(tag)) {
-      await saveLead(email, tag);
+      await saveLead(email, tag, utm);
       return NextResponse.json({ success: true });
     }
 
