@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import ScrollReveal from "@/components/scroll-reveal";
 import PartnershipForm from "./partnership-form";
-import { HeroReel, CountUp, WorkRow, PinnedWorkRow, Analytics, type Work, type Panel } from "./partnerships-client";
+import { HeroReel, CountUp, PinnedWorkRow, Analytics, type Work, type Panel } from "./partnerships-client";
 
 export const metadata: Metadata = pageMetadata({
   title: "Brand Partnerships",
@@ -47,11 +47,11 @@ const brands = [
 ];
 
 const stats = [
-  { to: 1.54, decimals: 2, suffix: "M", label: "Instagram views in 30 days" },
-  { to: 905, suffix: "K", label: "Accounts reached in a month" },
+  { to: 1.54, decimals: 2, suffix: "M", label: "Instagram views in a month" },
+  { to: 84.9, decimals: 1, suffix: "%", label: "Women in the Instagram audience" },
   { to: 97.4, decimals: 1, suffix: "%", label: "Views from non followers" },
   { to: 33.7, decimals: 1, suffix: "K", label: "LinkedIn impressions in 28 days" },
-  { to: 13, suffix: "K", label: "Instagram followers" },
+  { to: 12.7, decimals: 1, suffix: "K", label: "Instagram followers" },
   { to: 1.1, decimals: 1, suffix: "K+", label: "Community members" },
 ];
 
@@ -60,11 +60,11 @@ const panels: Panel[] = [
   {
     id: "instagram",
     label: "Instagram",
-    source: "Instagram insights, 4 April to 3 May 2026. 1.54M views, 97.4% from non followers.",
+    source: "Instagram insights, 30 days to 20 October 2026. 183.6K views from 104.9K accounts, 12.7K followers.",
     groups: [
-      { title: "Gender", rows: [["Women", 71.7], ["Men", 28.3]] },
-      { title: "Age", rows: [["25 to 34", 40.6], ["18 to 24", 32.6], ["35 to 44", 16.5]] },
-      { title: "Top markets", rows: [["India", 23.2], ["United States", 16.1], ["United Kingdom", 4.7], ["Pakistan", 4.0]] },
+      { title: "Gender", rows: [["Women", 84.9], ["Men", 15.1]] },
+      { title: "Age", rows: [["25 to 34", 35.5], ["35 to 44", 31.0], ["45 to 54", 14.7], ["18 to 24", 13.2]] },
+      { title: "Top countries", rows: [["United States", 22.5], ["India", 14.6], ["United Kingdom", 7.2], ["Australia", 4.0], ["Germany", 3.9]] },
     ],
   },
   {
@@ -171,8 +171,23 @@ export default function PartnershipsPage() {
         </div>
       </section>
 
-      {/* Work: one sideways scrolling row */}
-      <PinnedWorkRow work={work}>
+      {/* Organic content */}
+      <PinnedWorkRow id="organic" work={organic}>
+        <div className="w-full max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8 md:mb-10">
+          <div>
+            <Eyebrow>Organic content</Eyebrow>
+            <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
+              Recent <span className="italic text-[#ECB398]">videos</span>
+            </h2>
+          </div>
+          <a href={EXTERNAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-[#EFE2D3]/70 hover:text-[#EFE2D3] underline underline-offset-4 md:text-right">
+            See the full YouTube channel
+          </a>
+        </div>
+      </PinnedWorkRow>
+
+      {/* Sponsored work: pinned, scrolling down slides it sideways */}
+      <PinnedWorkRow id="work" work={work}>
         <div className="w-full max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8 md:mb-10">
           <div>
             <Eyebrow>Past work</Eyebrow>
@@ -183,22 +198,6 @@ export default function PartnershipsPage() {
           <p className="text-[#EFE2D3]/60 md:text-right">Keep scrolling, tap a video to watch it.</p>
         </div>
       </PinnedWorkRow>
-
-      {/* Organic content */}
-      <section className="py-24 md:py-32 border-t border-white/10">
-        <ScrollReveal className="max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
-          <div>
-            <Eyebrow>Organic content</Eyebrow>
-            <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
-              Recent <span className="italic text-[#ECB398]">videos</span>
-            </h2>
-          </div>
-          <a href={EXTERNAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-[#EFE2D3]/70 hover:text-[#EFE2D3] underline underline-offset-4 md:text-right">
-            See the full YouTube channel
-          </a>
-        </ScrollReveal>
-        <WorkRow work={organic} />
-      </section>
 
       {/* Stats */}
       <section className="pt-glow py-24 md:py-32 px-6 md:px-10 border-t border-white/10">

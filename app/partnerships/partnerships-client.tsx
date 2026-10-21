@@ -30,13 +30,22 @@ const shapeClass = {
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
-// Muted loop that only plays while on screen. `muted` is set before play() so autoplay rules allow it.
-function Loop({ slug, className = "" }: { slug: string; className?: string }) {
+// Muted loop that plays while on screen, or only while `active` when a row picks one video at a time.
+// `muted` is set before play() so autoplay rules allow it.
+function Loop({ slug, className = "", active }: { slug: string; className?: string; active?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video) return;
+    if (!video || active === undefined) return;
+    video.muted = true;
+    if (active) video.play().catch(() => {});
+    else video.pause();
+  }, [active]);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video || active !== undefined) return;
     video.muted = true;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -47,7 +56,7 @@ function Loop({ slug, className = "" }: { slug: string; className?: string }) {
     );
     observer.observe(video);
     return () => observer.disconnect();
-  }, []);
+  }, [active]);
 
   return (
     <video
@@ -158,36 +167,53 @@ export function Bar({ label, pct }: { label: string; pct: number }) {
 }
 
 // A video card that opens the original post in a new tab
-function WorkCard({ w, className, style }: { w: Work; className: string; style?: React.CSSProperties }) {
+function WorkCard({ w, className, style, active }: { w: Work; className: string; style?: React.CSSProperties; active?: boolean }) {
+  const cursorRef = useRef<HTMLSpanElement>(null);
+
+  // A small "Watch" disc follows the mouse in place of the pointer
+  function moveCursor(e: React.MouseEvent<HTMLAnchorElement>) {
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+    const box = e.currentTarget.getBoundingClientRect();
+    cursor.style.transform = `translate(${e.clientX - box.left}px, ${e.clientY - box.top}px) translate(-50%, -50%)`;
+  }
+
   return (
     <a
-        href={w.url}
+      href={w.url}
       target="_blank"
       rel="noopener noreferrer"
       style={style}
-    className={`group relative shrink-0 overflow-hidden rounded-2xl md:rounded-3xl bg-[#1c1416] ${className}`}
+      onMouseMove={moveCursor}
+      className={`group relative shrink-0 overflow-hidden rounded-2xl md:rounded-3xl bg-[#1c1416] md:cursor-none transition-[opacity,transform] duration-500 ${
+        active === false ? "opacity-45 scale-[0.96]" : "opacity-100"
+      } ${className}`}
       aria-label={`Watch ${w.title ?? `the ${w.brand} video`} on ${w.platform}`}
     >
       {w.image ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={w.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
       ) : (
-        <Loop slug={w.slug} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+        <Loop slug={w.slug} active={active} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
       <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/90" style={heading}>
         {w.platform}
       </div>
-      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 flex items-end justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-3xl md:text-4xl text-white leading-none" style={display}>{w.brand}</p>
-          {w.title && <p className="mt-2 text-sm text-white/80 leading-snug line-clamp-2">{w.title}</p>}
-        </div>
-        <span className="shrink-0 px-4 h-10 md:h-11 rounded-full bg-[#EFE2D3] text-[#602D37] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-transform duration-300 group-hover:scale-105" style={heading}>
-          Watch <span aria-hidden="true">↗</span>
-        </span>
+      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+        <p className="text-3xl md:text-4xl text-white leading-none" style={display}>{w.brand}</p>
+        {w.title && <p className="mt-2 text-sm text-white/80 leading-snug line-clamp-2">{w.title}</p>}
       </div>
-    </a>  );
+      <span
+        ref={cursorRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-0 hidden md:flex w-[72px] h-[72px] rounded-full bg-[#EFE2D3] text-[#602D37] items-center justify-center text-[11px] font-bold uppercase tracking-wider opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-[opacity,scale] duration-200"
+        style={heading}
+      >
+        Watch ↗
+      </span>
+    </a>
+  );
 }
 
 // One row of sponsored videos that scrolls sideways. Each card opens the original post.
@@ -272,10 +298,11 @@ export function Analytics({ panels }: { panels: Panel[] }) {
 
 // Past work pinned in place: scrolling down slides the row sideways, then the page carries on.
 // With reduced motion it falls back to the ordinary sideways scrolling row.
-export function PinnedWorkRow({ work, children }: { work: Work[]; children: React.ReactNode }) {
+export function PinnedWorkRow({ id, work, children }: { id: string; work: Work[]; children: React.ReactNode }) {
   const outerRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [distance, setDistance] = useState(0);
+  const [centred, setCentred] = useState(0);
   const reduced = useSyncExternalStore(subscribeReducedMotion, () => window.matchMedia(REDUCED).matches, () => false);
 
   useEffect(() => {
@@ -291,6 +318,20 @@ export function PinnedWorkRow({ work, children }: { work: Work[]; children: Reac
       const travel = outer.offsetHeight - window.innerHeight;
       const progress = travel > 0 ? Math.min(Math.max(-outer.getBoundingClientRect().top / travel, 0), 1) : 0;
       track.style.transform = `translate3d(${-progress * (track.scrollWidth - window.innerWidth)}px, 0, 0)`;
+
+      // Only the card nearest the middle of the screen plays
+      const middle = window.innerWidth / 2;
+      let best = 0;
+      let bestGap = Infinity;
+      Array.from(track.children).forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const gap = Math.abs(r.left + r.width / 2 - middle);
+        if (gap < bestGap) {
+          bestGap = gap;
+          best = i;
+        }
+      });
+      setCentred(best);
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -315,7 +356,7 @@ export function PinnedWorkRow({ work, children }: { work: Work[]; children: Reac
 
   if (reduced) {
     return (
-      <section id="work" className="py-24 md:py-32 scroll-mt-16">
+      <section id={id} className="py-24 md:py-32 scroll-mt-16">
         {children}
         <WorkRow work={work} />
       </section>
@@ -324,14 +365,15 @@ export function PinnedWorkRow({ work, children }: { work: Work[]; children: Reac
 
   // Section height = one screen plus the sideways distance, so one pixel down moves the row one pixel across
   return (
-    <section id="work" ref={outerRef} className="relative" style={{ height: `calc(100svh + ${distance}px)` }}>
+    <section id={id} ref={outerRef} className="relative" style={{ height: `calc(100svh + ${distance}px)` }}>
       <div className="sticky top-0 h-[100svh] overflow-hidden flex flex-col justify-center pt-16 md:pt-20">
         {children}
         <div ref={trackRef} className="flex items-end gap-4 md:gap-6 w-max px-6 md:px-10 will-change-transform">
-          {work.map((w) => (
+          {work.map((w, i) => (
             <WorkCard
               key={w.slug}
               w={w}
+              active={i === centred}
               className={w.shape === "wide" ? "aspect-video" : w.shape === "feed" ? "aspect-[4/5]" : "aspect-[9/16]"}
               style={{ height: w.shape === "wide" ? "min(440px, 40svh)" : "min(560px, 54svh)" }}
             />
