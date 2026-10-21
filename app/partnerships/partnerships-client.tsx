@@ -19,7 +19,36 @@ export type Work = {
   // a still thumbnail (eg YouTube) in place of a looping preview
   image?: string;
   title?: string;
+  // white brand logo shown above the card; `logoText` sets the brand name in type beside it
+  logo?: string;
+  logoText?: boolean;
 };
+
+// White platform marks in place of the "Instagram" / "LinkedIn" / "YouTube" labels
+function PlatformIcon({ platform }: { platform: string }) {
+  const common = { width: 22, height: 22, viewBox: "0 0 24 24", "aria-label": platform, role: "img" as const };
+  if (platform === "Instagram") {
+    return (
+      <svg {...common} fill="none" stroke="#fff" strokeWidth="2">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none" />
+      </svg>
+    );
+  }
+  if (platform === "LinkedIn") {
+    return (
+      <svg {...common} fill="#fff">
+        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common} fill="#fff">
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z" />
+    </svg>
+  );
+}
 
 const shapeClass = {
   tall: "aspect-[9/16] h-[420px] md:h-[560px]",
@@ -196,14 +225,16 @@ function WorkCard({ w, className, style, active }: { w: Work; className: string;
       ) : (
         <Loop slug={w.slug} active={active} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-      <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/90" style={heading}>
-        {w.platform}
+      {!w.logo && <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />}
+      <div className="absolute top-3 left-3 md:top-4 md:left-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center">
+        <PlatformIcon platform={w.platform} />
       </div>
-      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-        <p className="text-3xl md:text-4xl text-white leading-none" style={display}>{w.brand}</p>
-        {w.title && <p className="mt-2 text-sm text-white/80 leading-snug line-clamp-2">{w.title}</p>}
-      </div>
+      {!w.logo && (
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+          <p className="text-3xl md:text-4xl text-white leading-none" style={display}>{w.brand}</p>
+          {w.title && <p className="mt-2 text-sm text-white/80 leading-snug line-clamp-2">{w.title}</p>}
+        </div>
+      )}
       <span
         ref={cursorRef}
         aria-hidden="true"
@@ -370,13 +401,21 @@ export function PinnedWorkRow({ id, work, children }: { id: string; work: Work[]
         {children}
         <div ref={trackRef} className="flex items-end gap-4 md:gap-6 w-max px-6 md:px-10 will-change-transform">
           {work.map((w, i) => (
-            <WorkCard
-              key={w.slug}
-              w={w}
-              active={i === centred}
-              className={w.shape === "wide" ? "aspect-video" : w.shape === "feed" ? "aspect-[4/5]" : "aspect-[9/16]"}
-              style={{ height: w.shape === "wide" ? "min(440px, 40svh)" : "min(560px, 54svh)" }}
-            />
+            <div key={w.slug} className="shrink-0 flex flex-col gap-3 md:gap-4">
+              {w.logo && (
+                <div className={`flex items-center gap-2 h-7 md:h-8 transition-opacity duration-500 ${i === centred ? "opacity-100" : "opacity-45"}`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={w.logo} alt={w.logoText ? "" : w.brand} className="h-full w-auto max-w-[160px] object-contain object-left" />
+                  {w.logoText && <span className="text-xl md:text-2xl font-semibold tracking-tight text-white" style={heading}>{w.brand}</span>}
+                </div>
+              )}
+              <WorkCard
+                w={w}
+                active={i === centred}
+                className={w.shape === "wide" ? "aspect-video" : w.shape === "feed" ? "aspect-[4/5]" : "aspect-[9/16]"}
+                style={{ height: w.shape === "wide" ? "min(420px, 36svh)" : "min(560px, 48svh)" }}
+              />
+            </div>
           ))}
         </div>
       </div>

@@ -20,12 +20,12 @@ const PARTNERSHIPS_EMAIL = "partnerships@womenlead.ai";
 
 // Silent previews live in public/partnerships as <slug>-loop.mp4 and <slug>.jpg; each card links to the original post
 const work: Work[] = [
-  { slug: "runway", brand: "Runway", platform: "Instagram", url: "https://www.instagram.com/p/Dd3i47Mgi5G/" },
-  { slug: "pink-nyc", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/Ddy9LkugPE9/" },
-  { slug: "veed", brand: "VEED", platform: "LinkedIn", url: "https://www.linkedin.com/posts/veedhq_spending-your-evenings-working-not-the-one-activity-7513529130571730944-m7I6", shape: "wide" },
-  { slug: "imagine", brand: "Imagine", platform: "Instagram", url: "https://www.instagram.com/p/DcLYUXUohxq/" },
-  { slug: "higgsfield", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/DXumWciDtc8/" },
-  { slug: "sintra", brand: "Sintra AI", platform: "Instagram", url: "https://www.instagram.com/p/DZXrVroH4U1/" },
+  { slug: "runway", brand: "Runway", platform: "Instagram", url: "https://www.instagram.com/p/Dd3i47Mgi5G/", logo: "/partnerships/logos/runway.svg" },
+  { slug: "pink-nyc", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/Ddy9LkugPE9/", logo: "/partnerships/logos/higgsfield-glyph.svg", logoText: true },
+  { slug: "veed", brand: "VEED", platform: "LinkedIn", url: "https://www.linkedin.com/posts/veedhq_spending-your-evenings-working-not-the-one-activity-7513529130571730944-m7I6", shape: "wide", logo: "/partnerships/logos/veed.svg" },
+  { slug: "imagine", brand: "Imagine", platform: "Instagram", url: "https://www.instagram.com/p/DcLYUXUohxq/", logo: "/partnerships/logos/imagine.svg" },
+  { slug: "higgsfield", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/DXumWciDtc8/", logo: "/partnerships/logos/higgsfield-glyph.svg", logoText: true },
+  { slug: "sintra", brand: "Sintra AI", platform: "Instagram", url: "https://www.instagram.com/p/DZXrVroH4U1/", logo: "/partnerships/logos/sintra.svg" },
 ];
 
 // Recent organic videos: YouTube shows its thumbnail, Instagram plays a silent preview
