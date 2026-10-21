@@ -10,6 +10,9 @@ const BOOTCAMP_PATH = "/courses/ai-sales-marketing-bootcamp";
 const DISMISS_KEY = "wla-bootcamp-popup-dismissed";
 // Once closed, stay hidden for a week so it doesn't nag on every page.
 const DISMISS_MS = 7 * 86_400_000;
+// Wait until the visitor has been on the site this long, counted across pages.
+const DELAY_MS = 10_000;
+const ARRIVED_KEY = "wla-arrived-at";
 
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 const serif = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
@@ -20,6 +23,19 @@ function recentlyDismissed() {
     return at > 0 && Date.now() - at < DISMISS_MS;
   } catch {
     return false;
+  }
+}
+
+function msUntilDue() {
+  try {
+    let at = Number(sessionStorage.getItem(ARRIVED_KEY));
+    if (!at) {
+      at = Date.now();
+      sessionStorage.setItem(ARRIVED_KEY, String(at));
+    }
+    return Math.max(0, at + DELAY_MS - Date.now());
+  } catch {
+    return DELAY_MS;
   }
 }
 
@@ -34,12 +50,12 @@ export default function BootcampPopup() {
   const [open, setOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
 
-  // Show on load, except on the bootcamp page itself, after it has started, or if recently closed.
+  // Show after 10 seconds on the site, except on the bootcamp page itself, after it has started, or if recently closed.
   useEffect(() => {
     if (pathname === BOOTCAMP_PATH) return;
     if (Date.now() >= new Date(BOOTCAMP_START).getTime()) return;
     if (recentlyDismissed()) return;
-    const id = setTimeout(() => setOpen(true), 0);
+    const id = setTimeout(() => setOpen(true), msUntilDue());
     return () => clearTimeout(id);
   }, [pathname]);
 
