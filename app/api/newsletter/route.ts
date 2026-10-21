@@ -1,4 +1,10 @@
 import { NextResponse } from "next/server";
+import { saveLead } from "@/lib/leads";
+
+// Only the newsletter (no tag) and the course waitlist belong in Buttondown.
+// Any other tag is a resource download, usually from a page loaded before
+// downloads moved to /api/lead, so it goes to Supabase instead.
+const BUTTONDOWN_TAGS = ["waitlist"];
 
 export async function POST(request: Request) {
   try {
@@ -7,6 +13,11 @@ export async function POST(request: Request) {
 
     if (!email) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    }
+
+    if (tag && !BUTTONDOWN_TAGS.includes(tag)) {
+      await saveLead(email, tag);
+      return NextResponse.json({ success: true });
     }
 
     const apiKey = process.env.BUTTONDOWN_API_KEY;
