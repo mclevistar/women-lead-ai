@@ -41,7 +41,7 @@ export default function PartnershipForm() {
     }
   }
 
-  const inputClass = "w-full px-4 py-3 bg-[#FAF5EF] border-2 border-[#D9CCBE] text-[#232323] placeholder:text-[#5A4A44]/40 focus:outline-none focus:border-[#602D37] text-sm transition-colors";
+  const inputClass = "w-full px-4 py-3 bg-[#FAF5EF] border-2 border-[#D9CCBE] text-[#232323] placeholder:text-[#5A4A44]/40 focus:outline-none focus:border-[#602D37] text-base md:text-sm transition-colors";
   const labelClass = "block text-xs font-bold uppercase tracking-wider text-[#602D37] mb-1.5";
 
   if (status === "success") {

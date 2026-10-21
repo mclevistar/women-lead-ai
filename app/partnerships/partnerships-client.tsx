@@ -427,7 +427,8 @@ export function PinnedWorkRow({ id, work, children }: { id: string; work: Work[]
                 w={w}
                 active={i === centred}
                 className={w.shape === "wide" ? "aspect-video" : w.shape === "feed" ? "aspect-[4/5]" : "aspect-[9/16]"}
-                style={{ height: w.shape === "wide" ? "min(420px, 36svh)" : "min(560px, 48svh)" }}
+                // wide cards also capped by screen width so a 16:9 video fits on a phone
+                style={{ height: w.shape === "wide" ? "min(420px, 36svh, 48vw)" : "min(560px, 48svh)" }}
               />
             </div>
           ))}

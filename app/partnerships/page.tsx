@@ -170,11 +170,10 @@ export default function PartnershipsPage() {
 
       {/* Organic content */}
       <PinnedWorkRow id="organic" work={organic}>
-        <div className="w-full max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8 md:mb-10">
+        <div className="w-full max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-2 md:gap-3 mb-6 md:mb-10">
           <div>
-            <Eyebrow>Organic content</Eyebrow>
-            <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
-              Recent <span className="italic text-[#ECB398]">videos</span>
+            <h2 className="text-4xl sm:text-5xl md:text-7xl leading-[0.95]" style={display}>
+              Organic <span className="italic text-[#ECB398]">content</span>
             </h2>
           </div>
           <a href={EXTERNAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-[#EFE2D3]/70 hover:text-[#EFE2D3] underline underline-offset-4 md:text-right">
@@ -185,11 +184,10 @@ export default function PartnershipsPage() {
 
       {/* Sponsored work: pinned, scrolling down slides it sideways */}
       <PinnedWorkRow id="work" work={work}>
-        <div className="w-full max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8 md:mb-10">
+        <div className="w-full max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-2 md:gap-3 mb-6 md:mb-10">
           <div>
-            <Eyebrow>Past work</Eyebrow>
-            <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
-              Made with <span className="italic text-[#ECB398]">these brands</span>
+            <h2 className="text-4xl sm:text-5xl md:text-7xl leading-[0.95]" style={display}>
+              Past <span className="italic text-[#ECB398]">work</span>
             </h2>
           </div>
           <p className="text-[#EFE2D3]/60 md:text-right">Keep scrolling, tap a video to watch it.</p>
