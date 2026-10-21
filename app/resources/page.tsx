@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/claude-code-cheat-sheet",
+    label: "Free · Cheat sheet",
+    title: "The Claude Code Cheat Sheet",
+    description:
+      "Connectors, MCP, skills, plugins, slash commands, artifacts and routines in plain English, where each lives in the app, and every prompt from my video.",
+  },
+  {
     href: "/resources/london-through-time",
     label: "Free · Prompt pack",
     title: "London Through Time",

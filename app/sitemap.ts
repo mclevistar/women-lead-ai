@@ -12,6 +12,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
   { path: "/courses/ai-sales-marketing-bootcamp", priority: 0.9, changeFrequency: "weekly" },
   { path: "/courses", priority: 0.7, changeFrequency: "monthly" },
   { path: "/resources", priority: 0.7, changeFrequency: "weekly" },
+  { path: "/resources/claude-code-cheat-sheet", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/website-starter-pack", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/aeo-audit-kit", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/startup-perks", priority: 0.6, changeFrequency: "monthly" },
