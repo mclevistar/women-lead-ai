@@ -20,12 +20,12 @@ const PARTNERSHIPS_EMAIL = "hello@womenlead.ai";
 
 // Silent previews live in public/partnerships as <slug>-loop.mp4 and <slug>.jpg; each card links to the original post
 const work: Work[] = [
-  { slug: "runway", brand: "Runway", platform: "Instagram", url: "https://www.instagram.com/p/Dd3i47Mgi5G/", logo: "/partnerships/logos/runway.svg" },
-  { slug: "pink-nyc", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/Ddy9LkugPE9/", logo: "/partnerships/logos/higgsfield-glyph.svg", logoText: true },
-  { slug: "veed", brand: "VEED", platform: "LinkedIn", url: "https://www.linkedin.com/posts/veedhq_spending-your-evenings-working-not-the-one-activity-7513529130571730944-m7I6", shape: "wide", logo: "/partnerships/logos/veed.svg" },
-  { slug: "imagine", brand: "Imagine", platform: "Instagram", url: "https://www.instagram.com/p/DcLYUXUohxq/", logo: "/partnerships/logos/imagine.svg" },
-  { slug: "higgsfield", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/DXumWciDtc8/", logo: "/partnerships/logos/higgsfield-glyph.svg", logoText: true },
-  { slug: "sintra", brand: "Sintra AI", platform: "Instagram", url: "https://www.instagram.com/p/DZXrVroH4U1/", logo: "/partnerships/logos/sintra.svg" },
+  { slug: "runway", brand: "Runway", platform: "Instagram", url: "https://www.instagram.com/p/Dd3i47Mgi5G/", hideName: true },
+  { slug: "pink-nyc", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/Ddy9LkugPE9/", hideName: true },
+  { slug: "veed", brand: "VEED", platform: "LinkedIn", url: "https://www.linkedin.com/posts/veedhq_spending-your-evenings-working-not-the-one-activity-7513529130571730944-m7I6", shape: "wide", hideName: true },
+  { slug: "imagine", brand: "Imagine", platform: "Instagram", url: "https://www.instagram.com/p/DcLYUXUohxq/", hideName: true },
+  { slug: "higgsfield", brand: "Higgsfield", platform: "Instagram", url: "https://www.instagram.com/p/DXumWciDtc8/", hideName: true },
+  { slug: "sintra", brand: "Sintra AI", platform: "Instagram", url: "https://www.instagram.com/p/DZXrVroH4U1/", hideName: true },
 ];
 
 // Recent organic videos: YouTube shows its thumbnail, Instagram plays a silent preview
@@ -34,7 +34,6 @@ const organic: Work[] = [
   { slug: "organic-higgs", brand: "AI video", platform: "Instagram", url: "https://www.instagram.com/p/DeUdMozAUC4/" },
   { slug: "yt-EEEo1Obql1A", brand: "AEO Playbook", platform: "YouTube", shape: "wide", image: "/partnerships/yt-EEEo1Obql1A.jpg", title: "How to Get AI to Recommend Your Website: AEO 2026 Playbook", url: "https://www.youtube.com/watch?v=EEEo1Obql1A" },
   { slug: "organic-history", brand: "Time travel", platform: "Instagram", shape: "feed", url: "https://www.instagram.com/p/Deew5AhgA1M/" },
-  { slug: "yt-DJ2J8OxWafQ", brand: "Podcast", platform: "YouTube", shape: "wide", image: "/partnerships/yt-DJ2J8OxWafQ.jpg", title: "The $1 Trillion Gap In Women's Health, Ep 9", url: "https://www.youtube.com/watch?v=DJ2J8OxWafQ" },
 ];
 
 // White logos taken from each brand's own site, in public/partnerships/logos. Higgsfield's wordmark is live text on their site, so it is set in type next to the glyph.

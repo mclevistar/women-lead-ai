@@ -19,9 +19,8 @@ export type Work = {
   // a still thumbnail (eg YouTube) in place of a looping preview
   image?: string;
   title?: string;
-  // white brand logo shown above the card; `logoText` sets the brand name in type beside it
-  logo?: string;
-  logoText?: boolean;
+  // keep the video clean: no brand name over it (the brand belt above names them)
+  hideName?: boolean;
 };
 
 // White platform marks in place of the "Instagram" / "LinkedIn" / "YouTube" labels
@@ -247,11 +246,11 @@ function WorkCard({ w, className, style, active }: { w: Work; className: string;
       ) : (
         <Loop slug={w.slug} active={active} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
       )}
-      {!w.logo && <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />}
+      {!w.hideName && <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />}
       <div className="absolute top-3 left-3 md:top-4 md:left-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur flex items-center justify-center text-white" title={w.platform}>
         <PlatformIcon platform={w.platform} />
       </div>
-      {!w.logo && (
+      {!w.hideName && (
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
           <p className="text-3xl md:text-4xl text-white leading-none" style={display}>{w.brand}</p>
           {w.title && <p className="mt-2 text-sm text-white/80 leading-snug line-clamp-2">{w.title}</p>}
@@ -424,13 +423,6 @@ export function PinnedWorkRow({ id, work, children }: { id: string; work: Work[]
         <div ref={trackRef} className="flex items-end gap-4 md:gap-6 w-max px-6 md:px-10 will-change-transform">
           {work.map((w, i) => (
             <div key={w.slug} className="shrink-0 flex flex-col gap-3 md:gap-4">
-              {w.logo && (
-                <div className={`flex items-center gap-2 h-7 md:h-8 transition-opacity duration-500 ${i === centred ? "opacity-100" : "opacity-45"}`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={w.logo} alt={w.logoText ? "" : w.brand} className="h-full w-auto max-w-[160px] object-contain object-left" />
-                  {w.logoText && <span className="text-xl md:text-2xl font-semibold tracking-tight text-white" style={heading}>{w.brand}</span>}
-                </div>
-              )}
               <WorkCard
                 w={w}
                 active={i === centred}
