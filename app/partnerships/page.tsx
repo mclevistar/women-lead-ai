@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import ScrollReveal from "@/components/scroll-reveal";
 import PartnershipForm from "./partnership-form";
-import { HeroReel, CountUp, WorkRow, Analytics, type Work, type Panel } from "./partnerships-client";
+import { HeroReel, CountUp, WorkRow, PinnedWorkRow, Analytics, type Work, type Panel } from "./partnerships-client";
 
 export const metadata: Metadata = pageMetadata({
   title: "Brand Partnerships",
@@ -172,18 +172,17 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Work: one sideways scrolling row */}
-      <section id="work" className="py-24 md:py-32 scroll-mt-16">
-        <ScrollReveal className="max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
+      <PinnedWorkRow work={work}>
+        <div className="w-full max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8 md:mb-10">
           <div>
             <Eyebrow>Past work</Eyebrow>
             <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
               Made with <span className="italic text-[#ECB398]">these brands</span>
             </h2>
           </div>
-          <p className="text-[#EFE2D3]/60 md:text-right">Scroll sideways, tap a video to watch it.</p>
-        </ScrollReveal>
-        <WorkRow work={work} />
-      </section>
+          <p className="text-[#EFE2D3]/60 md:text-right">Keep scrolling, tap a video to watch it.</p>
+        </div>
+      </PinnedWorkRow>
 
       {/* Organic content */}
       <section className="py-24 md:py-32 border-t border-white/10">

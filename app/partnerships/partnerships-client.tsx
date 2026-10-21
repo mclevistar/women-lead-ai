@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+
+const REDUCED = "(prefers-reduced-motion: reduce)";
+function subscribeReducedMotion(onChange: () => void) {
+  const query = window.matchMedia(REDUCED);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
 
 export type Work = {
   slug: string;
@@ -150,6 +157,39 @@ export function Bar({ label, pct }: { label: string; pct: number }) {
   );
 }
 
+// A video card that opens the original post in a new tab
+function WorkCard({ w, className, style }: { w: Work; className: string; style?: React.CSSProperties }) {
+  return (
+    <a
+        href={w.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={style}
+    className={`group relative shrink-0 overflow-hidden rounded-2xl md:rounded-3xl bg-[#1c1416] ${className}`}
+      aria-label={`Watch ${w.title ?? `the ${w.brand} video`} on ${w.platform}`}
+    >
+      {w.image ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={w.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+      ) : (
+        <Loop slug={w.slug} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+      <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/90" style={heading}>
+        {w.platform}
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 flex items-end justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-3xl md:text-4xl text-white leading-none" style={display}>{w.brand}</p>
+          {w.title && <p className="mt-2 text-sm text-white/80 leading-snug line-clamp-2">{w.title}</p>}
+        </div>
+        <span className="shrink-0 px-4 h-10 md:h-11 rounded-full bg-[#EFE2D3] text-[#602D37] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-transform duration-300 group-hover:scale-105" style={heading}>
+          Watch <span aria-hidden="true">↗</span>
+        </span>
+      </div>
+    </a>  );
+}
+
 // One row of sponsored videos that scrolls sideways. Each card opens the original post.
 export function WorkRow({ work }: { work: Work[] }) {
   const rowRef = useRef<HTMLDivElement>(null);
@@ -166,34 +206,7 @@ export function WorkRow({ work }: { work: Work[] }) {
         className="flex items-end gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-6 pl-6 md:pl-10 pr-6 md:pr-10 [scrollbar-width:thin] [scrollbar-color:#602D37_transparent]"
       >
         {work.map((w) => (
-          <a
-            key={w.slug}
-            href={w.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`group relative shrink-0 snap-start overflow-hidden rounded-2xl md:rounded-3xl bg-[#1c1416] max-w-[85vw] ${shapeClass[w.shape ?? "tall"]}`}
-            aria-label={`Watch ${w.title ?? `the ${w.brand} video`} on ${w.platform}`}
-          >
-            {w.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={w.image} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-            ) : (
-              <Loop slug={w.slug} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-            <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur text-[10px] md:text-xs font-bold uppercase tracking-wider text-white/90" style={heading}>
-              {w.platform}
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 flex items-end justify-between gap-3">
-              <div className="min-w-0">
-                <p className="text-3xl md:text-4xl text-white leading-none" style={display}>{w.brand}</p>
-                {w.title && <p className="mt-2 text-sm text-white/80 leading-snug line-clamp-2">{w.title}</p>}
-              </div>
-              <span className="shrink-0 px-4 h-10 md:h-11 rounded-full bg-[#EFE2D3] text-[#602D37] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-transform duration-300 group-hover:scale-105" style={heading}>
-                Watch <span aria-hidden="true">↗</span>
-              </span>
-            </div>
-          </a>
+          <WorkCard key={w.slug} w={w} className={`snap-start max-w-[85vw] ${shapeClass[w.shape ?? "tall"]}`} />
         ))}
       </div>
       <div className="hidden md:flex justify-end gap-3 pr-10 mt-4">
@@ -254,5 +267,77 @@ export function Analytics({ panels }: { panels: Panel[] }) {
       </div>
       <p className="text-xs text-[#EFE2D3]/45 mt-10">{panel.source}</p>
     </div>
+  );
+}
+
+// Past work pinned in place: scrolling down slides the row sideways, then the page carries on.
+// With reduced motion it falls back to the ordinary sideways scrolling row.
+export function PinnedWorkRow({ work, children }: { work: Work[]; children: React.ReactNode }) {
+  const outerRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [distance, setDistance] = useState(0);
+  const reduced = useSyncExternalStore(subscribeReducedMotion, () => window.matchMedia(REDUCED).matches, () => false);
+
+  useEffect(() => {
+    if (reduced) return;
+    const outer = outerRef.current;
+    const track = trackRef.current;
+    if (!outer || !track) return;
+
+    const measure = () => setDistance(Math.max(0, track.scrollWidth - window.innerWidth));
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const travel = outer.offsetHeight - window.innerHeight;
+      const progress = travel > 0 ? Math.min(Math.max(-outer.getBoundingClientRect().top / travel, 0), 1) : 0;
+      track.style.transform = `translate3d(${-progress * (track.scrollWidth - window.innerWidth)}px, 0, 0)`;
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    measure();
+    update();
+    const resize = new ResizeObserver(() => {
+      measure();
+      update();
+    });
+    resize.observe(track);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      resize.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, [reduced]);
+
+  if (reduced) {
+    return (
+      <section id="work" className="py-24 md:py-32 scroll-mt-16">
+        {children}
+        <WorkRow work={work} />
+      </section>
+    );
+  }
+
+  // Section height = one screen plus the sideways distance, so one pixel down moves the row one pixel across
+  return (
+    <section id="work" ref={outerRef} className="relative" style={{ height: `calc(100svh + ${distance}px)` }}>
+      <div className="sticky top-0 h-[100svh] overflow-hidden flex flex-col justify-center pt-16 md:pt-20">
+        {children}
+        <div ref={trackRef} className="flex items-end gap-4 md:gap-6 w-max px-6 md:px-10 will-change-transform">
+          {work.map((w) => (
+            <WorkCard
+              key={w.slug}
+              w={w}
+              className={w.shape === "wide" ? "aspect-video" : w.shape === "feed" ? "aspect-[4/5]" : "aspect-[9/16]"}
+              style={{ height: w.shape === "wide" ? "min(440px, 40svh)" : "min(560px, 54svh)" }}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

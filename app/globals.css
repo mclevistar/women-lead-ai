@@ -52,7 +52,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
-  overflow-x: hidden;
+  /* clip, not hidden: hidden makes body a scroll container and breaks position: sticky */
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4, h5, h6 {
