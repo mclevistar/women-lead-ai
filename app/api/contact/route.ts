@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { SITE_URL } from "@/lib/seo";
 
 // Contact and speaking enquiries are stored in our own Supabase table so none are
 // ever lost. The publishable key is safe to ship: the table only allows inserts
@@ -7,9 +6,6 @@ import { SITE_URL } from "@/lib/seo";
 const SUPABASE_URL = process.env.SUPABASE_URL ?? "https://klyubshxbbzzyppmrqnn.supabase.co";
 const SUPABASE_KEY = process.env.SUPABASE_PUBLISHABLE_KEY ?? "sb_publishable_y3Apv7gdUlk85wS2DhpL_g_7gvtZgSG";
 
-// Email notification via FormSubmit (no account or API key needed).
-// FormSubmit holds every email until the "Activate Form" link it sends to this address is clicked once.
-const NOTIFY_EMAIL = "wiktoria@oxfordtalks.io";
 
 export async function POST(request: Request) {
   try {
@@ -53,16 +49,13 @@ export async function POST(request: Request) {
         ? `Brand Partnership from ${from}`
         : `Contact Form: ${enquiry.name}`;
 
-    try {
-      const notified = await fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {
-        method: "POST",
-        // FormSubmit rejects requests that do not name the website they come from
-        headers: { "Content-Type": "application/json", Accept: "application/json", Origin: SITE_URL, Referer: `${SITE_URL}/` },
-        body: JSON.stringify({
-          _subject: subject,
-          _replyto: enquiry.email,
-          _template: "table",
-          _captcha: "false",
+    // The email itself is sent from the visitor's browser (lib/notify-enquiry.ts): FormSubmit blocks
+    // requests from hosting servers, so a server-side send silently never arrives.
+    return NextResponse.json({
+      success: true,
+      notification: {
+        subject,
+        fields: {
           Name: enquiry.name,
           Email: enquiry.email,
           ...(organisation && { Organisation: organisation }),
@@ -70,19 +63,9 @@ export async function POST(request: Request) {
           ...(eventDate && { "Event date": eventDate }),
           ...(reason && { Reason: reason }),
           Message: enquiry.message,
-        }),
-      });
-      // FormSubmit answers 200 with success "false" when the address is not activated, so read the body too
-      const reply = await notified.text();
-      if (!notified.ok || reply.includes('"success":"false"')) {
-        console.error("Enquiry email failed:", notified.status, reply);
-      }
-    } catch (err) {
-      // the enquiry is already saved, so never fail the form over the email
-      console.error("Enquiry email failed:", err);
-    }
-
-    return NextResponse.json({ success: true });
+        },
+      },
+    });
   } catch {
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }

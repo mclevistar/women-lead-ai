@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { notifyEnquiry } from "@/lib/notify-enquiry";
 
 export default function GeneralContactForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -25,6 +26,7 @@ export default function GeneralContactForm() {
         body: JSON.stringify(data),
       });
       if (res.ok) {
+        await notifyEnquiry(res);
         setStatus("success");
       } else {
         setStatus("error");

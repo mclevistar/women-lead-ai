@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { notifyEnquiry } from "@/lib/notify-enquiry";
 
 export default function PartnershipForm() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -35,6 +36,7 @@ export default function PartnershipForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      if (res.ok) await notifyEnquiry(res);
       setStatus(res.ok ? "success" : "error");
     } catch {
       setStatus("error");
