@@ -119,7 +119,7 @@ export default function PartnershipForm() {
         {status === "loading" ? "Sending..." : "Send Partnership Enquiry"}
       </button>
       {status === "error" && (
-        <p className="text-sm text-red-600 text-center">Something went wrong. Please try again or email partnerships@womenlead.ai.</p>
+        <p className="text-sm text-red-600 text-center">Something went wrong. Please try again or email hello@womenlead.ai.</p>
       )}
     </form>
   );

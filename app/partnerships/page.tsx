@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import ScrollReveal from "@/components/scroll-reveal";
 import PartnershipForm from "./partnership-form";
-import { HeroReel, CountUp, PinnedWorkRow, Analytics, type Work, type Panel } from "./partnerships-client";
+import { HeroReel, CountUp, PinnedWorkRow, PlatformIcon, Analytics, type Work, type Panel } from "./partnerships-client";
 
 export const metadata: Metadata = pageMetadata({
   title: "Brand Partnerships",
@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMetadata({
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
-const PARTNERSHIPS_EMAIL = "partnerships@womenlead.ai";
+const PARTNERSHIPS_EMAIL = "hello@womenlead.ai";
 
 // Silent previews live in public/partnerships as <slug>-loop.mp4 and <slug>.jpg; each card links to the original post
 const work: Work[] = [
@@ -97,18 +97,6 @@ const panels: Panel[] = [
       { title: "Who they are", rows: [["Skool engagement rate", 39], ["Want to grow their career", 14.8], ["Run their own business", 12]] },
     ],
   },
-];
-
-// Member answers to "What would you love AI to help you with?", lightly tidied for spelling, names left out
-const quotes = [
-  { text: "I want AI to build a strong system for my business that runs on automation without stressing me out.", who: "Business owner" },
-  { text: "I have a kidswear business online and I need AI to generate product videos, schedule posts and write scripts.", who: "Ecommerce founder" },
-  { text: "I would love for it to help me serve more clients. I lead our AI team for a consultancy.", who: "AI lead, consultancy" },
-  { text: "I'd like to delegate more of my work to AI and automate as much as possible, so I can focus on getting more clients.", who: "Freelancer" },
-  { text: "I am building my own AI operating system to manage my work and personal life.", who: "Community member" },
-  { text: "I'd like to be managing agent teams, with automated workflows and business development through agents.", who: "Founder" },
-  { text: "Help me be more efficient in business and deliver faster for my clients.", who: "Consultant" },
-  { text: "I want to use AI to boost my career, scale my social media and build content.", who: "Community member" },
 ];
 
 const channels = [
@@ -243,39 +231,20 @@ export default function PartnershipsPage() {
         </div>
       </section>
 
-      {/* Member quotes */}
-      <section className="pt-glow py-24 md:py-32 border-t border-white/10 overflow-hidden">
-        <ScrollReveal className="max-w-6xl mx-auto px-6 md:px-10 mb-10 md:mb-14">
-          <Eyebrow>In their words</Eyebrow>
-          <h2 className="text-5xl md:text-7xl leading-[0.95]" style={display}>
-            What my community <span className="italic text-[#ECB398]">wants from AI</span>
-          </h2>
-        </ScrollReveal>
-        <div className="marquee-track flex gap-5 w-max" style={{ animationDuration: "70s" }}>
-          {[...quotes, ...quotes].map((q, i) => (
-            <figure key={i} className="w-[300px] md:w-[380px] shrink-0 rounded-3xl border border-white/10 bg-white/[0.04] p-7 md:p-8 flex flex-col justify-between gap-6">
-              <blockquote className="text-xl md:text-2xl leading-snug text-[#EFE2D3] whitespace-normal" style={display}>
-                &ldquo;{q.text}&rdquo;
-              </blockquote>
-              <figcaption className="text-xs font-bold uppercase tracking-[0.2em] text-[#ECB398]" style={heading}>{q.who}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-
       {/* Channels */}
       <section className="py-20 md:py-24 px-6 md:px-10 border-t border-white/10">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <Eyebrow>Watch and listen</Eyebrow>
           </ScrollReveal>
-          <ScrollReveal className="flex flex-wrap gap-3">
+          <ScrollReveal className="flex flex-wrap gap-3 md:gap-4">
             {channels.map((c) => {
-              const cls = `${pill} border border-white/15 text-[#EFE2D3] hover:bg-[#EFE2D3] hover:text-[#602D37] text-base`;
+              const cls = "w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/15 flex items-center justify-center text-[#EFE2D3] hover:bg-[#EFE2D3] hover:text-[#602D37] hover:scale-105 transition-all duration-200";
+              const icon = <PlatformIcon platform={c.label} size={26} />;
               return c.internal ? (
-                <Link key={c.label} href={c.href} className={cls} style={heading}>{c.label} <span aria-hidden="true">↗</span></Link>
+                <Link key={c.label} href={c.href} className={cls} aria-label={c.label} title={c.label}>{icon}</Link>
               ) : (
-                <a key={c.label} href={c.href} target="_blank" rel="noopener noreferrer" className={cls} style={heading}>{c.label} <span aria-hidden="true">↗</span></a>
+                <a key={c.label} href={c.href} target="_blank" rel="noopener noreferrer" className={cls} aria-label={c.label} title={c.label}>{icon}</a>
               );
             })}
           </ScrollReveal>
