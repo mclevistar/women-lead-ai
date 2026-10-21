@@ -44,9 +44,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Failed to send" }, { status: 500 });
     }
 
+    const from = `${enquiry.name}${organisation ? ` (${organisation})` : ""}`;
     const subject = enquiry.type === "speaking"
-      ? `Speaking Request from ${enquiry.name}${organisation ? ` (${organisation})` : ""}`
-      : `Contact Form: ${enquiry.name}`;
+      ? `Speaking Request from ${from}`
+      : type === "partnership"
+        ? `Brand Partnership from ${from}`
+        : `Contact Form: ${enquiry.name}`;
 
     try {
       const notified = await fetch(`https://formsubmit.co/ajax/${NOTIFY_EMAIL}`, {

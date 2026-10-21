@@ -20,6 +20,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
   { path: "/resources/ask-for-more", priority: 0.6, changeFrequency: "monthly" },
   { path: "/about", priority: 0.8, changeFrequency: "monthly" },
   { path: "/speaking", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/partnerships", priority: 0.7, changeFrequency: "monthly" },
   { path: "/youtube", priority: 0.5, changeFrequency: "weekly" },
   { path: "/contact", priority: 0.4, changeFrequency: "yearly" },
 ];

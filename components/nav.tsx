@@ -21,7 +21,7 @@ export default function Nav() {
           Women Lead AI
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+        <nav className="hidden xl:flex items-center gap-6 2xl:gap-7">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -40,7 +40,7 @@ export default function Nav() {
             href={EXTERNAL_LINKS.skool}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-2.5 bg-[#EFE2D3] text-[#602D37] text-xs font-bold uppercase tracking-wider border-2 border-[#EFE2D3] hover:bg-transparent hover:text-[#EFE2D3] transition-all duration-200"
+            className="whitespace-nowrap px-5 py-2.5 bg-[#EFE2D3] text-[#602D37] text-xs font-bold uppercase tracking-wider border-2 border-[#EFE2D3] hover:bg-transparent hover:text-[#EFE2D3] transition-all duration-200"
             style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}
           >
             Join Us
@@ -48,7 +48,7 @@ export default function Nav() {
         </nav>
 
         <button
-          className="lg:hidden p-2 text-[#EFE2D3]"
+          className="xl:hidden p-2 text-[#EFE2D3]"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -57,7 +57,7 @@ export default function Nav() {
       </div>
 
       {mobileOpen && (
-        <nav className="lg:hidden bg-[#602D37] border-t border-[#4a2129]">
+        <nav className="xl:hidden bg-[#602D37] border-t border-[#4a2129]">
           <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-4">
             {NAV_LINKS.map((link) => (
               <Link
