@@ -68,6 +68,16 @@ const panels: Panel[] = [
     ],
   },
   {
+    id: "youtube",
+    label: "YouTube",
+    source: "YouTube Studio, 23 July to 20 October 2026. 14.5K views from 6K viewers, 72 hours watched, 38.4K thumbnail impressions.",
+    groups: [
+      { title: "Top countries", rows: [["United Kingdom", 23.9], ["United States", 14.2], ["India", 2.6], ["Germany", 0.9]] },
+      { title: "Viewers", rows: [["New to the channel", 97.7], ["Stayed to watch Shorts", 48.1]] },
+      { title: "Stayed to watch, top Shorts", rows: [["Claude skill that negotiates for me", 66.7], ["Canva AI Vision event in London", 62.0], ["Can your boss see your Claude chats?", 61.1], ["DaVinci Resolve with Claude Code", 50.8]] },
+    ],
+  },
+  {
     id: "linkedin",
     label: "LinkedIn",
     source: "LinkedIn analytics, 7 April to 4 May 2026. 33.7K impressions, 16.7K members reached.",
