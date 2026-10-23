@@ -57,19 +57,16 @@ export default function EightToolsListPage() {
             is the full list from my video: every link, how I set each one up, and how I use the data with Claude
             afterwards. Most of them are free.
           </p>
+          <div id="download" className="mt-10 scroll-mt-28 bg-[#602D37] px-6 py-8 md:px-10 md:py-10 text-center">
+            <h2 className="text-3xl md:text-4xl text-[#EFE2D3] mb-3 leading-tight" style={display}>
+              Get the list free
+            </h2>
+            <p className="text-[#EFE2D3]/70 mb-6">Pop in your email and the PDF downloads straight away.</p>
+            <DownloadForm downloadUrl="/downloads/8-tools-list.pdf" tag="8-tools-list" buttonLabel="Get the list" />
+          </div>
         </div>
         <div className="max-w-5xl mx-auto mt-14">
           <PagePreviews previews={previews} />
-        </div>
-      </section>
-
-      <section id="download" className="py-16 md:py-20 px-6 bg-[#602D37]">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl text-[#EFE2D3] mb-4 leading-tight" style={display}>
-            Get the list free
-          </h2>
-          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the PDF downloads straight away.</p>
-          <DownloadForm downloadUrl="/downloads/8-tools-list.pdf" tag="8-tools-list" buttonLabel="Get the list" />
         </div>
       </section>
 

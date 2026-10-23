@@ -55,23 +55,20 @@ export default function WebsiteStarterPackPage() {
             one pack: the 10 tips, every prompt in the order I&apos;d use them, a CLAUDE.md template and the launch
             checklist I run before anything goes live.
           </p>
+          <div id="download" className="mt-10 scroll-mt-28 bg-[#602D37] px-6 py-8 md:px-10 md:py-10 text-center">
+            <h2 className="text-3xl md:text-4xl text-[#EFE2D3] mb-3 leading-tight" style={display}>
+              Get the starter pack free
+            </h2>
+            <p className="text-[#EFE2D3]/70 mb-6">Pop in your email and the PDF downloads straight away.</p>
+            <DownloadForm
+              downloadUrl="/downloads/website-starter-pack.pdf"
+              tag="website-starter-pack"
+              buttonLabel="Get the starter pack"
+            />
+          </div>
         </div>
         <div className="max-w-5xl mx-auto mt-14">
           <PagePreviews previews={previews} />
-        </div>
-      </section>
-
-      <section id="download" className="py-16 md:py-20 px-6 bg-[#602D37]">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl text-[#EFE2D3] mb-4 leading-tight" style={display}>
-            Get the starter pack free
-          </h2>
-          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the PDF downloads straight away.</p>
-          <DownloadForm
-            downloadUrl="/downloads/website-starter-pack.pdf"
-            tag="website-starter-pack"
-            buttonLabel="Get the starter pack"
-          />
         </div>
       </section>
 

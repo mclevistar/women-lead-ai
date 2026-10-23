@@ -55,24 +55,21 @@ export default function AeoAuditKitPage() {
             is the exact audit I used, the template to log it, and every prompt from the video, so you can run it on your
             own site this week.
           </p>
+          <div id="download" className="mt-10 scroll-mt-28 bg-[#602D37] px-6 py-8 md:px-10 md:py-10 text-center">
+            <h2 className="text-3xl md:text-4xl text-[#EFE2D3] mb-3 leading-tight" style={display}>
+              Get the audit kit free
+            </h2>
+            <p className="text-[#EFE2D3]/70 mb-6">Pop in your email and the PDF downloads straight away.</p>
+            <DownloadForm
+              downloadUrl="/downloads/aeo-audit-kit.pdf"
+              tag="aeo-audit-kit"
+              buttonLabel="Get the audit kit"
+              extra={{ url: "/downloads/aeo-audit-template.xlsx", label: "Download the audit spreadsheet" }}
+            />
+          </div>
         </div>
         <div className="max-w-5xl mx-auto mt-14">
           <PagePreviews previews={previews} />
-        </div>
-      </section>
-
-      <section id="download" className="py-16 md:py-20 px-6 bg-[#602D37]">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl text-[#EFE2D3] mb-4 leading-tight" style={display}>
-            Get the audit kit free
-          </h2>
-          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the PDF downloads straight away.</p>
-          <DownloadForm
-            downloadUrl="/downloads/aeo-audit-kit.pdf"
-            tag="aeo-audit-kit"
-            buttonLabel="Get the audit kit"
-            extra={{ url: "/downloads/aeo-audit-template.xlsx", label: "Download the audit spreadsheet" }}
-          />
         </div>
       </section>
 

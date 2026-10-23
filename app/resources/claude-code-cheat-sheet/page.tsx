@@ -55,23 +55,20 @@ export default function ClaudeCodeCheatSheetPage() {
             English: what each feature is, where it lives in the Claude desktop app, and the prompts to copy and paste so
             you can try it today.
           </p>
+          <div id="download" className="mt-10 scroll-mt-28 bg-[#602D37] px-6 py-8 md:px-10 md:py-10 text-center">
+            <h2 className="text-3xl md:text-4xl text-[#EFE2D3] mb-3 leading-tight" style={display}>
+              Get the cheat sheet free
+            </h2>
+            <p className="text-[#EFE2D3]/70 mb-6">Pop in your email and the PDF downloads straight away.</p>
+            <DownloadForm
+              downloadUrl="/downloads/claude-code-cheat-sheet.pdf"
+              tag="claude-code-cheat-sheet"
+              buttonLabel="Get the cheat sheet"
+            />
+          </div>
         </div>
         <div className="max-w-5xl mx-auto mt-14">
           <PagePreviews previews={previews} />
-        </div>
-      </section>
-
-      <section id="download" className="py-16 md:py-20 px-6 bg-[#602D37]">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl text-[#EFE2D3] mb-4 leading-tight" style={display}>
-            Get the cheat sheet free
-          </h2>
-          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the PDF downloads straight away.</p>
-          <DownloadForm
-            downloadUrl="/downloads/claude-code-cheat-sheet.pdf"
-            tag="claude-code-cheat-sheet"
-            buttonLabel="Get the cheat sheet"
-          />
         </div>
       </section>
 

@@ -54,23 +54,20 @@ export default function NycThroughTimePage() {
             Every prompt I used to put myself into 143 years of New York history, from the Brooklyn Bridge opening in
             1883 to the streets of SoHo today. Copy, paste, swap in your own city and your own moments.
           </p>
+          <div id="download" className="mt-10 scroll-mt-28 bg-[#602D37] px-6 py-8 md:px-10 md:py-10 text-center">
+            <h2 className="text-3xl md:text-4xl text-[#EFE2D3] mb-3 leading-tight" style={display}>
+              Get the prompts free
+            </h2>
+            <p className="text-[#EFE2D3]/70 mb-6">Pop in your email and the PDF downloads straight away.</p>
+            <DownloadForm
+              downloadUrl="/downloads/nyc-through-time-prompts.pdf"
+              tag="nyc-through-time"
+              buttonLabel="Get the PDF"
+            />
+          </div>
         </div>
         <div className="max-w-5xl mx-auto mt-14">
           <PagePreviews previews={moments.map((m) => ({ src: m.src, name: m.year }))} aspect="aspect-[9/16]" compactMobile />
-        </div>
-      </section>
-
-      <section id="download" className="py-16 md:py-20 px-6 bg-[#602D37]">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl text-[#EFE2D3] mb-4 leading-tight" style={display}>
-            Get the prompts free
-          </h2>
-          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the PDF downloads straight away.</p>
-          <DownloadForm
-            downloadUrl="/downloads/nyc-through-time-prompts.pdf"
-            tag="nyc-through-time"
-            buttonLabel="Get the PDF"
-          />
         </div>
       </section>
 

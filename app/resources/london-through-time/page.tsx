@@ -54,23 +54,20 @@ export default function LondonThroughTimePage() {
             Every prompt I used to put myself into nearly 2,000 years of London history, from Boudica riding into
             Londinium to New Year 2026 over the Thames. Copy, paste, swap in your own city and your own moments.
           </p>
+          <div id="download" className="mt-10 scroll-mt-28 bg-[#602D37] px-6 py-8 md:px-10 md:py-10 text-center">
+            <h2 className="text-3xl md:text-4xl text-[#EFE2D3] mb-3 leading-tight" style={display}>
+              Get the prompts free
+            </h2>
+            <p className="text-[#EFE2D3]/70 mb-6">Pop in your email and the PDF downloads straight away.</p>
+            <DownloadForm
+              downloadUrl="/downloads/london-through-time-prompts.pdf"
+              tag="london-through-time"
+              buttonLabel="Get the PDF"
+            />
+          </div>
         </div>
         <div className="max-w-5xl mx-auto mt-14">
           <PagePreviews previews={moments.map((m) => ({ src: m.src, name: m.year }))} aspect="aspect-[9/16]" compactMobile />
-        </div>
-      </section>
-
-      <section id="download" className="py-16 md:py-20 px-6 bg-[#602D37]">
-        <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl text-[#EFE2D3] mb-4 leading-tight" style={display}>
-            Get the prompts free
-          </h2>
-          <p className="text-[#EFE2D3]/70 mb-8">Pop in your email and the PDF downloads straight away.</p>
-          <DownloadForm
-            downloadUrl="/downloads/london-through-time-prompts.pdf"
-            tag="london-through-time"
-            buttonLabel="Get the PDF"
-          />
         </div>
       </section>
 
