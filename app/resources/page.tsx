@@ -30,6 +30,13 @@ const resources = [
       "Connectors, MCP, skills, plugins, slash commands, artifacts and routines in plain English, where each lives in the app, and every prompt from my video.",
   },
   {
+    href: "/resources/paris-through-time",
+    label: "Free · Prompt pack",
+    title: "Paris Through Time",
+    description:
+      "Every prompt I used to step into eight moments of Paris history in one AI video, from the Bastille in 1789 to October 2026.",
+  },
+  {
     href: "/resources/london-through-time",
     label: "Free · Prompt pack",
     title: "London Through Time",
