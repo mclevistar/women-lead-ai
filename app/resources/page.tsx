@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/8-tools-list",
+    label: "Free · Tool list",
+    title: "8 Tools That Aren't AI",
+    description:
+      "The basic marketing and sales tools most founders skip, from email tracking and heatmaps to UTM links, with every link and my setup notes.",
+  },
+  {
     href: "/resources/claude-code-cheat-sheet",
     label: "Free · Cheat sheet",
     title: "The Claude Code Cheat Sheet",
