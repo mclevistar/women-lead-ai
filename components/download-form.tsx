@@ -12,9 +12,11 @@ type Props = {
   buttonLabel: string;
   /** optional second file offered after sign up (for example a spreadsheet version) */
   extra?: { url: string; label: string };
+  align?: "center" | "left";
 };
 
-export default function DownloadForm({ downloadUrl, tag, buttonLabel, extra }: Props) {
+export default function DownloadForm({ downloadUrl, tag, buttonLabel, extra, align = "center" }: Props) {
+  const left = align === "left";
   const formId = `${tag}-form`;
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
@@ -45,71 +47,77 @@ export default function DownloadForm({ downloadUrl, tag, buttonLabel, extra }: P
 
   if (status === "success") {
     return (
-      <div className="text-center">
-        <p className="text-[#ECB398] font-bold text-lg mb-4" style={heading}>
+      <div className={left ? "" : "text-center"}>
+        <p className="text-foreground font-semibold mb-4" style={heading}>
           You&apos;re in. Your download should start now.
         </p>
-        <a
-          href={downloadUrl}
-          download
-          className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#EFE2D3] text-[#602D37] font-bold text-sm uppercase tracking-wider border-2 border-[#EFE2D3] hover:bg-transparent hover:text-[#EFE2D3] transition-all duration-300"
-          style={heading}
-        >
-          <Download className="h-4 w-4" />
-          Download again
-        </a>
-        {extra && (
+        <div className={`flex flex-col sm:flex-row items-center gap-3 ${left ? "sm:justify-start" : "justify-center"}`}>
           <a
-            href={extra.url}
+            href={downloadUrl}
             download
-            className="inline-flex items-center gap-2 px-7 py-3.5 ml-0 sm:ml-3 mt-3 sm:mt-0 text-[#EFE2D3] font-bold text-sm uppercase tracking-wider border-2 border-[#EFE2D3] hover:bg-[#EFE2D3] hover:text-[#602D37] transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#602D37] text-[#EFE2D3] text-sm font-semibold hover:bg-[#4a2229] transition-colors"
             style={heading}
           >
             <Download className="h-4 w-4" />
-            {extra.label}
+            Download again
           </a>
-        )}
+          {extra && (
+            <a
+              href={extra.url}
+              download
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#602D37]/30 text-[#602D37] text-sm font-semibold hover:bg-[#602D37] hover:text-[#EFE2D3] transition-colors"
+              style={heading}
+            >
+              <Download className="h-4 w-4" />
+              {extra.label}
+            </a>
+          )}
+        </div>
       </div>
     );
   }
 
   return (
     <>
-      <form id={formId} onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <form
+        id={formId}
+        onSubmit={handleSubmit}
+        className={`flex items-center gap-2 max-w-md ${left ? "" : "mx-auto"} p-1.5 rounded-full bg-white/70 border border-[#602D37]/15 shadow-[0_8px_30px_rgba(96,45,55,0.08)] focus-within:border-[#602D37]/40 transition-colors`}
+      >
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Your email address"
+          placeholder="Your email"
+          aria-label="Your email"
           required
-          className="flex-1 px-5 py-3.5 bg-[#EFE2D3]/10 border-2 border-[#EFE2D3]/30 text-[#EFE2D3] placeholder:text-[#EFE2D3]/40 focus:outline-none focus:border-[#ECB398] text-sm transition-all"
+          className="flex-1 min-w-0 bg-transparent pl-4 pr-2 py-2.5 text-[15px] text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
           style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="px-7 py-3.5 bg-[#EFE2D3] text-[#602D37] font-bold text-sm uppercase tracking-wider border-2 border-[#EFE2D3] hover:bg-transparent hover:text-[#EFE2D3] transition-all duration-300 disabled:opacity-50"
+          className="shrink-0 px-5 py-2.5 rounded-full bg-[#602D37] text-[#EFE2D3] text-sm font-semibold hover:bg-[#4a2229] transition-colors disabled:opacity-50"
           style={heading}
         >
           {status === "loading" ? "Sending..." : buttonLabel}
         </button>
       </form>
-      <label className="flex items-start gap-3 max-w-md mx-auto mt-4 text-left text-[#EFE2D3]/70 text-xs leading-relaxed cursor-pointer">
+      <label className={`flex items-start gap-2 max-w-md mt-4 ${left ? "" : "mx-auto justify-center"} text-muted-foreground text-xs leading-relaxed cursor-pointer`}>
         <input
           type="checkbox"
           form={formId}
           checked={consent}
           onChange={(e) => setConsent(e.target.checked)}
           required
-          className="mt-0.5 h-4 w-4 shrink-0 accent-[#ECB398] cursor-pointer"
+          className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[#602D37] cursor-pointer"
         />
-        <span>
-          I agree to receive emails from Wiktoria Korbecka at Women Lead AI, including weekly AI insights, resources
-          and occasional offers. I can unsubscribe at any time using the link in every email.
+        <span className="text-left">
+          I agree to get emails from Women Lead AI with AI tips, resources and occasional offers. Unsubscribe anytime.
         </span>
       </label>
       {status === "error" && (
-        <p className="text-[#EFE2D3]/70 text-sm mt-3 text-center">Something went wrong. Please try again.</p>
+        <p className={`text-[#602D37] text-sm mt-3 ${left ? "" : "text-center"}`}>Something went wrong. Please try again.</p>
       )}
     </>
   );
