@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/automated-podcast-kit",
+    label: "Free · Prompt pack",
+    title: "The Automated Podcast Kit",
+    description:
+      "Every prompt and setup step behind Build By AI, the weekly podcast that writes, voices and publishes itself with Claude and ElevenLabs.",
+  },
+  {
     href: "/resources/8-tools-list",
     label: "Free · Tool list",
     title: "8 Tools That Aren't AI",
