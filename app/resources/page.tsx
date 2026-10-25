@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/time-travel-video-kit",
+    label: "Free · Kit",
+    title: "The Time Travel Video Kit",
+    description:
+      "The workflow behind my London and Paris history reels: moments, character sheets, video prompts, the flipping calendar and how to save credits.",
+  },
+  {
     href: "/resources/thumbnail-prompts",
     label: "Free · Prompt pack",
     title: "The Thumbnail Prompt Pack",
