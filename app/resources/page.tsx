@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/thumbnail-prompts",
+    label: "Free · Prompt pack",
+    title: "The Thumbnail Prompt Pack",
+    description:
+      "My exact character sheet and thumbnail prompts for Claude and Higgsfield, the phone test, and the 3 rules that make the biggest difference.",
+  },
+  {
     href: "/resources/automated-podcast-kit",
     label: "Free · Prompt pack",
     title: "The Automated Podcast Kit",
