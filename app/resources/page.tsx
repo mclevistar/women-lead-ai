@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/claude-video-editing",
+    label: "Free · Starter kit",
+    title: "The Claude Video Editing Starter Kit",
+    description:
+      "The install list, prompts, starter playbook and GitHub structure behind how I edit every YouTube video with Claude Code.",
+  },
+  {
     href: "/resources/time-travel-video-kit",
     label: "Free · Kit",
     title: "The Time Travel Video Kit",
