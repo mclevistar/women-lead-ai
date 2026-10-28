@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     }
 
     const enquiry = {
-      type: type === "speaking" ? "speaking" : "contact",
+      type: type === "speaking" || type === "bootcamp" ? type : "contact",
       name: String(name).trim(),
       email: String(email).trim().toLowerCase(),
       organisation: organisation || null,
@@ -45,7 +45,9 @@ export async function POST(request: Request) {
     const from = `${enquiry.name}${organisation ? ` (${organisation})` : ""}`;
     const subject = enquiry.type === "speaking"
       ? `Speaking Request from ${from}`
-      : type === "partnership"
+      : enquiry.type === "bootcamp"
+        ? `Bootcamp question (${reason || "no day"}) from ${enquiry.name}`
+        : type === "partnership"
         ? `Brand Partnership from ${from}`
         : `Contact Form: ${enquiry.name}`;
 
@@ -61,7 +63,7 @@ export async function POST(request: Request) {
           ...(organisation && { Organisation: organisation }),
           ...(eventType && { "Event type": eventType }),
           ...(eventDate && { "Event date": eventDate }),
-          ...(reason && { Reason: reason }),
+          ...(reason && { [enquiry.type === "bootcamp" ? "Day" : "Reason"]: reason }),
           Message: enquiry.message,
         },
       },
