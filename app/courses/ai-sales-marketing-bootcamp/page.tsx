@@ -163,6 +163,10 @@ const faqs = [
     q: "When do I get access?",
     a: "The bootcamp starts on 1 November. You get your access email straight after checkout, day one unlocks on the 1st and a new day unlocks every morning after that.",
   },
+  {
+    q: "What if it's not for me?",
+    a: "Do the bootcamp, and if you didn't find value in it, you can get a refund. Just reply to any of my emails within 7 days of the course ending.",
+  },
 ];
 
 function DayList({ days }: { days: typeof week1 }) {
