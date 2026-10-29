@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { NOTIFY_EMAIL } from "@/lib/notify-enquiry";
 
 // Every site form (contact, speaking, partnerships, bootcamp) posts here. Enquiries are stored
 // in our own Supabase table so none are ever lost. The publishable key is safe to ship: the
@@ -9,7 +8,8 @@ const SUPABASE_KEY = process.env.SUPABASE_PUBLISHABLE_KEY ?? "sb_publishable_y3A
 
 // Email notifications go out from here through Resend when RESEND_API_KEY is set. Its shared
 // onboarding@resend.dev sender needs no DNS, but it only delivers to the address the Resend account
-// was made with, so NOTIFY_EMAIL must be that address. Without the key, the browser falls back to FormSubmit.
+// was made with (wiktoria@womenlead.ai). Without the key, the browser falls back to FormSubmit.
+const RESEND_TO = "wiktoria@womenlead.ai";
 async function sendNotification(subject: string, fields: Record<string, string>) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return false;
@@ -23,7 +23,7 @@ async function sendNotification(subject: string, fields: Record<string, string>)
       headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: process.env.NOTIFY_FROM ?? "Women Lead AI forms <onboarding@resend.dev>",
-        to: [process.env.NOTIFY_TO ?? NOTIFY_EMAIL],
+        to: [process.env.NOTIFY_TO ?? RESEND_TO],
         reply_to: fields.Email,
         subject,
         html: `<table style="font-family:Helvetica,Arial,sans-serif;font-size:14px;border-collapse:collapse">${rows}</table>`,
