@@ -145,6 +145,7 @@ export default function IntakeForm() {
           email: a("email"),
           reason: a("plan"),
           message: lines.map(([q, v]) => `${q}: ${v}`).join("\n\n"),
+          answers: Object.fromEntries(lines),
           type: "bootcamp-intake",
         }),
       });

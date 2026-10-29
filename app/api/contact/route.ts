@@ -41,7 +41,7 @@ async function sendNotification(subject: string, fields: Record<string, string>)
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, message, type, reason, organisation, eventType, eventDate } = body;
+    const { name, email, message, type, reason, organisation, eventType, eventDate, answers } = body;
 
     if (!name || !email || !message) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -90,8 +90,15 @@ export async function POST(request: Request) {
       ...(organisation && { Organisation: organisation }),
       ...(eventType && { "Event type": eventType }),
       ...(eventDate && { "Event date": eventDate }),
-      ...(reason && { [enquiry.type === "bootcamp" ? "Day" : enquiry.type === "bootcamp-intake" ? "Paid Claude plan" : "Reason"]: reason }),
-      Message: enquiry.message,
+      ...(reason && !answers && { [enquiry.type === "bootcamp" ? "Day" : "Reason"]: reason }),
+      // Forms with several questions (the bootcamp intake) send each answer so it gets its own row
+      ...(answers && typeof answers === "object"
+        ? Object.fromEntries(
+            Object.entries(answers as Record<string, unknown>)
+              .slice(0, 20)
+              .map(([q, a]) => [String(q).slice(0, 100), String(a ?? "").slice(0, 2000)]),
+          )
+        : { Message: enquiry.message }),
     };
 
     // Sent from the server when Resend is set up. Otherwise the visitor's browser sends it through
