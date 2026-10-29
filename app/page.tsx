@@ -283,7 +283,7 @@ export default async function Home() {
               {
                 icon: BookOpen,
                 title: "Courses",
-                desc: "New bootcamp: Your AI Marketing Team in 14 Days, starting 1 November. One task and one video a day for 14 days.",
+                desc: "New bootcamp: Your AI Marketing Team in 14 Days, expected launch 1 December. One task and one video a day for 14 days.",
                 href: "/courses/ai-sales-marketing-bootcamp",
                 label: "See the course",
               },

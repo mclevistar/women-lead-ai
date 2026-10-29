@@ -22,11 +22,11 @@ import { BOOTCAMP_CHECKOUT_URL, BOOTCAMP_PRICE, BOOTCAMP_START } from "@/lib/con
 export const metadata: Metadata = pageMetadata({
   title: "Your AI Marketing Team in 14 Days",
   description:
-    "A 2-week bootcamp on using AI for sales and marketing, starting 1 November. Every day you get one task and a video showing exactly how to do it: cinematic AI videos, animated carousels built with Claude, long and short form videos edited by Claude, and AI-powered outreach.",
+    "A 2-week bootcamp on using AI for sales and marketing, launching 1 December. Every day you get one task and a video showing exactly how to do it: cinematic AI videos, animated carousels built with Claude, long and short form videos edited by Claude, and AI-powered outreach.",
   path: "/courses/ai-sales-marketing-bootcamp",
   ogTitle: "Your AI Marketing Team in 14 Days | Women Lead AI",
   ogDescription:
-    "Starts 1 November. 14 days, 14 tasks. Make cinematic AI videos, animated carousels and Claude-edited content, then turn it into sales with AI outreach.",
+    "Launching 1 December. 14 days, 14 tasks. Make cinematic AI videos, animated carousels and Claude-edited content, then turn it into sales with AI outreach.",
   images: ["/course/pink-nyc.jpg"],
 });
 
@@ -40,7 +40,7 @@ const enrolHref = hasCheckout ? BOOTCAMP_CHECKOUT_URL : "#enrol";
 function EnrolButton() {
   return (
     <a href={enrolHref} className="btn-bold" style={heading}>
-      {hasCheckout ? `Enrol for $${BOOTCAMP_PRICE}` : "Get early access"}
+      {hasCheckout ? `Enrol for $${BOOTCAMP_PRICE}` : "Join the waiting list"}
       <ArrowRight className="h-4 w-4" />
     </a>
   );
@@ -161,7 +161,7 @@ const faqs = [
   },
   {
     q: "When do I get access?",
-    a: "The bootcamp starts on 1 November. You get your access email straight after checkout, day one unlocks on the 1st and a new day unlocks every morning after that.",
+    a: "We expect to launch on 1 December. Join the waiting list and you'll get an email as soon as enrolment opens. Day one unlocks on launch day and a new day unlocks every morning after that.",
   },
   {
     q: "What if it's not for me?",
@@ -205,7 +205,7 @@ const courseSchema = {
     priceCurrency: "USD",
     category: "Paid",
     url: `${SITE_URL}/courses/ai-sales-marketing-bootcamp`,
-    availability: "https://schema.org/InStock",
+    availability: "https://schema.org/PreOrder",
   },
   hasCourseInstance: {
     "@type": "CourseInstance",
@@ -228,7 +228,7 @@ export default function AiSalesMarketingBootcampPage() {
               className="text-xs font-bold uppercase tracking-[0.25em] text-[#602D37] mb-6 fade-in-up"
               style={{ ...heading, animationFillMode: "both" }}
             >
-              2-week bootcamp &middot; starts 1 November
+              2-week bootcamp &middot; expected launch 1 December
             </p>
             <h1
               className="text-[3rem] md:text-[4.5rem] leading-[1.02] text-[#602D37] mb-5 fade-in-up delay-100"
@@ -373,7 +373,7 @@ export default function AiSalesMarketingBootcampPage() {
           <ScrollReveal variant="stagger">
             <div className="grid md:grid-cols-3 gap-5">
               {[
-                { n: "1", t: "Get your task", d: "From 1 November, each morning a new day unlocks with one clear task and the result you should have by the end of it." },
+                { n: "1", t: "Get your task", d: "From launch day, each morning a new day unlocks with one clear task and the result you should have by the end of it." },
                 { n: "2", t: "Watch me do it", d: "A screen-recorded video shows exactly how I do it, every prompt and every click, so you never get stuck." },
                 { n: "3", t: "Ship it", d: "Do the task, post the result. After 14 days you have a portfolio of content and a sales system that runs." },
               ].map((s) => (
@@ -494,10 +494,10 @@ export default function AiSalesMarketingBootcampPage() {
         <div className="relative max-w-3xl mx-auto">
           <ScrollReveal className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl text-[#EFE2D3] leading-[1.05] mb-3" style={display}>
-              Join the bootcamp
+              Join the waiting list
             </h2>
             <p className="text-2xl text-[#ECB398]" style={script}>
-              doors close when we start on 1 November
+              expected launch 1 December
             </p>
             <div className="mt-8 flex justify-center">
               <Countdown target={BOOTCAMP_START} tone="dark" />
@@ -511,7 +511,7 @@ export default function AiSalesMarketingBootcampPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#602D37] mb-2" style={heading}>
                     Your AI Marketing Team in 14 Days
                   </p>
-                  <p className="text-[#5A4A44]">Starts 1 November &middot; 14 days &middot; 14 tasks</p>
+                  <p className="text-[#5A4A44]">Expected launch 1 December &middot; 14 days &middot; 14 tasks</p>
                 </div>
                 <p className="text-6xl md:text-7xl leading-none text-[#602D37]" style={display}>
                   ${BOOTCAMP_PRICE}
@@ -542,7 +542,7 @@ export default function AiSalesMarketingBootcampPage() {
               ) : (
                 <div className="text-center">
                   <p className="text-[#232323] font-semibold mb-4" style={heading}>
-                    Enrolment opens soon. Get on the list for first access.
+                    Launching 1 December for ${BOOTCAMP_PRICE}. Join the waiting list and you&apos;ll be the first to know when doors open.
                   </p>
                   <WaitlistForm />
                 </div>

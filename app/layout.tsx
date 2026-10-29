@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { Bebas_Neue, Manrope, Caveat, DM_Sans, DM_Serif_Display } from "next/font/google";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
-import BootcampPopup from "@/components/bootcamp-popup";
 import CookieBanner from "@/components/cookie-banner";
 import UtmCapture from "@/components/utm-capture";
 import JsonLd from "@/components/json-ld";
@@ -98,7 +97,6 @@ export default function RootLayout({
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
-        <BootcampPopup />
         <CookieBanner />
         <UtmCapture />
         <Analytics />

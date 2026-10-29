@@ -31,7 +31,7 @@ export default function CoursesPage() {
         >
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#ECB398] mb-3 block" style={{ fontFamily: "'Manrope', system-ui, sans-serif" }}>
-              Starts 1 November &middot; 2 weeks &middot; ${BOOTCAMP_PRICE}
+              Expected launch 1 December &middot; 2 weeks &middot; ${BOOTCAMP_PRICE}
             </span>
             <h2 className="text-4xl md:text-5xl leading-[1.05] mb-4" style={{ fontFamily: "var(--loaded-dmserif), Georgia, serif" }}>
               Your AI marketing team <em className="text-[#ECB398]">in 14 days</em>
