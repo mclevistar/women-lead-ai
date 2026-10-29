@@ -32,6 +32,8 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
   { path: "/partnerships", priority: 0.7, changeFrequency: "monthly" },
   { path: "/youtube", priority: 0.5, changeFrequency: "weekly" },
   { path: "/contact", priority: 0.4, changeFrequency: "yearly" },
+  { path: "/privacy", priority: 0.2, changeFrequency: "yearly" },
+  { path: "/terms", priority: 0.2, changeFrequency: "yearly" },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
