@@ -54,7 +54,8 @@ export default function BootcampPopup() {
 
   // Show after 10 seconds on the site, except on the bootcamp page itself and business pages, after it has started, or if recently closed.
   useEffect(() => {
-    if (pathname === BOOTCAMP_PATH || NO_POPUP_PATHS.includes(pathname)) return;
+    // Students on the course pages have already bought it
+    if (pathname === BOOTCAMP_PATH || NO_POPUP_PATHS.includes(pathname) || pathname.startsWith("/bootcamp/")) return;
     if (Date.now() >= new Date(BOOTCAMP_START).getTime()) return;
     if (recentlyDismissed()) return;
     const id = setTimeout(() => setOpen(true), msUntilDue());

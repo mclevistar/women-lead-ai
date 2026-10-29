@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     }
 
     const enquiry = {
-      type: type === "speaking" || type === "bootcamp" ? type : "contact",
+      type: ["speaking", "bootcamp", "bootcamp-intake"].includes(type) ? type : "contact",
       name: String(name).trim(),
       email: String(email).trim().toLowerCase(),
       organisation: organisation || null,
@@ -47,6 +47,8 @@ export async function POST(request: Request) {
       ? `Speaking Request from ${from}`
       : enquiry.type === "bootcamp"
         ? `Bootcamp question (${reason || "no day"}) from ${enquiry.name}`
+        : enquiry.type === "bootcamp-intake"
+        ? `Bootcamp intake form from ${enquiry.name}`
         : type === "partnership"
         ? `Brand Partnership from ${from}`
         : `Contact Form: ${enquiry.name}`;
