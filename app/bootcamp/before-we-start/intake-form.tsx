@@ -35,6 +35,7 @@ const STEPS: Step[] = [
   { id: "plan", kind: "choice", q: "Do you have a paid Claude plan?", hint: "You'll need one from Day 1. Pro is enough.", options: [PLAN_YES, "Not yet", "Not sure"] },
   { id: "claude", kind: "choice", q: "Have you used Claude before?", options: ["Never", "A little", "Loads"] },
   { id: "platforms", kind: "multi", q: "Where do you post?", hint: "Choose as many as you like.", options: ["Instagram", "TikTok", "YouTube", "LinkedIn", "Facebook", "Not posting yet"] },
+  { id: "editing", kind: "multi", q: "What do you use to edit your videos right now?", hint: "Choose as many as you like.", options: ["CapCut", "Canva", "iMovie", "Adobe Premiere Pro", "Final Cut Pro", "DaVinci Resolve", "InShot", "Instagram Edits", "Something else", "I don't edit yet"] },
   { id: "goal", kind: "long", q: "What do you most want from these 14 days?" },
   { id: "worry", kind: "long", q: "Anything that might get in the way?", hint: "Time, tech nerves, anything at all. No judgement 💛", optional: true },
   { id: "email", kind: "email", q: "Last one! What's the email you signed up with?", hint: "So I can match your answers to your place on the course." },
@@ -133,6 +134,7 @@ export default function IntakeForm() {
       ["Paid Claude plan", a("plan")],
       ["Used Claude before", a("claude")],
       ["Posts on", a("platforms")],
+      ["Edits videos with", a("editing")],
       ["Wants from the 14 days", a("goal")],
       ["Might get in the way", a("worry") || "Nothing said"],
     ];
@@ -234,7 +236,7 @@ export default function IntakeForm() {
                     className={`${line} resize-none`}
                   />
                 ) : (
-                  <div className="flex flex-col gap-2.5 max-w-sm" role={step.kind === "multi" ? "group" : "radiogroup"}>
+                  <div className={"options" in step && step.options.length > 6 ? "grid sm:grid-cols-2 gap-2.5 max-w-xl" : "flex flex-col gap-2.5 max-w-sm"} role={step.kind === "multi" ? "group" : "radiogroup"}>
                     {("options" in step ? step.options : []).map((o, n) => {
                       const on = step.kind === "multi" ? ((value as string[]) ?? []).includes(o) : value === o;
                       return (
