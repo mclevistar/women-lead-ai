@@ -23,9 +23,10 @@ const previews = [
 const inside = [
   "How to connect Higgsfield to Claude Code and set up the project folder",
   "The moment picker: why backdrops fail, plus a worksheet for your own city",
-  "The character sheet and video prompt templates I used for every era",
+  "The plain character sheet of you that every era starts from",
+  "The character sheet and video prompt templates, each next to my exact prompt word for word",
   "The two-angle trick so you look at the moment, not away from it",
-  "The Claude Code prompt for the flipping calendar, the sound plan and a credit checklist",
+  "The Claude Code prompts for the flipping calendar and the editing tools it needs, the sound plan and a credit checklist",
 ];
 
 export default function TimeTravelVideoKitPage() {
