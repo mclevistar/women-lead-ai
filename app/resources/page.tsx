@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/ig-covers-prompt",
+    label: "Free · Prompt pack",
+    title: "Instagram Covers with Claude",
+    description:
+      "The prompt, the style rules and the review page behind my consistent Instagram grid, made with Claude.",
+  },
+  {
     href: "/resources/claude-video-editing",
     label: "Free · Starter kit",
     title: "The Claude Video Editing Starter Kit",
