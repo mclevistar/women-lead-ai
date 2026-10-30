@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/bridgerton-era",
+    label: "Free · Prompt pack",
+    title: "A Day in the Bridgerton Era",
+    description:
+      "Every prompt I used to spend one day as a debutante in London, 1813, from the corset to the Queen's verdict and the first waltz.",
+  },
+  {
     href: "/resources/ig-covers-prompt",
     label: "Free · Prompt pack",
     title: "Instagram Covers with Claude",
