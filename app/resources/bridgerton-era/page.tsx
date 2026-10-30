@@ -14,10 +14,10 @@ export const metadata: Metadata = pageMetadata({
   images: ["/resources/bridgerton-cover.jpg"],
 });
 
-const moments = [
-  { src: "/resources/bridgerton-queen.jpg", name: "2 pm, the Queen" },
-  { src: "/resources/bridgerton-waltz.jpg", name: "11 pm, the waltz" },
-  { src: "/resources/bridgerton-morning.jpg", name: "9 am, the morning after" },
+const previews = [
+  { src: "/resources/bridgerton-page-plan.jpg", name: "Plan the day as six moments" },
+  { src: "/resources/bridgerton-page-sheets.jpg", name: "Character sheets and outfit lines" },
+  { src: "/resources/bridgerton-page-queen.jpg", name: "My Queen scene, word for word" },
 ];
 
 const inside = [
@@ -41,9 +41,7 @@ export default function BridgertonEraPage() {
       intro="Every prompt I used to spend one day as a debutante in London, 1813."
       form={<DownloadForm align="left" downloadUrl="/downloads/bridgerton-era-prompts.pdf" tag="bridgerton-era" buttonLabel="Get it free" />}
       cover={{ src: "/resources/bridgerton-cover.jpg", alt: "", width: "w-52 md:w-72" }}
-      previews={moments}
-      aspect="aspect-[9/16]"
-      compactMobile
+      previews={previews}
       inside={inside}
       note="You don't need to be a filmmaker. You'll need a Higgsfield account, a few clear photos of your face and an editor like CapCut."
       ctaTitle="Want more guides like this?"
