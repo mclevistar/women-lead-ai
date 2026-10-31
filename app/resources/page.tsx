@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/living-paintings",
+    label: "Free · Prompt pack",
+    title: "Living Paintings",
+    description:
+      "Every prompt I used to step inside four surreal paintings that come to life: a porcelain octopus, a Saturn swing, the moon and the zodiac.",
+  },
+  {
     href: "/resources/bridgerton-era",
     label: "Free · Prompt pack",
     title: "A Day in the Bridgerton Era",
