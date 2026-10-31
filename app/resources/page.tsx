@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/vox-collage-kit",
+    label: "Free · Prompt + setup guide",
+    title: "The Vox Collage Kit",
+    description:
+      "The exact prompt I gave Claude Code to turn a talking-head video into a Vox-style paper collage reel, plus the five minute setup.",
+  },
+  {
     href: "/resources/github-animation-libraries",
     label: "Free · Guide",
     title: "10 free GitHub libraries for animating with Claude Code",
