@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/github-animation-libraries",
+    label: "Free · Guide",
+    title: "10 free GitHub libraries for animating with Claude Code",
+    description:
+      "The open source tools behind my reel where every frame was drawn by Claude Code, with a prompt to paste for each one.",
+  },
+  {
     href: "/resources/living-paintings",
     label: "Free · Prompt pack",
     title: "Living Paintings",
