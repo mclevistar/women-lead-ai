@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/motion-graphics-prompts",
+    label: "Free · Prompt pack",
+    title: "5 Motion Graphics: the prompts",
+    description:
+      "The Claude Code prompts behind five effects I'd steal for every video: papercut collage, travel map, blueprint, Apple style reveal and receipt.",
+  },
+  {
     href: "/resources/vox-collage-kit",
     label: "Free · Prompt + setup guide",
     title: "The Vox Collage Kit",
