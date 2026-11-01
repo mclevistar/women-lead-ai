@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import PagePreviews from "@/components/page-previews";
 import ReferralText from "@/components/referral-text";
+import RelatedResources from "@/components/related-resources";
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
@@ -121,6 +122,8 @@ export default function ResourcePage({
           {note && <p className="text-sm text-muted-foreground text-center mt-8"><ReferralText>{note}</ReferralText></p>}
         </div>
       </section>
+
+      <RelatedResources />
 
       <section className="pb-28 px-6">
         <div className="max-w-2xl mx-auto text-center">
