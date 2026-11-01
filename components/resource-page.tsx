@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import PagePreviews from "@/components/page-previews";
+import ReferralText from "@/components/referral-text";
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
@@ -53,7 +54,7 @@ export default function ResourcePage({
             <h1 className="text-5xl md:text-6xl leading-[1.04] tracking-tight text-foreground mb-6" style={display}>
               {title}
             </h1>
-            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground mb-10 max-w-lg">{intro}</p>
+            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground mb-10 max-w-lg"><ReferralText>{intro}</ReferralText></p>
             <div id="download" className="scroll-mt-32">
               {form}
             </div>
@@ -117,7 +118,7 @@ export default function ResourcePage({
             </>
           )}
 
-          {note && <p className="text-sm text-muted-foreground text-center mt-8">{note}</p>}
+          {note && <p className="text-sm text-muted-foreground text-center mt-8"><ReferralText>{note}</ReferralText></p>}
         </div>
       </section>
 
