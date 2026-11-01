@@ -6,7 +6,7 @@ import GeneralContactForm from "./contact-form";
 export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
-    "Get in touch with Women Lead AI. We'd love to hear from you.",
+    "Contact Women Lead AI and Wiktoria Korbecka about the podcast, the community, speaking, brand partnerships or press. Email hello@womenlead.ai or use the form.",
   path: "/contact",
 });
 

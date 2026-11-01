@@ -40,7 +40,7 @@ export default function BridgertonEraPage() {
       }
       intro="Every prompt I used to spend one day as a debutante in London, 1813."
       form={<DownloadForm align="left" downloadUrl="/downloads/bridgerton-era-prompts.pdf" tag="bridgerton-era" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/bridgerton-cover.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/bridgerton-cover.jpg", alt: "Cover of A Day in the Bridgerton Era: the prompts, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       inside={inside}
       note="You don't need to be a filmmaker. You'll need a Higgsfield account, a few clear photos of your face and an editor like CapCut."

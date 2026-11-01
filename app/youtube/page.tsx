@@ -72,7 +72,7 @@ export default async function YouTubePage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={video.thumbnail}
-                    alt=""
+                    alt={video.title}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
                   />

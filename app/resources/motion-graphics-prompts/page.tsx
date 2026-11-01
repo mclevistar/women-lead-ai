@@ -39,7 +39,7 @@ export default function MotionGraphicsPromptsPage() {
       }
       intro="The exact prompts behind the five motion graphics in my reel, all made with Claude Code."
       form={<DownloadForm align="left" downloadUrl="/downloads/motion-graphics-prompts.pdf" tag="motion-graphics-prompts" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/mgprompts-cover.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/mgprompts-cover.jpg", alt: "Cover of 5 Motion Graphics: the prompts, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       inside={inside}
       note="You don't need to code. You'll need Claude Code and a talking head clip."

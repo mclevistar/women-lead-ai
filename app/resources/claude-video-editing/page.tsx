@@ -41,7 +41,7 @@ export default function ClaudeVideoEditingPage() {
       }
       intro="Everything I use to have Claude Code edit my YouTube videos while I just leave notes."
       form={<DownloadForm align="left" downloadUrl="/downloads/claude-video-editing-starter-kit.pdf" tag="claude-video-editing" buttonLabel="Get it free" />}
-      cover={{ src: previews[0].src, alt: "" }}
+      cover={{ src: previews[0].src, alt: "Cover of The Claude Video Editing Starter Kit: edit your YouTube videos with Claude Code, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       note="You'll need the Claude Pro plan ($20 a month) with Claude Code. DaVinci Resolve is optional."

@@ -42,7 +42,7 @@ export default function AutomatedPodcastKitPage() {
       }
       intro="Every prompt and setup step behind Build By AI, the podcast that writes, voices and publishes itself."
       form={<DownloadForm align="left" downloadUrl="/downloads/automated-podcast-kit.pdf" tag="automated-podcast-kit" buttonLabel="Get it free" />}
-      cover={{ src: previews[0].src, alt: "" }}
+      cover={{ src: previews[0].src, alt: "Cover of The Automated Podcast Kit: every prompt to build a podcast with Claude and ElevenLabs, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       note="You need a Claude account, an ElevenLabs account, a free GitHub account and a podcast host like Captivate or Buzzsprout."

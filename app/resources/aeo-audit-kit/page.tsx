@@ -40,7 +40,7 @@ export default function AeoAuditKitPage() {
       }
       intro="The audit that took my site from 5 to 43 AI recommendations in two weeks."
       form={<DownloadForm align="left" downloadUrl="/downloads/aeo-audit-kit.pdf" tag="aeo-audit-kit" buttonLabel="Get it free" extra={{ url: "/downloads/aeo-audit-template.xlsx", label: "Download the audit spreadsheet" }} />}
-      cover={{ src: previews[0].src, alt: "" }}
+      cover={{ src: previews[0].src, alt: "Cover of The AEO audit kit: get AI to recommend your website, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       note="You'll need Claude for the questions and Claude Code for the website fixes. On Webflow, Squarespace or WordPress the steps are the same, you'll just click through settings instead."

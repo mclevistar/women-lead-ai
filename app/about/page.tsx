@@ -1,14 +1,62 @@
 import Image from "next/image";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/seo";
+import Link from "next/link";
+import { pageMetadata, PERSON_ID } from "@/lib/seo";
+import JsonLd from "@/components/json-ld";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About",
+  title: "About Wiktoria Korbecka",
   description:
-    "Meet the founder behind Women Lead AI and learn about our mission to explore AI, leadership and the future of tech.",
+    "Wiktoria Korbecka is the founder of Women Lead AI and host of the Women Lead AI podcast, teaching professional women to use AI in their careers and businesses.",
   path: "/about",
 });
+
+const WORK = [
+  {
+    title: "The Women Lead AI Podcast",
+    href: "/podcast",
+    description:
+      "Interviews with women founders, operators and experts building with AI, from startup founders who raised millions to data and leadership specialists. Every episode has show notes and a transcript.",
+  },
+  {
+    title: "Practical AI on YouTube",
+    href: "/youtube",
+    description:
+      "Real experiments in public: editing videos with Claude Code instead of editing software, AI history films made with image and video models, and getting a website recommended by ChatGPT.",
+  },
+  {
+    title: "Free AI Resources",
+    href: "/resources",
+    description:
+      "Prompt packs, cheat sheets and starter kits from each experiment, free to download, so you can copy what works instead of starting from scratch.",
+  },
+  {
+    title: "Workshops and Keynotes",
+    href: "/speaking",
+    description:
+      "Talks and hands-on workshops on AI for non technical leaders, closing the gender gap in AI adoption, and building with AI as a solo founder.",
+  },
+];
+
+const FAQ = [
+  {
+    q: "Who is Wiktoria Korbecka?",
+    a: "Wiktoria Korbecka is an AI educator, consultant and podcast host, and the founder of Women Lead AI. She teaches professional women and organisations how to use AI in practice, from AI video and Claude Code to AI for sales and marketing.",
+  },
+  {
+    q: "What is Women Lead AI?",
+    a: "Women Lead AI is a podcast, community and education platform that helps professional women use AI to grow their careers and businesses. It includes the Women Lead AI podcast, a free online community, YouTube tutorials, free resources and courses.",
+  },
+  {
+    q: "Who is the Women Lead AI community for?",
+    a: "Professional women, founders and freelancers who want to use AI in their work but want practical, honest guidance rather than hype. You don't need a technical background.",
+  },
+  {
+    q: "How can I book Wiktoria to speak or get a comment for an article?",
+    a: "For keynotes, panels and workshops, use the speaking page. For press, quotes and interviews, the press page has bios, photos and story angles, or email hello@womenlead.ai.",
+  },
+];
 
 export default function AboutPage() {
   return (
@@ -28,7 +76,7 @@ export default function AboutPage() {
             </div>
             <div className="flex-1">
               <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-                About the Founder
+                About Wiktoria Korbecka
               </h1>
               <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
                 <p>
@@ -42,6 +90,53 @@ export default function AboutPage() {
                 Wiktoria Korbecka
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What I do, so search engines and AI tools can tell who Wiktoria is */}
+      <section className="py-24 px-6 border-t border-border/40">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-10">
+            What I Do
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {WORK.map((item) => (
+              <div key={item.title}>
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                  <Link href={item.href} className="hover:text-primary transition-colors">{item.title}</Link>
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Questions people ask */}
+      <section className="py-24 px-6 border-t border-border/40">
+        <JsonLd
+          data={{
+            "@type": "FAQPage",
+            about: { "@id": PERSON_ID },
+            mainEntity: FAQ.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
+          }}
+        />
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-10">
+            Questions People Ask
+          </h2>
+          <div className="space-y-8">
+            {FAQ.map((item) => (
+              <div key={item.q}>
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2">{item.q}</h3>
+                <p className="text-muted-foreground leading-relaxed">{item.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

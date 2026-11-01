@@ -25,9 +25,23 @@ async function findVideo(id: string): Promise<Video | null> {
   return { id, title: saved.title, date: saved.date, description: "", thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg` };
 }
 
+// A plain summary for search results: the first real paragraph of the description
+// (not chapters, link lists, hashtags or calls to action), else the transcript opening
 function summary(video: Video) {
-  const firstPara = video.description.split(/\n{2,}/)[0]?.trim();
-  return firstPara || video.title;
+  const para = video.description
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .find(
+      (p) =>
+        p.length > 80 &&
+        !/https?:|#\w/.test(p) &&
+        !/^[A-Z0-9 &'!?:]{4,}$/m.test(p.split("\n")[0]) &&
+        !/^(\p{Extended_Pictographic}|free\b|get\b|join\b|which\b|tell\b|comment\b)/iu.test(p),
+    );
+  if (para) return para;
+  const transcript = stored[video.id]?.transcript;
+  if (transcript) return transcript.split(/(?<=[.!?])\s+/).slice(0, 2).join(" ");
+  return `${video.title}. A video by Wiktoria Korbecka, founder of Women Lead AI, with free resources to go with it.`;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -10,6 +10,7 @@ import { EXTERNAL_LINKS } from "@/lib/constants";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  title: { absolute: "Women Lead AI | AI Podcast, Community and Courses for Women" },
   alternates: { canonical: "/" },
   openGraph: { url: "/", siteName: "Women Lead AI", type: "website", images: ["/og-default.jpg"] },
 };

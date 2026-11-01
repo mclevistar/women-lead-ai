@@ -41,7 +41,7 @@ export default function MotionGraphicsEffectsPage() {
       }
       intro="Every prompt behind the effects in my video. No After Effects needed."
       form={<DownloadForm align="left" downloadUrl="/downloads/10-motion-graphics-effects-prompts.pdf" tag="motion-graphics-effects" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/motion-map.jpg", alt: "", width: "w-full max-w-lg" }}
+      cover={{ src: "/resources/motion-map.jpg", alt: "Cover of 10 motion graphics effects with Claude Code: every prompt, a free resource from Women Lead AI", width: "w-full max-w-lg" }}
       previews={previews}
       aspect="aspect-video"
       inside={inside}

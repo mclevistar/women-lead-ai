@@ -37,7 +37,7 @@ export default function GithubAnimationLibrariesPage() {
       }
       intro="The tools behind my reel where every frame was drawn by Claude Code."
       form={<DownloadForm align="left" downloadUrl="/downloads/github-animation-libraries.pdf" tag="github-animation-libraries" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/animlibs-cover.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/animlibs-cover.jpg", alt: "Cover of 10 free GitHub libraries for animating with Claude Code, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       inside={inside}
       note="You don't need to code. You'll need Claude Code and about an hour."

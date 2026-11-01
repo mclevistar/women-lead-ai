@@ -32,15 +32,30 @@ type PageMetadataInput = {
   type?: "website" | "article";
 };
 
+// Google shows about 60 characters of a title and 160 of a description
+const TITLE_SUFFIX = ` | ${SITE_NAME}`;
+const MAX_TITLE = 65;
+const MAX_DESCRIPTION = 160;
+
+// Cuts long text at a word boundary so search results don't end mid-word
+export function clampText(text: string, max: number): string {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\s]+$/, "")}…`;
+}
+
 // Title, description, canonical URL and share card for a page
 export function pageMetadata({ title, description, path, ogTitle, ogDescription, images, type = "website" }: PageMetadataInput): Metadata {
+  // Long titles drop the site name rather than get cut off
+  const fullTitle = title.length + TITLE_SUFFIX.length > MAX_TITLE ? { absolute: title } : title;
   return {
-    title,
-    description,
+    title: fullTitle,
+    description: clampText(description, MAX_DESCRIPTION),
     alternates: { canonical: path },
     openGraph: {
       title: ogTitle ?? `${title} | ${SITE_NAME}`,
-      description: ogDescription ?? description,
+      description: clampText(ogDescription ?? description, 200),
       url: path,
       siteName: SITE_NAME,
       type,

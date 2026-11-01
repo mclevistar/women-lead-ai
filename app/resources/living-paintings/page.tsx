@@ -39,7 +39,7 @@ export default function LivingPaintingsPage() {
       }
       intro="Every prompt I used to step inside four surreal paintings that come to life."
       form={<DownloadForm align="left" downloadUrl="/downloads/living-paintings-prompts.pdf" tag="living-paintings" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/livingpaint-cover.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/livingpaint-cover.jpg", alt: "Cover of Living Paintings: the prompts, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       inside={inside}
       note="You don't need to be an artist. You'll need a Higgsfield account and a character sheet of your face."

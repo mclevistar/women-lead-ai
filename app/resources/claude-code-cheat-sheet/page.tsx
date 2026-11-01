@@ -40,7 +40,7 @@ export default function ClaudeCodeCheatSheetPage() {
       }
       intro="Every Claude Code feature in plain English, with prompts to try today."
       form={<DownloadForm align="left" downloadUrl="/downloads/claude-code-cheat-sheet.pdf" tag="claude-code-cheat-sheet" buttonLabel="Get it free" />}
-      cover={{ src: previews[0].src, alt: "" }}
+      cover={{ src: previews[0].src, alt: "Cover of The Claude Code cheat sheet: the other 90% of Claude, in plain English, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       note="You'll need the Claude desktop app. Every prompt is written for beginners, no coding needed."

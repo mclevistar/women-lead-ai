@@ -41,7 +41,7 @@ export default function LondonThroughTimePage() {
       }
       intro="Every prompt I used to step into 2,000 years of London history."
       form={<DownloadForm align="left" downloadUrl="/downloads/london-through-time-prompts.pdf" tag="london-through-time" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/london-cover.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/london-cover.jpg", alt: "Cover of London Through Time: the prompts, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile

@@ -41,7 +41,7 @@ export default function ParisThroughTimePage() {
       }
       intro="Every prompt I used to step into 200 years of Paris history."
       form={<DownloadForm align="left" downloadUrl="/downloads/paris-through-time-prompts.pdf" tag="paris-through-time" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/paris-cover.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/paris-cover.jpg", alt: "Cover of Paris Through Time: the prompts, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile

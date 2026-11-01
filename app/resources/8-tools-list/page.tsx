@@ -42,7 +42,7 @@ export default function EightToolsListPage() {
       }
       intro="The basic sales tools most founders skip, with every link and how I set them up."
       form={<DownloadForm align="left" downloadUrl="/downloads/8-tools-list.pdf" tag="8-tools-list" buttonLabel="Get it free" />}
-      cover={{ src: previews[0].src, alt: "" }}
+      cover={{ src: previews[0].src, alt: "Cover of 8 tools that aren't AI (but will grow your sales): the free list, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       note="Seven of the eight are free. LinkedIn Smart Links needs a paid Sales Navigator plan."

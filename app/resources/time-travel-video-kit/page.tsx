@@ -40,7 +40,7 @@ export default function TimeTravelVideoKitPage() {
       }
       intro="The workflow behind my London and Paris history reels, ready for your city."
       form={<DownloadForm align="left" downloadUrl="/downloads/time-travel-video-kit.pdf" tag="time-travel-video-kit" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/ttkit-cover.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/ttkit-cover.jpg", alt: "Cover of The Time Travel Video Kit, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile

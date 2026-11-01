@@ -39,7 +39,7 @@ export default function StartupPerksPage() {
       }
       intro="Every perk from my video, who can apply and where. Tick them off as you go."
       form={<DownloadForm align="left" downloadUrl="/downloads/startup-perks-tracker.pdf" tag="startup-perks" buttonLabel="Get it free" extra={{ url: "/downloads/startup-perks-tracker.xlsx", label: "Download the spreadsheet" }} />}
-      cover={{ src: previews[0].src, alt: "" }}
+      cover={{ src: previews[0].src, alt: "Cover of Startup perks tracker: free credits for new founders, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       ctaTitle="Want to build smarter with AI?"

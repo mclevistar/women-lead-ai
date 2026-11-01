@@ -40,7 +40,7 @@ export default function IgCoversPromptPage() {
       }
       intro="The prompt I used to make all my reel covers match, so my grid looks like one brand."
       form={<DownloadForm align="left" downloadUrl="/downloads/ig-covers-prompt.pdf" tag="ig-covers-prompt" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/igcovers-page-cover.jpg", alt: "" }}
+      cover={{ src: "/resources/igcovers-page-cover.jpg", alt: "Cover of Instagram Covers with Claude: the prompt that made my grid consistent, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       note="You'll need the Claude Pro plan ($20 a month) with Claude in Chrome. Higgsfield is optional."

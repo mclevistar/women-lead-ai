@@ -40,7 +40,7 @@ export default function StoryBehindTheObjectPage() {
       }
       intro="Every prompt I used to turn my brother and a real 1940 banknote into a World War II film. Swap in your own product."
       form={<DownloadForm align="left" downloadUrl="/downloads/story-behind-the-object.pdf" tag="story-behind-the-object" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/storyobject-page-cover.jpg", alt: "" }}
+      cover={{ src: "/resources/storyobject-page-cover.jpg", alt: "Cover of The Story Behind the Object: every prompt from my AI history film, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       note="You'll need a Higgsfield account (the whole film cost about $50) and Claude with the Higgsfield connector."

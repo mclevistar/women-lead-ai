@@ -39,7 +39,7 @@ export default function VoxCollageKitPage() {
       }
       intro="The exact prompt I gave Claude Code to turn a talking-head video into a Vox-style collage reel."
       form={<DownloadForm align="left" downloadUrl="/downloads/vox-collage-kit.pdf" tag="vox-collage-kit" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/voxkit-cover.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/voxkit-cover.jpg", alt: "Cover of The Vox Collage Kit, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       inside={inside}
       note="No editing app needed. You'll need Claude Code and a short talking-head video."

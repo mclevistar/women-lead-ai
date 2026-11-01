@@ -41,7 +41,7 @@ export default function AiHookEffectsPage() {
       }
       intro="Every prompt behind my scroll stopping AI hooks. Copy, paste, make it yours."
       form={<DownloadForm align="left" downloadUrl="/downloads/3-ai-hook-effects-prompts.pdf" tag="ai-hook-effects" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/hook-end_candy.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/hook-end_candy.jpg", alt: "Cover of 3 AI hook effects that stop the scroll: every prompt, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile

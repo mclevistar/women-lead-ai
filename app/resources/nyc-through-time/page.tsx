@@ -41,7 +41,7 @@ export default function NycThroughTimePage() {
       }
       intro="Every prompt I used to step into 143 years of New York history."
       form={<DownloadForm align="left" downloadUrl="/downloads/nyc-through-time-prompts.pdf" tag="nyc-through-time" buttonLabel="Get it free" />}
-      cover={{ src: "/resources/nyc-cover.jpg", alt: "", width: "w-52 md:w-72" }}
+      cover={{ src: "/resources/nyc-cover.jpg", alt: "Cover of NYC Through Time: the prompts, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile

@@ -40,7 +40,7 @@ export default function WebsiteStarterPackPage() {
       }
       intro="Everything I used to build womenlead.ai with Claude Code, in one pack."
       form={<DownloadForm align="left" downloadUrl="/downloads/website-starter-pack.pdf" tag="website-starter-pack" buttonLabel="Get it free" />}
-      cover={{ src: previews[0].src, alt: "" }}
+      cover={{ src: previews[0].src, alt: "Cover of The Website Starter Pack: build your business website with Claude Code, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       note="You'll need Claude Code. Every prompt works whether you're starting from scratch or moving a site away from a website builder."

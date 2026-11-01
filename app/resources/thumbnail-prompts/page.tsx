@@ -41,7 +41,7 @@ export default function ThumbnailPromptsPage() {
       }
       intro="The exact prompts I use to make 10 thumbnail options in about 5 minutes with Claude and Higgsfield."
       form={<DownloadForm align="left" downloadUrl="/downloads/thumbnail-prompts.pdf" tag="thumbnail-prompts" buttonLabel="Get it free" />}
-      cover={{ src: previews[0].src, alt: "" }}
+      cover={{ src: previews[0].src, alt: "Cover of The Thumbnail Prompt Pack: make scroll-stopping YouTube thumbnails with AI, a free resource from Women Lead AI" }}
       previews={previews}
       inside={inside}
       note="You'll need Claude and a Higgsfield account. I use GPT Image 2.5 on Higgsfield for every thumbnail."
