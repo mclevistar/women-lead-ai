@@ -22,6 +22,13 @@ const FIXES = [
   [/\banthr?opic\b/gi, "Anthropic"],
   [/\bhiggs ?field\b/gi, "Higgsfield"],
   [/\bchat ?gpt\b/gi, "ChatGPT"],
+  [/\bwom[ae]n leads? (ai|a\.?i\.?)\b/gi, "Women Lead AI"],
+  // Guest names the captions mangle (Ep 3 guest Vic Silverman really is a Victoria, so that one is left alone)
+  [/\bLori Wang\b/gi, "Laurie Wang"],
+  [/\bLindsay Chrisman\b/gi, "Lindsey Chrismon"],
+  [/\bJenna Zanks\b/gi, "Jena Zangs"],
+  [/\bAmy iHeart\b/gi, "Aime Ayrehart"],
+  [/\bJacine Vajard\b/gi, "Jackelinne Vaillard"],
 ];
 
 function clean(text) {
