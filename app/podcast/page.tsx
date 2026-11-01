@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { pageMetadata, SITE_URL, PODCAST_ID, PERSON_ID, ORGANIZATION_ID } from "@/lib/seo";
 import { EXTERNAL_LINKS } from "@/lib/constants";
@@ -42,9 +43,28 @@ export default async function PodcastPage() {
         <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
           Podcast
         </h1>
-        <p className="text-lg text-muted-foreground mb-12">
-          Conversations with builders, operators and visionaries shaping the AI era.
+        <p className="text-lg text-muted-foreground mb-6">
+          Conversations with builders, operators and visionaries shaping the AI era, hosted by{" "}
+          <Link href="/about" className="text-primary hover:underline">Wiktoria Korbecka</Link>.
         </p>
+        {/* Visible platform links so directories and AI search can tie the show to this site */}
+        <div className="flex flex-wrap gap-3 mb-12">
+          {[
+            { href: EXTERNAL_LINKS.spotify, label: "Spotify" },
+            { href: EXTERNAL_LINKS.applePodcasts, label: "Apple Podcasts" },
+            { href: EXTERNAL_LINKS.youtube, label: "YouTube" },
+          ].map((p) => (
+            <a
+              key={p.label}
+              href={p.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium px-4 py-2 rounded-full border border-border hover:border-primary hover:text-primary transition-colors"
+            >
+              Listen on {p.label}
+            </a>
+          ))}
+        </div>
         <PodcastList episodes={episodes} />
       </div>
     </section>
