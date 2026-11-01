@@ -16,6 +16,13 @@ const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
 
 const resources = [
   {
+    href: "/resources/story-behind-the-object",
+    label: "Free · Prompt pack",
+    title: "The Story Behind the Object",
+    description:
+      "Every prompt behind my AI history film of my brother and a real 1940 banknote, with templates for your own product.",
+  },
+  {
     href: "/resources/motion-graphics-prompts",
     label: "Free · Prompt pack",
     title: "5 Motion Graphics: the prompts",
