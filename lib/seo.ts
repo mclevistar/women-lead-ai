@@ -20,6 +20,7 @@ export const SOCIAL_PROFILES = [
   EXTERNAL_LINKS.skool,
   EXTERNAL_LINKS.spotify,
   EXTERNAL_LINKS.applePodcasts,
+  "https://www.wikidata.org/wiki/Q141974034",
 ];
 
 type PageMetadataInput = {
@@ -81,7 +82,13 @@ export const personSchema = {
   url: `${SITE_URL}/about`,
   worksFor: { "@id": ORGANIZATION_ID },
   knowsAbout: ["Artificial intelligence", "AI for marketing", "AI video editing", "Claude", "AI leadership", "Future of work"],
-  sameAs: [EXTERNAL_LINKS.linkedin, EXTERNAL_LINKS.youtube, EXTERNAL_LINKS.instagram, EXTERNAL_LINKS.tiktok],
+  sameAs: [
+    EXTERNAL_LINKS.linkedin,
+    EXTERNAL_LINKS.youtube,
+    EXTERNAL_LINKS.instagram,
+    EXTERNAL_LINKS.tiktok,
+    "https://www.wikidata.org/wiki/Q141974031",
+  ],
 };
 
 export const organizationSchema = {

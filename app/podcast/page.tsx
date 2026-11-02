@@ -27,7 +27,7 @@ export default async function PodcastPage() {
     author: { "@id": PERSON_ID },
     publisher: { "@id": ORGANIZATION_ID },
     webFeed: "https://anchor.fm/s/10ef58958/podcast/rss",
-    sameAs: [EXTERNAL_LINKS.spotify, EXTERNAL_LINKS.applePodcasts, EXTERNAL_LINKS.youtube],
+    sameAs: [EXTERNAL_LINKS.spotify, EXTERNAL_LINKS.applePodcasts, EXTERNAL_LINKS.youtube, "https://www.wikidata.org/wiki/Q141974035"],
     episode: episodes.map((ep) => ({
       "@type": "PodcastEpisode",
       name: ep.title,
