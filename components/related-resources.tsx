@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { resources } from "@/lib/resources";
+import ResourceCover from "@/components/resource-cover";
 
 const display = { fontFamily: "var(--loaded-dmserif), Georgia, serif" };
 const heading = { fontFamily: "'Manrope', system-ui, sans-serif" };
@@ -28,6 +29,7 @@ export default function RelatedResources() {
               href={r.href}
               className="group flex flex-col rounded-2xl border border-[#602D37]/15 p-6 hover:border-[#602D37]/40 transition-colors"
             >
+              <ResourceCover resource={r} className="aspect-[4/3] mb-5" />
               <span className="text-xs font-semibold uppercase tracking-wider text-[#602D37]/70 mb-3" style={heading}>
                 {r.label}
               </span>

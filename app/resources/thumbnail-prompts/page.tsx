@@ -20,16 +20,6 @@ const previews = [
   { src: "/resources/tprompts-page-rules.jpg", name: "The 3 rules checklist" },
 ];
 
-const inside = [
-  "The setup: connecting Higgsfield to Claude and the three folders I use",
-  "Where I find reference thumbnails, and how to borrow the structure, not the thumbnail",
-  "My character sheet prompt for building your AI double from 6 to 8 photos",
-  "The fix-it prompts for when the sheet doesn't look like you",
-  "The generate ONE thumbnail first prompt, then the other nine",
-  "The phone test and the 'give me 3 more of number 4' prompt",
-  "The 3 rules checklist to run before you upload",
-];
-
 export default function ThumbnailPromptsPage() {
   return (
     <ResourcePage
@@ -43,8 +33,6 @@ export default function ThumbnailPromptsPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/thumbnail-prompts.pdf" tag="thumbnail-prompts" buttonLabel="Get it free" />}
       cover={{ src: previews[0].src, alt: "Cover of The Thumbnail Prompt Pack: make scroll-stopping YouTube thumbnails with AI, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
-      note="You'll need Claude and a Higgsfield account. I use GPT Image 2.5 on Higgsfield for every thumbnail."
       ctaTitle="Want more guides like this?"
     />
   );

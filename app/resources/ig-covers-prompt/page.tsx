@@ -20,15 +20,6 @@ const previews = [
   { src: "/resources/igcovers-page-review.jpg", name: "The review page" },
 ];
 
-const inside = [
-  "The exact prompt I gave Claude to redo the covers of my first 20 reels",
-  "My real before and after grid, same reels in the same order",
-  "The five style rules that make a grid look like one brand",
-  "How to keep your face and text inside the 4:5 profile crop",
-  "The review page where you just tap Approve or leave a note",
-  "Follow-up prompts for the review rounds, the export and your style file",
-];
-
 export default function IgCoversPromptPage() {
   return (
     <ResourcePage
@@ -42,8 +33,6 @@ export default function IgCoversPromptPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/ig-covers-prompt.pdf" tag="ig-covers-prompt" buttonLabel="Get it free" />}
       cover={{ src: "/resources/igcovers-page-cover.jpg", alt: "Cover of Instagram Covers with Claude: the prompt that made my grid consistent, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
-      note="You'll need the Claude Pro plan ($20 a month) with Claude in Chrome. Higgsfield is optional."
       ctaTitle="Want more guides like this?"
     />
   );

@@ -20,15 +20,6 @@ const previews = [
   { src: "/resources/storyobject-page-scenes.jpg", name: "Every scene" },
 ];
 
-const inside = [
-  "How to plan a product's life story in seven short shots",
-  "The character sheet prompt and the two settings that fixed his face",
-  "Edit prompts that change one thing without starting again",
-  "Every scene and video prompt, as a template and word for word",
-  "Lip sync with their real voice, captions and the music prompt",
-  "Five fixes that saved credits, and what the whole film cost",
-];
-
 export default function StoryBehindTheObjectPage() {
   return (
     <ResourcePage
@@ -42,8 +33,6 @@ export default function StoryBehindTheObjectPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/story-behind-the-object.pdf" tag="story-behind-the-object" buttonLabel="Get it free" />}
       cover={{ src: "/resources/storyobject-page-cover.jpg", alt: "Cover of The Story Behind the Object: every prompt from my AI history film, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
-      note="You'll need a Higgsfield account (the whole film cost about $50) and Claude with the Higgsfield connector."
       ctaTitle="Want more guides like this?"
     />
   );

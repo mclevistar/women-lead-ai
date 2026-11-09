@@ -20,16 +20,6 @@ const previews = [
   { src: "/resources/cvkit-page-github.jpg", name: "GitHub, so Claude remembers" },
 ];
 
-const inside = [
-  "The five things you need, and the one prompt that installs everything else",
-  "The full install list, so you know what goes onto your computer",
-  "How to set up your brand folder, with my own brand rules as an example",
-  "A starter YouTube edit playbook you can copy and make your own",
-  "The edit prompt, the b-roll prompt and the review page prompt",
-  "The GitHub prompt and folder structure, so Claude remembers every note",
-  "The 5 best practices that saved me the most rounds of feedback",
-];
-
 export default function ClaudeVideoEditingPage() {
   return (
     <ResourcePage
@@ -43,8 +33,6 @@ export default function ClaudeVideoEditingPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/claude-video-editing-starter-kit.pdf" tag="claude-video-editing" buttonLabel="Get it free" />}
       cover={{ src: previews[0].src, alt: "Cover of The Claude Video Editing Starter Kit: edit your YouTube videos with Claude Code, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
-      note="You'll need the Claude Pro plan ($20 a month) with Claude Code. DaVinci Resolve is optional."
       ctaTitle="Want more guides like this?"
     />
   );

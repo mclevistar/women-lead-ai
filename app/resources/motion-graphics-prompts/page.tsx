@@ -20,14 +20,6 @@ const previews = [
   { src: "/resources/mgprompts-page-blueprint.jpg", name: "What I learned from five rounds of notes" },
 ];
 
-const inside = [
-  "How to set up Claude Code and the free HyperFrames plugin in two commands",
-  "The one prompt that turns a talking head clip into a timed, subtitled reel",
-  "The reference trick that took my effects from fine to good",
-  "All five prompts: papercut collage, travel map, blueprint, Apple style reveal and receipt",
-  "How to give notes like you have an editor",
-];
-
 export default function MotionGraphicsPromptsPage() {
   return (
     <ResourcePage
@@ -41,8 +33,6 @@ export default function MotionGraphicsPromptsPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/motion-graphics-prompts.pdf" tag="motion-graphics-prompts" buttonLabel="Get it free" />}
       cover={{ src: "/resources/mgprompts-cover.jpg", alt: "Cover of 5 Motion Graphics: the prompts, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
-      inside={inside}
-      note="You don't need to code. You'll need Claude Code and a talking head clip."
       ctaTitle="Want more guides like this?"
     />
   );

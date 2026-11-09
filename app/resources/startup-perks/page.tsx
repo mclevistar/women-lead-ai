@@ -20,14 +20,6 @@ const previews = [
   { src: "/resources/perks-page-list2.jpg", name: "List 2: via your bank" },
 ];
 
-const inside = [
-  "All 29 perks from the video, from AWS Activate and Notion to Stripe Atlas and Datadog",
-  "What each one offers today, checked on the programme page",
-  "Who can apply, and the direct link to the application page",
-  "A box to tick when you've applied, plus a spreadsheet version to track your status",
-  "How to stack them so the perks get bigger as your startup grows",
-];
-
 export default function StartupPerksPage() {
   return (
     <ResourcePage
@@ -41,7 +33,6 @@ export default function StartupPerksPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/startup-perks-tracker.pdf" tag="startup-perks" buttonLabel="Get it free" extra={{ url: "/downloads/startup-perks-tracker.xlsx", label: "Download the spreadsheet" }} />}
       cover={{ src: previews[0].src, alt: "Cover of Startup perks tracker: free credits for new founders, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
       ctaTitle="Want to build smarter with AI?"
     />
   );

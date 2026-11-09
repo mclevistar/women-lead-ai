@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { EXTERNAL_LINKS } from "@/lib/constants";
 import { resources } from "@/lib/resources";
+import ResourceCover from "@/components/resource-cover";
 
 export const metadata: Metadata = pageMetadata({
   title: "Resources",
@@ -35,8 +36,9 @@ export default function ResourcesPage() {
             <Link
               key={r.href}
               href={r.href}
-              className="group grid md:grid-cols-[1fr_auto] gap-6 items-center bg-[#602D37] text-[#EFE2D3] p-8 md:p-10 border-2 border-[#602D37] hover:-translate-y-1 transition-transform"
+              className="group grid md:grid-cols-[180px_1fr_auto] gap-6 md:gap-8 items-center bg-[#602D37] text-[#EFE2D3] p-6 md:p-8 border-2 border-[#602D37] hover:-translate-y-1 transition-transform"
             >
+              <ResourceCover resource={r} tone="dark" className="aspect-[16/10] md:aspect-[3/4]" />
               <div>
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#ECB398] mb-3 block" style={heading}>
                   {r.label}

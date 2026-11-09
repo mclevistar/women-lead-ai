@@ -20,15 +20,6 @@ const previews = [
   { src: "/resources/bridgerton-page-queen.jpg", name: "My Queen scene, word for word" },
 ];
 
-const inside = [
-  "How I planned one day as six moments, with what happens on camera in each",
-  "The plain character sheet, the outfit sheet prompt and my four Regency outfit lines",
-  "The first frame prompt, plus how to get a varied, mixed crowd and the Queen's look",
-  "The animation prompt, the reference order, and my Queen scene word for word",
-  "What went wrong and the fixes: blocked faces, the copyright filter and timing the line",
-  "The edit: the flipping calendar, intro title, subtitle and music ideas",
-];
-
 export default function BridgertonEraPage() {
   return (
     <ResourcePage
@@ -42,8 +33,6 @@ export default function BridgertonEraPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/bridgerton-era-prompts.pdf" tag="bridgerton-era" buttonLabel="Get it free" />}
       cover={{ src: "/resources/bridgerton-cover.jpg", alt: "Cover of A Day in the Bridgerton Era: the prompts, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
-      inside={inside}
-      note="You don't need to be a filmmaker. You'll need a Higgsfield account, a few clear photos of your face and an editor like CapCut."
       ctaTitle="Want more guides like this?"
     />
   );

@@ -20,14 +20,6 @@ const effects = [
   { src: "/resources/motion-phone.jpg", name: "The 3D phone" },
 ];
 
-const inside = [
-  "The setup prompt that transcribes your video and times every effect to your words",
-  "A copy and paste prompt for each of the 10 effects",
-  "Newspaper highlight, globe and map zoom, text behind you, title card, callouts and zoom",
-  "Chapters and progress bar, data graphics, logo reveal, chat conversation and 3D phone mockup",
-  "The three habits that save the most time when you edit with Claude",
-];
-
 const previews = effects;
 
 export default function MotionGraphicsEffectsPage() {
@@ -44,8 +36,6 @@ export default function MotionGraphicsEffectsPage() {
       cover={{ src: "/resources/motion-map.jpg", alt: "Cover of 10 motion graphics effects with Claude Code: every prompt, a free resource from Women Lead AI", width: "w-full max-w-lg" }}
       previews={previews}
       aspect="aspect-video"
-      inside={inside}
-      note="You'll need Claude Code. DaVinci Resolve Studio helps for long videos; for a one or two minute video Claude Code can do it all."
       ctaTitle="Want more guides like this?"
     />
   );

@@ -20,15 +20,6 @@ const previews = [
   { src: "/resources/aeo-page-prompts.jpg", name: "Every Claude Code prompt" },
 ];
 
-const inside = [
-  "The prompt that writes the 20 questions your audience actually asks AI",
-  "How to run the audit across ChatGPT, Claude, Perplexity and Gemini so the results are honest",
-  "A printable audit sheet, plus a spreadsheet that adds up your AEO score out of 80",
-  "Every Claude Code prompt from the video: the SEO and AEO audit, robots.txt and sitemap fixes, schema markup, summaries and Q&A",
-  "How to find the pages AI reads, and a pitch prompt for getting onto \"best of\" lists",
-  "Where to measure it every month, and what not to do",
-];
-
 export default function AeoAuditKitPage() {
   return (
     <ResourcePage
@@ -42,8 +33,6 @@ export default function AeoAuditKitPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/aeo-audit-kit.pdf" tag="aeo-audit-kit" buttonLabel="Get it free" extra={{ url: "/downloads/aeo-audit-template.xlsx", label: "Download the audit spreadsheet" }} />}
       cover={{ src: previews[0].src, alt: "Cover of The AEO audit kit: get AI to recommend your website, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
-      note="You'll need Claude for the questions and Claude Code for the website fixes. On Webflow, Squarespace or WordPress the steps are the same, you'll just click through settings instead."
       ctaTitle="Want more guides like this?"
     />
   );

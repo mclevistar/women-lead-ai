@@ -20,15 +20,6 @@ const previews = [
   { src: "/resources/ttkit-1889.jpg", name: "Paris 1889" },
 ];
 
-const inside = [
-  "How to connect Higgsfield to Claude Code and set up the project folder",
-  "The moment picker: why backdrops fail, plus a worksheet for your own city",
-  "The plain character sheet of you that every era starts from",
-  "The character sheet and video prompt templates, each next to my exact prompt word for word",
-  "The two-angle trick so you look at the moment, not away from it",
-  "The Claude Code prompts for the flipping calendar and the editing tools it needs, the sound plan and a credit checklist",
-];
-
 export default function TimeTravelVideoKitPage() {
   return (
     <ResourcePage
@@ -44,8 +35,6 @@ export default function TimeTravelVideoKitPage() {
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile
-      inside={inside}
-      note="You'll need a Higgsfield account, 2 or 3 clear photos of your face and Claude Code (or CapCut for the edit)."
       ctaTitle="Want more guides like this?"
     />
   );

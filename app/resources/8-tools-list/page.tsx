@@ -20,17 +20,6 @@ const previews = [
   { src: "/resources/8tools-page-ai.jpg", name: "Then bring in AI" },
 ];
 
-const inside = [
-  "HubSpot email tracking: see the moment someone opens your proposal",
-  "Microsoft Clarity: heatmaps and recordings of real visitors on your website",
-  "Meta and LinkedIn ad libraries: every ad your competitors are running right now",
-  "AnswerThePublic: the real questions people type into Google about your topic",
-  "Google Search Console: the exact searches that bring people to your site",
-  "LinkedIn Smart Links: see who opened your deck and which pages they read",
-  "PageSpeed Insights: how fast your site loads on a phone, and what's slowing it down",
-  "UTM links: which post, email or channel actually brought you a customer",
-];
-
 export default function EightToolsListPage() {
   return (
     <ResourcePage
@@ -44,8 +33,6 @@ export default function EightToolsListPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/8-tools-list.pdf" tag="8-tools-list" buttonLabel="Get it free" />}
       cover={{ src: previews[0].src, alt: "Cover of 8 tools that aren't AI (but will grow your sales): the free list, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
-      note="Seven of the eight are free. LinkedIn Smart Links needs a paid Sales Navigator plan."
       ctaTitle="Want more guides like this?"
     />
   );

@@ -20,11 +20,9 @@ type Props = {
   previews?: Preview[];
   aspect?: string;
   compactMobile?: boolean;
-  insideTitle?: string;
-  /** "Name: detail" items; the part before the first colon is shown in bold */
-  inside: string[];
-  /** optional numbered steps shown under the list (for example how to install) */
+  /** optional numbered steps (for example how to install), shown under the previews */
   steps?: { title: string; items: string[] };
+  /** a short line under the steps; only shown when there are steps */
   note?: string;
   ctaTitle: string;
 };
@@ -38,8 +36,6 @@ export default function ResourcePage({
   previews,
   aspect,
   compactMobile,
-  insideTitle = "What's inside",
-  inside,
   steps,
   note,
   ctaTitle,
@@ -78,52 +74,30 @@ export default function ResourcePage({
         )}
       </section>
 
-      <section className="py-24 md:py-32 px-6">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-foreground text-center mb-10" style={display}>
-            {insideTitle}
-          </h2>
-          <ul className="border-t border-[#602D37]/10">
-            {inside.map((item) => {
-              const i = item.indexOf(": ");
-              return (
-                <li key={item} className="py-4 border-b border-[#602D37]/10 text-muted-foreground leading-relaxed">
-                  {i > 0 ? (
-                    <>
-                      <span className="font-semibold text-foreground">{item.slice(0, i)}</span>
-                      <span className="block text-[15px] mt-0.5 first-letter:uppercase">{item.slice(i + 2)}</span>
-                    </>
-                  ) : (
-                    <span className="text-foreground">{item}</span>
-                  )}
+      {steps && (
+        <section className="py-24 md:py-32 px-6">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl text-foreground text-center mb-10" style={display}>
+              {steps.title}
+            </h2>
+            <ol className="border-t border-[#602D37]/10">
+              {steps.items.map((item, n) => (
+                <li key={item} className="flex gap-4 py-4 border-b border-[#602D37]/10 text-foreground leading-relaxed">
+                  <span className="text-sm font-semibold text-[#602D37]/60 mt-0.5 w-5 shrink-0" style={heading}>
+                    {n + 1}
+                  </span>
+                  <span>{item}</span>
                 </li>
-              );
-            })}
-          </ul>
+              ))}
+            </ol>
+            {note && <p className="text-sm text-muted-foreground text-center mt-8"><ReferralText>{note}</ReferralText></p>}
+          </div>
+        </section>
+      )}
 
-          {steps && (
-            <>
-              <h2 className="text-3xl md:text-4xl text-foreground text-center mt-20 mb-10" style={display}>
-                {steps.title}
-              </h2>
-              <ol className="border-t border-[#602D37]/10">
-                {steps.items.map((item, n) => (
-                  <li key={item} className="flex gap-4 py-4 border-b border-[#602D37]/10 text-foreground leading-relaxed">
-                    <span className="text-sm font-semibold text-[#602D37]/60 mt-0.5 w-5 shrink-0" style={heading}>
-                      {n + 1}
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ol>
-            </>
-          )}
-
-          {note && <p className="text-sm text-muted-foreground text-center mt-8"><ReferralText>{note}</ReferralText></p>}
-        </div>
-      </section>
-
-      <RelatedResources />
+      <div className={steps ? "" : "mt-24 md:mt-32"}>
+        <RelatedResources />
+      </div>
 
       <section className="pb-28 px-6">
         <div className="max-w-2xl mx-auto text-center">

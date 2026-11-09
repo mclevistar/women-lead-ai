@@ -20,14 +20,6 @@ const moments = [
   { src: "/resources/nyc-1964.jpg", year: "1964" },
 ];
 
-const inside = [
-  "The character sheet prompt to dress you for every decade",
-  "A start frame prompt for each of the seven moments, 1883 to 2026",
-  "The animation prompts, with music and sound for every clip",
-  "How to add the flipping paper calendar in your editor",
-  "The Higgsfield settings and what the whole video cost in credits",
-];
-
 const previews = moments.map((m) => ({ src: m.src, name: m.year }));
 
 export default function NycThroughTimePage() {
@@ -45,8 +37,6 @@ export default function NycThroughTimePage() {
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile
-      inside={inside}
-      note="You don't need to be a filmmaker. You'll need a Higgsfield account, 6 to 8 photos of yourself and an editor like CapCut."
       ctaTitle="Want more guides like this?"
     />
   );

@@ -20,14 +20,6 @@ const previews = [
   { src: "/resources/voxkit-page-recipe.jpg", name: "The collage recipe: colours, textures, type, motion" },
 ];
 
-const inside = [
-  "The five minute setup, including the two lines that install HyperFrames",
-  "The exact prompt I gave Claude Code, ready to paste",
-  "The reference prompt that made the edit jump up a level",
-  "The step by step prompts for the cut, the images, the transitions and the 4K final",
-  "Six fixes from my redos, from green skin to blank transitions",
-];
-
 export default function VoxCollageKitPage() {
   return (
     <ResourcePage
@@ -41,8 +33,6 @@ export default function VoxCollageKitPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/vox-collage-kit.pdf" tag="vox-collage-kit" buttonLabel="Get it free" />}
       cover={{ src: "/resources/voxkit-cover.jpg", alt: "Cover of The Vox Collage Kit, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
-      inside={inside}
-      note="No editing app needed. You'll need Claude Code and a short talking-head video."
       ctaTitle="Want more guides like this?"
     />
   );

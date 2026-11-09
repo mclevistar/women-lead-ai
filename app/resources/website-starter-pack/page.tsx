@@ -20,15 +20,6 @@ const previews = [
   { src: "/resources/starter-page-checklist.jpg", name: "The launch checklist" },
 ];
 
-const inside = [
-  "The 10 tips from the video on one page",
-  "The interview prompt that writes your website brief, plus a CLAUDE.md template",
-  "Prompts for references, your brand kit, the setup, plan mode and your design rules",
-  "The mobile check, GitHub, data and consent, and the SEO and AI search audit prompts",
-  "The launch checklist, printable, with every check I run before going live",
-  "How to set up analytics and Microsoft Clarity, and a weekly review routine",
-];
-
 export default function WebsiteStarterPackPage() {
   return (
     <ResourcePage
@@ -42,8 +33,6 @@ export default function WebsiteStarterPackPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/website-starter-pack.pdf" tag="website-starter-pack" buttonLabel="Get it free" />}
       cover={{ src: previews[0].src, alt: "Cover of The Website Starter Pack: build your business website with Claude Code, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
-      note="You'll need Claude Code. Every prompt works whether you're starting from scratch or moving a site away from a website builder."
       ctaTitle="Want more guides like this?"
     />
   );

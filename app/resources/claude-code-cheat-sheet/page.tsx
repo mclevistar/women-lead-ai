@@ -20,15 +20,6 @@ const previews = [
   { src: "/resources/cheatsheet-page-commands.jpg", name: "Skills, plugins and slash commands" },
 ];
 
-const inside = [
-  "Connectors and MCP: plug Claude into Gmail, your calendar, Drive and the tools you already use",
-  "API keys: how to keep them safe, and the one thing you should never paste into the chat",
-  "Skills and plugins: teach Claude how you like things done, and where to find ready made ones",
-  "The slash commands worth knowing, from /init to /rewind",
-  "Projects and artifacts: one folder per area of your business, and reports you can actually look at",
-  "Routines: three jobs Claude can run on a schedule while your laptop is closed",
-];
-
 export default function ClaudeCodeCheatSheetPage() {
   return (
     <ResourcePage
@@ -42,8 +33,6 @@ export default function ClaudeCodeCheatSheetPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/claude-code-cheat-sheet.pdf" tag="claude-code-cheat-sheet" buttonLabel="Get it free" />}
       cover={{ src: previews[0].src, alt: "Cover of The Claude Code cheat sheet: the other 90% of Claude, in plain English, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
-      note="You'll need the Claude desktop app. Every prompt is written for beginners, no coding needed."
       ctaTitle="Want more guides like this?"
     />
   );

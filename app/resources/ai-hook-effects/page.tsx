@@ -20,14 +20,6 @@ const effects = [
   { src: "/resources/hook-end_jam.jpg", name: "The melt" },
 ];
 
-const inside = [
-  "The character sheet prompt that keeps your face and outfit the same in every clip",
-  "How to get readable words on screen (image models can spell, video models can move)",
-  "The start frame prompt for each effect",
-  "The Seedance 2.5 animation prompt for each effect",
-  "The exact Higgsfield settings and what each clip cost me",
-];
-
 const previews = effects;
 
 export default function AiHookEffectsPage() {
@@ -45,8 +37,6 @@ export default function AiHookEffectsPage() {
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile
-      inside={inside}
-      note="You'll need a Higgsfield account, 6 to 10 photos of yourself and an editor like CapCut."
       ctaTitle="Want more guides like this?"
     />
   );

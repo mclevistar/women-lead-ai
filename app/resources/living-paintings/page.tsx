@@ -20,14 +20,6 @@ const previews = [
   { src: "/resources/livingpaint-page-moving.jpg", name: "The Seedance prompts that bring them to life" },
 ];
 
-const inside = [
-  "The character sheet prompt and my four outfit lines, ready to paste",
-  "The painting formula and all four scene prompts: octopus, Saturn swing, moon and zodiac",
-  "The exact Seedance 2.5 settings, plus the animation template",
-  "The moving parts for each painting, word for word",
-  "Five fixes from my redos, from closed eyes to failed jobs, and more worlds to try",
-];
-
 export default function LivingPaintingsPage() {
   return (
     <ResourcePage
@@ -41,8 +33,6 @@ export default function LivingPaintingsPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/living-paintings-prompts.pdf" tag="living-paintings" buttonLabel="Get it free" />}
       cover={{ src: "/resources/livingpaint-cover.jpg", alt: "Cover of Living Paintings: the prompts, a free resource from Women Lead AI", width: "w-52 md:w-72" }}
       previews={previews}
-      inside={inside}
-      note="You don't need to be an artist. You'll need a Higgsfield account and a character sheet of your face."
       ctaTitle="Want more guides like this?"
     />
   );

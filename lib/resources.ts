@@ -1,10 +1,12 @@
 // Every free resource, newest first. Used by the /resources index and the
 // "More free resources" block at the bottom of each resource page.
-export type Resource = { href: string; label: string; title: string; description: string };
+// image: the lead magnet cover, shown as a preview on the cards (leave out for a text-only tile)
+export type Resource = { href: string; label: string; title: string; description: string; image?: string };
 
 export const resources: Resource[] = [
   {
     href: "/resources/story-behind-the-object",
+    image: "/resources/storyobject-page-cover.jpg",
     label: "Free · Prompt pack",
     title: "The Story Behind the Object",
     description:
@@ -12,6 +14,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/motion-graphics-prompts",
+    image: "/resources/mgprompts-cover.jpg",
     label: "Free · Prompt pack",
     title: "5 Motion Graphics: the prompts",
     description:
@@ -19,6 +22,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/vox-collage-kit",
+    image: "/resources/voxkit-cover.jpg",
     label: "Free · Prompt + setup guide",
     title: "The Vox Collage Kit",
     description:
@@ -26,6 +30,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/github-animation-libraries",
+    image: "/resources/animlibs-cover.jpg",
     label: "Free · Guide",
     title: "10 free GitHub libraries for animating with Claude Code",
     description:
@@ -33,6 +38,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/living-paintings",
+    image: "/resources/livingpaint-cover.jpg",
     label: "Free · Prompt pack",
     title: "Living Paintings",
     description:
@@ -40,6 +46,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/bridgerton-era",
+    image: "/resources/bridgerton-cover.jpg",
     label: "Free · Prompt pack",
     title: "A Day in the Bridgerton Era",
     description:
@@ -47,6 +54,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/ig-covers-prompt",
+    image: "/resources/igcovers-page-cover.jpg",
     label: "Free · Prompt pack",
     title: "Instagram Covers with Claude",
     description:
@@ -54,6 +62,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/claude-video-editing",
+    image: "/resources/cvkit-page-cover.jpg",
     label: "Free · Starter kit",
     title: "The Claude Video Editing Starter Kit",
     description:
@@ -61,6 +70,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/time-travel-video-kit",
+    image: "/resources/ttkit-cover.jpg",
     label: "Free · Kit",
     title: "The Time Travel Video Kit",
     description:
@@ -68,6 +78,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/thumbnail-prompts",
+    image: "/resources/tprompts-page-cover.jpg",
     label: "Free · Prompt pack",
     title: "The Thumbnail Prompt Pack",
     description:
@@ -75,6 +86,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/automated-podcast-kit",
+    image: "/resources/podcastkit-cover.jpg",
     label: "Free · Prompt pack",
     title: "The Automated Podcast Kit",
     description:
@@ -82,6 +94,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/8-tools-list",
+    image: "/resources/8tools-page-cover.jpg",
     label: "Free · Tool list",
     title: "8 Tools That Aren't AI",
     description:
@@ -89,6 +102,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/claude-code-cheat-sheet",
+    image: "/resources/cheatsheet-page-cover.jpg",
     label: "Free · Cheat sheet",
     title: "The Claude Code Cheat Sheet",
     description:
@@ -96,6 +110,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/paris-through-time",
+    image: "/resources/paris-cover.jpg",
     label: "Free · Prompt pack",
     title: "Paris Through Time",
     description:
@@ -103,6 +118,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/london-through-time",
+    image: "/resources/london-cover.jpg",
     label: "Free · Prompt pack",
     title: "London Through Time",
     description:
@@ -110,6 +126,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/website-starter-pack",
+    image: "/resources/starter-page-cover.jpg",
     label: "Free · Starter pack",
     title: "The Website Starter Pack",
     description:
@@ -117,6 +134,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/aeo-audit-kit",
+    image: "/resources/aeo-page-cover.jpg",
     label: "Free · Audit kit",
     title: "The AEO Audit Kit",
     description:
@@ -124,6 +142,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/startup-perks",
+    image: "/resources/perks-page-cover.jpg",
     label: "Free · Tracker",
     title: "Startup Perks Tracker",
     description:
@@ -138,6 +157,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/motion-graphics-effects",
+    image: "/resources/motion-map.jpg",
     label: "Free · Prompt guide",
     title: "10 Motion Graphics Effects",
     description:
@@ -145,6 +165,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/ai-hook-effects",
+    image: "/resources/hook-end_candy.jpg",
     label: "Free · Prompt guide",
     title: "3 AI Hook Effects",
     description:
@@ -152,6 +173,7 @@ export const resources: Resource[] = [
   },
   {
     href: "/resources/nyc-through-time",
+    image: "/resources/nyc-cover.jpg",
     label: "Free · Prompt pack",
     title: "NYC Through Time",
     description:

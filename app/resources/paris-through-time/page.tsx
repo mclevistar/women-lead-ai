@@ -20,14 +20,6 @@ const moments = [
   { src: "/resources/paris-2019.jpg", year: "2019" },
 ];
 
-const inside = [
-  "The eight moments I picked, 1789 to 2026, with their real dates",
-  "The character sheet prompt, plus a ready outfit line for every era",
-  "The start frame prompt and the two-angle trick that makes you look at the moment",
-  "The animation prompt template, the sounds for each clip, and my 2019 clip word for word",
-  "How to add the paper calendar, and five fixes from my redos",
-];
-
 const previews = moments.map((m) => ({ src: m.src, name: m.year }));
 
 export default function ParisThroughTimePage() {
@@ -45,8 +37,6 @@ export default function ParisThroughTimePage() {
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile
-      inside={inside}
-      note="You don't need to be a filmmaker. You'll need a Higgsfield account, 2 or 3 clear photos of your face and an editor like CapCut."
       ctaTitle="Want more guides like this?"
     />
   );

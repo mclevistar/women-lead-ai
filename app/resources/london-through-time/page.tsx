@@ -20,14 +20,6 @@ const moments = [
   { src: "/resources/london-1918.jpg", year: "1918" },
 ];
 
-const inside = [
-  "The eight moments I picked, AD 60 to 2026, with their real dates",
-  "The character sheet prompt, plus a ready outfit line for every era",
-  "The animation prompt template and the sounds for each clip",
-  "My full 1918 clip prompt, word for word",
-  "How to add the flipping paper calendar, and five fixes from my redos",
-];
-
 const previews = moments.map((m) => ({ src: m.src, name: m.year }));
 
 export default function LondonThroughTimePage() {
@@ -45,8 +37,6 @@ export default function LondonThroughTimePage() {
       previews={previews}
       aspect="aspect-[9/16]"
       compactMobile
-      inside={inside}
-      note="You don't need to be a filmmaker. You'll need a Higgsfield account, 2 or 3 clear photos of your face and an editor like CapCut."
       ctaTitle="Want more guides like this?"
     />
   );

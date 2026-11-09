@@ -21,16 +21,6 @@ const previews = [
   { src: "/resources/podcastkit-page-autopilot.jpg", name: "Autopilot and fixes" },
 ];
 
-const inside = [
-  "What you need and how Claude, ElevenLabs, GitHub and Captivate connect",
-  "The setup checklist, including every GitHub secret the weekly run needs",
-  "The prompt to pick your two host voices from the ElevenLabs library",
-  "The planning prompt plus one prompt for each of the eight stages",
-  "Cold open styles and episode memory, so it sounds like a real show",
-  "The GitHub Actions schedule, the fix-it prompt and the pronunciation fix",
-  "What broke for me, so it doesn't break for you",
-];
-
 export default function AutomatedPodcastKitPage() {
   return (
     <ResourcePage
@@ -44,8 +34,6 @@ export default function AutomatedPodcastKitPage() {
       form={<DownloadForm align="left" downloadUrl="/downloads/automated-podcast-kit.pdf" tag="automated-podcast-kit" buttonLabel="Get it free" />}
       cover={{ src: previews[0].src, alt: "Cover of The Automated Podcast Kit: every prompt to build a podcast with Claude and ElevenLabs, a free resource from Women Lead AI" }}
       previews={previews}
-      inside={inside}
-      note="You need a Claude account, an ElevenLabs account, a free GitHub account and a podcast host like Captivate or Buzzsprout."
       ctaTitle="Want more guides like this?"
     />
   );
