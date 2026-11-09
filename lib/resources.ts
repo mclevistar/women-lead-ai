@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/lead-magnet-funnel-kit",
+    image: "/resources/funnelkit-page-cover.jpg",
+    label: "Free · Kit",
+    title: "The Lead Magnet Funnel Kit",
+    description:
+      "The system behind every free download on this site: page, email form, database, tracking and Instagram DMs, built with Claude Code. Every prompt to copy.",
+  },
+  {
     href: "/resources/story-behind-the-object",
     image: "/resources/storyobject-page-cover.jpg",
     label: "Free · Prompt pack",
