@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/date-through-the-decades",
+    image: "/resources/fddecades-page-cover.jpg",
+    label: "Free · Prompt pack",
+    title: "Date Through the Decades: the prompts",
+    description:
+      "Every prompt behind my first date reel: the same mirror and the same face in 1888, 1925, 1943, 1977, 1996 and today.",
+  },
+  {
     href: "/resources/get-paid-by-ai",
     image: "/resources/getpaidai-page-cover.jpg",
     label: "Free · Guide",

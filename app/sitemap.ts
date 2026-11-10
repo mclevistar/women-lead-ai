@@ -17,6 +17,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
   { path: "/resources/claude-video-editing", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/ig-covers-prompt", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/story-behind-the-object", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/resources/date-through-the-decades", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/get-paid-by-ai", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/lead-magnet-funnel-kit", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/8-tools-list", priority: 0.6, changeFrequency: "monthly" },
