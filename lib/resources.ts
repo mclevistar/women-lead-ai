@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/get-paid-by-ai",
+    image: "/resources/getpaidai-page-cover.jpg",
+    label: "Free · Guide",
+    title: "10 Ways to Get Paid by AI Companies",
+    description:
+      "Ten real programmes that pay you for your voice, face, footage or expertise, what each one actually pays, and the small print to read first.",
+  },
+  {
     href: "/resources/lead-magnet-funnel-kit",
     image: "/resources/funnelkit-page-cover.jpg",
     label: "Free · Kit",
