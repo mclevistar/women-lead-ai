@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/silicon-valley-through-time",
+    image: "/resources/svtime-page-cover.jpg",
+    label: "Free · Prompt pack",
+    title: "Silicon Valley Through Time: the prompts",
+    description:
+      "Every prompt behind my 60 years of Silicon Valley reel: real-looking first frames, screens you can read and brand names fixed in code.",
+  },
+  {
     href: "/resources/date-through-the-decades",
     image: "/resources/fddecades-page-cover.jpg",
     label: "Free · Prompt pack",
