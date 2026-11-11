@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/gingerbread-london",
+    image: "/resources/gbldn-page-cover.jpg",
+    label: "Free · Prompt pack",
+    title: "Gingerbread London: 5 AI video models, one prompt",
+    description:
+      "The exact prompts behind my test of Veo, Kling, MiniMax, Wan and Seedance, plus the character sheet and start frame tricks that kept my face looking like me.",
+  },
+  {
     href: "/resources/silicon-valley-through-time",
     image: "/resources/svtime-page-cover.jpg",
     label: "Free · Prompt pack",
