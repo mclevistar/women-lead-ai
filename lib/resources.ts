@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/claude-artifacts-kit",
+    image: "/resources/artifactskit-page-cover.jpg",
+    label: "Free · Kit",
+    title: "The Claude Artifacts Kit",
+    description:
+      "The exact prompts behind my review page, custom CRM, quote builder, content dashboard and ROI calculator, plus how to put any of them on your own website.",
+  },
+  {
     href: "/resources/gingerbread-london",
     image: "/resources/gbldn-page-cover.jpg",
     label: "Free · Prompt pack",
