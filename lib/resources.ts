@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/tokyo-vending-machine",
+    image: "/resources/tokyovm-page-cover.jpg",
+    label: "Free · Prompt pack",
+    title: "The vending machine that sells places",
+    description:
+      "The exact prompts behind my Tokyo vending machine video: the character sheet, the first frame and the Seedance 2.5 shots that pull me into a bottle and drop me in Shibuya.",
+  },
+  {
     href: "/resources/claude-artifacts-kit",
     image: "/resources/artifactskit-page-cover.jpg",
     label: "Free · Kit",
