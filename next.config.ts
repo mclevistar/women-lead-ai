@@ -7,7 +7,10 @@ const nextConfig: NextConfig = {
     inlineCss: true,
   },
   async redirects() {
-    return [{ source: "/b2b", destination: "/contact", permanent: true }];
+    return [
+      { source: "/b2b", destination: "/contact", permanent: true },
+      { source: "/courses/ai-marketing-sprint", destination: "/courses/ai-sales-marketing-bootcamp", permanent: true },
+    ];
   },
 };
 
