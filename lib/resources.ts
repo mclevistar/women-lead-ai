@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/grok-bot-agents",
+    image: "/resources/grokteam-page-cover.jpg",
+    label: "Free · Kit",
+    title: "Copy My AI Team",
+    description:
+      "The Grok Bot agents I use to run my business, four more worth hiring, the copy-paste prompt for each and ten rules for a team you can trust.",
+  },
+  {
     href: "/resources/tokyo-vending-machine",
     image: "/resources/tokyovm-page-cover.jpg",
     label: "Free · Prompt pack",
