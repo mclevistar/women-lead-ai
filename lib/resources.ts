@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/new-york-80-years",
+    image: "/resources/nyc80-page-cover.jpg",
+    label: "Free · Prompt pack",
+    title: "80 Years of New York",
+    description:
+      "Every prompt behind my AI video through six New York moments, from a 1920 speakeasy to the millennium ball drop: sheets, first frames, video prompts and fixes.",
+  },
+  {
     href: "/resources/grok-bot-agents",
     image: "/resources/grokteam-page-cover.jpg",
     label: "Free · Kit",
