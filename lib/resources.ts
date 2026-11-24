@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/pr-agent-kit",
+    image: "/resources/prkit-page-cover.jpg",
+    label: "Free · Kit",
+    title: "Get Quoted for Free",
+    description:
+      "The AI PR agent that got me quoted in the press in two weeks: where journalists ask for experts, the exact prompt and the reply that gets picked.",
+  },
+  {
     href: "/resources/new-york-80-years",
     image: "/resources/nyc80-page-cover.jpg",
     label: "Free · Prompt pack",
