@@ -20,6 +20,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
   { path: "/resources/date-through-the-decades", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/gingerbread-london", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/silicon-valley-through-time", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/resources/ai-catch-up-checklist", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/pr-agent-kit", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/grok-bot-agents", priority: 0.6, changeFrequency: "monthly" },
   { path: "/resources/get-paid-by-ai", priority: 0.6, changeFrequency: "monthly" },

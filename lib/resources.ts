@@ -5,6 +5,14 @@ export type Resource = { href: string; label: string; title: string; description
 
 export const resources: Resource[] = [
   {
+    href: "/resources/ai-catch-up-checklist",
+    image: "/resources/catchup-page-cover.jpg",
+    label: "Free · Checklist",
+    title: "Catch Up on AI in 30 Days",
+    description:
+      "Score yourself on the 7 signs you're falling behind on AI, then nine small steps over four weeks, with the tools, where to click and the prompts to copy.",
+  },
+  {
     href: "/resources/pr-agent-kit",
     image: "/resources/prkit-page-cover.jpg",
     label: "Free · Kit",
